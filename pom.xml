@@ -1,0 +1,227 @@
+<project
+ xmlns="http://maven.apache.org/POM/4.0.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
+ <properties>
+  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  <!-- JMH version to use with this project. -->
+  <jmh.version>1.32</jmh.version>
+  <!-- Java source/target to use for compilation. -->
+  <javac.target>16</javac.target>
+  <!-- Name of the benchmark Uber-JAR to generate. -->
+  <uberjar.name>benchmarks</uberjar.name>
+  <commons-math3-version>3.6.1</commons-math3-version>
+  <commons-rng-version>1.3</commons-rng-version>
+  <junit-jupiter-version>5.7.1</junit-jupiter-version>
+  <junit-platform-version>1.7.1</junit-platform-version>
+  <numbers-java-version>1.8.2</numbers-java-version>
+  <oshi-version>5.7.0</oshi-version>
+  <slf4j-version>1.7.30</slf4j-version>
+  <!-- 
+  <spire_2_12_version>0.17.0</spire_2_12_version>
+   -->
+ <spire_2_13_version>0.17.0</spire_2_13_version>
+ </properties>
+ <modelVersion>4.0.0</modelVersion>
+ <groupId>palisades-lakes</groupId>
+ <artifactId>nzqr-jmh</artifactId>
+ <version>0.0.0</version>
+ <packaging>jar</packaging>
+ <name>NZQR benchmarks via JMH</name>
+ <dependencies>
+ <!-- 
+  <dependency>
+   <groupId>org.typelevel</groupId>
+   <artifactId>spire_2.12</artifactId>
+   <version>${spire_2_12_version}</version>
+  </dependency>
+   -->
+  <dependency>
+   <groupId>org.typelevel</groupId>
+   <artifactId>spire_2.13</artifactId>
+   <version>${spire_2_13_version}</version>
+  </dependency>
+  <dependency>
+   <groupId>org.openjdk.jmh</groupId>
+   <artifactId>jmh-core</artifactId>
+   <version>${jmh.version}</version>
+   <exclusions>
+    <exclusion>
+     <groupId>org.apache.commons</groupId>
+     <artifactId>commons-math3</artifactId>
+    </exclusion>
+   </exclusions>
+  </dependency>
+  <dependency>
+   <groupId>org.openjdk.jmh</groupId>
+   <artifactId>jmh-generator-annprocess</artifactId>
+   <version>${jmh.version}</version>
+   <scope>provided</scope>
+  </dependency>
+  <dependency>
+   <groupId>palisades-lakes</groupId>
+   <artifactId>nzqr</artifactId>
+   <version>0.0.0</version>
+  </dependency>
+  <dependency>
+   <groupId>palisades-lakes</groupId>
+   <artifactId>nzqr</artifactId>
+   <version>0.0.0</version>
+   <classifier>tests</classifier>
+  </dependency>
+  <dependency>
+   <groupId>org.apache.commons</groupId>
+   <artifactId>commons-math3</artifactId>
+   <version>${commons-math3-version}</version>
+  </dependency>
+  <dependency>
+   <groupId>com.github.peteroupc</groupId>
+   <artifactId>numbers</artifactId>
+   <version>${numbers-java-version}</version>
+  </dependency>
+  <dependency>
+   <groupId>com.github.oshi</groupId>
+   <artifactId>oshi-core</artifactId>
+   <version>${oshi-version}</version>
+  </dependency>
+  <!-- Rational.doubleValue() is interesting, but no easy way to go double -> Rational 
+   <dependency> <groupId>org.jscience</groupId> <artifactId>jscience</artifactId> <version>${jscience-version}</version> 
+   </dependency> -->
+  <!-- BigRational not useful <dependency> <groupId>de.uni-mannheim.rz.krum</groupId> 
+   <artifactId>jas</artifactId> <version>${jas-version}</version> </dependency> -->
+  <!-- no easy path double -> Rational double <dependency> <groupId>org.apfloat</groupId> 
+   <artifactId>apfloat</artifactId> <version>${apfloat-version}</version> </dependency> -->
+  <dependency>
+   <groupId>org.junit.jupiter</groupId>
+   <artifactId>junit-jupiter-api</artifactId>
+   <version>${junit-jupiter-version}</version>
+   <scope>test</scope>
+  </dependency>
+  <dependency>
+   <groupId>org.junit.jupiter</groupId>
+   <artifactId>junit-jupiter-params</artifactId>
+   <version>${junit-jupiter-version}</version>
+   <scope>test</scope>
+  </dependency>
+  <dependency>
+   <groupId>org.junit.jupiter</groupId>
+   <artifactId>junit-jupiter-engine</artifactId>
+   <version>${junit-jupiter-version}</version>
+   <scope>test</scope>
+  </dependency>
+  <dependency>
+   <groupId>org.slf4j</groupId>
+   <artifactId>slf4j-nop</artifactId>
+   <version>${slf4j-version}</version>
+  </dependency>
+ </dependencies>
+ <build>
+  <plugins>
+   <!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>exec-maven-plugin</artifactId> 
+    <version>1.6.0</version> <executions> <execution> <id>run-benchmarks</id> <phase>integration-test</phase> 
+    <goals> <goal>exec</goal> </goals> <configuration> <classpathScope>test</classpathScope> 
+    <executable>java</executable> <arguments> <argument>-classpath</argument> <classpath 
+    /> <argument>org.openjdk.jmh.Main</argument> <argument>.*</argument> </arguments> 
+    </configuration> </execution> </executions> </plugin> -->
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.8.1</version>
+    <configuration>
+     <compilerVersion>${javac.target}</compilerVersion>
+     <source>${javac.target}</source>
+     <target>${javac.target}</target>
+    </configuration>
+   </plugin>
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-shade-plugin</artifactId>
+    <!-- <version>2.2</version> -->
+    <version>3.2.4</version> 
+    <executions>
+     <execution>
+      <phase>package</phase>
+      <goals>
+       <goal>shade</goal>
+      </goals>
+      <configuration>
+       <finalName>${uberjar.name}</finalName>
+       <transformers>
+        <transformer
+         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"
+        >
+         <mainClass>org.openjdk.jmh.Main</mainClass>
+        </transformer>
+       </transformers>
+       <filters>
+        <filter>
+         <!-- Shading signed JARs will fail without this. http://stackoverflow.com/questions/999489/invalid-signature-file-when-attempting-to-run-a-jar -->
+         <artifact>*:*</artifact>
+         <excludes>
+          <exclude>META-INF/*.SF</exclude>
+          <exclude>META-INF/*.DSA</exclude>
+          <exclude>META-INF/*.RSA</exclude>
+         </excludes>
+        </filter>
+       </filters>
+      </configuration>
+     </execution>
+    </executions>
+   </plugin>
+  </plugins>
+  <pluginManagement>
+   <plugins>
+    <plugin>
+     <artifactId>maven-clean-plugin</artifactId>
+     <version>3.1.0</version>
+    </plugin>
+    <plugin>
+     <artifactId>maven-deploy-plugin</artifactId>
+     <version>3.0.0-M2</version>
+    </plugin>
+    <plugin>
+     <artifactId>maven-install-plugin</artifactId>
+     <version>3.0.0-M1</version>
+    </plugin>
+    <plugin>
+     <artifactId>maven-jar-plugin</artifactId>
+     <version>3.1.1</version>
+    </plugin>
+    <plugin>
+     <artifactId>maven-javadoc-plugin</artifactId>
+     <version>3.1.0</version>
+    </plugin>
+    <plugin>
+     <artifactId>maven-resources-plugin</artifactId>
+     <version>3.1.0</version>
+    </plugin>
+    <plugin>
+     <artifactId>maven-site-plugin</artifactId>
+     <version>3.3</version>
+    </plugin>
+    <plugin>
+     <artifactId>maven-source-plugin</artifactId>
+     <version>3.0.1</version>
+    </plugin>
+    <plugin>
+     <groupId>org.apache.maven.plugins</groupId>
+     <artifactId>maven-surefire-plugin</artifactId>
+     <version>3.0.0-M2</version>
+     <configuration>
+      <trimStackTrace>false</trimStackTrace>
+      <!-- argLine>-Xmx2G -XX:MaxPermSize=512M</argLine -->
+      <argLine>-Xmx4G -Xms4G</argLine>
+     </configuration>
+     <dependencies>
+      <dependency>
+       <groupId>org.junit.jupiter</groupId>
+       <artifactId>junit-jupiter-engine</artifactId>
+       <version>5.4.1</version>
+      </dependency>
+     </dependencies>
+    </plugin>
+   </plugins>
+  </pluginManagement>
+ </build>
+</project>

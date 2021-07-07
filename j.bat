@@ -1,0 +1,26 @@
+@echo off
+:: palisades.lakes (at) gmail (dot) com
+:: 2019-09-07
+
+::set GC=-XX:+AggressiveHeap -XX:+UseStringDeduplication 
+set GC=
+
+::set TRACE=-XX:+PrintGCDetails -XX:+TraceClassUnloading -XX:+TraceClassLoading
+set TRACE=
+
+::set THRUPUT=-server -Xbatch 
+set THRUPUT=-server -Xbatch -XX:+UseFMA
+
+::set XMX=-Xms29g -Xmx29g -Xmn11g 
+::set XMX=-Xms12g -Xmx12g -Xmn5g 
+set XMX= 
+
+set OPENS=--add-opens java.base/java.lang=ALL-UNNAMED
+set CP=-cp target/benchmarks.jar
+
+set JAVA_HOME=%JAVA12%
+set JAVA="%JAVA_HOME%\bin\java"
+
+set CMD=%JAVA% %THRUPUT% -ea -dsa %GC% %XMX% %TRACE% %OPENS% %CP% %*
+::echo %CMD%
+%CMD%
