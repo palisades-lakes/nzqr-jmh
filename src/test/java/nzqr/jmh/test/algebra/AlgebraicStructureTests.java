@@ -13,10 +13,6 @@ import com.google.common.collect.ImmutableMap;
 import nzqr.java.algebra.Set;
 import nzqr.java.algebra.Structure;
 import nzqr.java.prng.PRNG;
-import nzqr.jmh.linear.BigDecimalsN;
-import nzqr.jmh.linear.BigFractionsN;
-import nzqr.jmh.linear.ERationalsN;
-import nzqr.jmh.linear.RatiosN;
 import nzqr.jmh.numbers.BigDecimals;
 import nzqr.jmh.numbers.BigFractions;
 import nzqr.jmh.numbers.ERationals;
@@ -26,7 +22,7 @@ import nzqr.jmh.numbers.Ratios;
 /** Common code for testing sets.
  *
  * @author palisades dot lakes at gmail dot com
- * @version 2019-10-15
+ * @version 2021-07-08
  */
 
 @SuppressWarnings("unchecked")
@@ -73,19 +69,7 @@ public final class AlgebraicStructureTests {
     structureTests(Ratios.MULTIPLICATIVE_MAGMA,TRYS);
     structureTests(Ratios.FIELD,TRYS);
 
-    for (final int n : new int[] { 1, 3, 127}) {
-      structureTests(BigDecimalsN.group(n),SPACE_TRYS);
-      structureTests(BigDecimalsN.space(n),SPACE_TRYS);
-
-      structureTests(ERationalsN.group(n),SPACE_TRYS);
-      structureTests(ERationalsN.space(n),SPACE_TRYS);
-
-      structureTests(BigFractionsN.group(n),SPACE_TRYS);
-      structureTests(BigFractionsN.space(n),SPACE_TRYS);
-
-      structureTests(RatiosN.group(n),SPACE_TRYS);
-      structureTests(RatiosN.space(n),SPACE_TRYS);
-    } }
+    }
 
 
   //--------------------------------------------------------------

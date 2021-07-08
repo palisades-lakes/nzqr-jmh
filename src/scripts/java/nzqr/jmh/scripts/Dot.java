@@ -1,5 +1,6 @@
 package nzqr.jmh.scripts;
 
+import static java.lang.Double.NEGATIVE_INFINITY;
 import static java.lang.Double.toHexString;
 
 import java.util.Arrays;
@@ -9,8 +10,8 @@ import org.apache.commons.rng.sampling.ListSampler;
 
 import nzqr.java.Classes;
 import nzqr.java.accumulators.Accumulator;
+import nzqr.java.accumulators.BigFloatAccumulator;
 import nzqr.java.accumulators.DoubleAccumulator;
-import nzqr.java.linear.Dn;
 import nzqr.java.numbers.Doubles;
 import nzqr.java.prng.Generator;
 import nzqr.java.prng.PRNG;
@@ -29,21 +30,42 @@ import nzqr.jmh.accumulators.RatioAccumulator;
  * java -ea -jar target\benchmarks.jar TotalDot
  * </pre>
  * @author palisades dot lakes at gmail dot com
- * @version 2019-04-14
+ * @version 2021-07-08
  */
 @SuppressWarnings("unchecked")
 public final class Dot {
 
   //--------------------------------------------------------------
+
+  private static final double maxAbs (final double[] x) {
+    double m = NEGATIVE_INFINITY;
+    for (final double element : x) {
+      m = Math.max(m,Math.abs(element)); }
+    return m; }
+
+  private static final double l1Dist (final double[] x0,
+                                     final double[] x1) {
+    final int n = x0.length;
+    assert n == x1.length;
+    final Accumulator a = BigFloatAccumulator.make();
+    for (int i=0;i<n;i++) { a.add(Math.abs(x0[i]-x1[i])); }
+    return a.doubleValue(); }
+
   // TODO: more efficient via bits?
   private static final boolean isEven (final int k) {
     return k == (2*(k/2)); }
 
+  private static final double[] zeroSum (final double[] x) {
+    final int n = x.length;
+    final double[] y = new double[2*n];
+    System.arraycopy(x,0,y,0,n);
+    for (int i=0;i<n;i++) { y[i+n] = -x[i]; }
+    return y; }
+
   // exact sum is 0.0
   private static double[] sampleDoubles (final Generator g,
                                          final UniformRandomProvider urp) {
-    double[] x = (double[]) g.next();
-    x = Dn.concatenate(x,Dn.minus(x));
+    final double[] x = zeroSum((double[]) g.next());
     ListSampler.shuffle(urp,Arrays.asList(x));
     return x; }
 
@@ -84,9 +106,9 @@ public final class Dot {
         i + " : "
           + Double.toHexString(truth[i])
           + ", "
-          + Double.toHexString(Dn.maxAbs(x0[i]))
+          + Double.toHexString(maxAbs(x0[i]))
           + ", "
-          + Double.toHexString(Dn.maxAbs(x1[i]))); }
+          + Double.toHexString(maxAbs(x1[i]))); }
     System.out.println();
     final Accumulator[] accumulators =
     {
@@ -108,7 +130,7 @@ public final class Dot {
         pred[i] =
           a.clear().addProducts(x0[i],x1[i]).doubleValue(); }
       t = (System.nanoTime()-t);
-      System.out.println(toHexString(Dn.l1Dist(truth,pred)) +
+      System.out.println(toHexString(l1Dist(truth,pred)) +
         " in " + (t*1.0e-9)
         + " secs " + Classes.className(a)); }
 
