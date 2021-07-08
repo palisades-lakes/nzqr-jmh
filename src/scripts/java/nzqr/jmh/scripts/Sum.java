@@ -14,7 +14,7 @@ import nzqr.jmh.accumulators.ZhuHayesBranch;
 /** Benchmark accumulators tests.
  *
  * <pre>
- * jy --source 12 -ea src/scripts/java/nzqr/jmh/scripts/TotalSum.java
+ * jy --source 12 -ea src/scripts/java/nzqr/jmh/scripts/Sum.java
  * </pre>
  * @author palisades dot lakes at gmail dot com
  * @version 2019-04-08
