@@ -19,7 +19,7 @@ import com.upokecenter.numbers.ERational;
 import nzqr.java.algebra.OneSetOneOperation;
 import nzqr.java.algebra.OneSetTwoOperations;
 import nzqr.java.algebra.Set;
-import nzqr.java.exceptions.Exceptions;
+import nzqr.java.Exceptions;
 import nzqr.java.numbers.Doubles;
 import nzqr.java.prng.Generator;
 import nzqr.java.prng.GeneratorBase;

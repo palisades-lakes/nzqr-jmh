@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import nzqr.java.Debug;
-import nzqr.java.exceptions.Exceptions;
+import nzqr.java.Exceptions;
 import nzqr.java.numbers.Ringlike;
 
 /** immutable arbitrary-precision non-negative integers

@@ -6,7 +6,7 @@ import static nzqr.java.numbers.Numbers.loBit;
 
 import java.util.Objects;
 
-import nzqr.java.exceptions.Exceptions;
+import nzqr.java.Exceptions;
 import nzqr.java.numbers.BigFloat;
 import nzqr.java.numbers.Doubles;
 import nzqr.java.numbers.Floats;
