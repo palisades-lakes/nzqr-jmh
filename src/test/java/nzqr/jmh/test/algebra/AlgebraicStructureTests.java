@@ -69,7 +69,7 @@ public final class AlgebraicStructureTests {
     structureTests(Ratios.MULTIPLICATIVE_MAGMA,TRYS);
     structureTests(Ratios.FIELD,TRYS);
 
-    }
+  }
 
 
   //--------------------------------------------------------------

@@ -15,7 +15,7 @@ public class TotalSum extends Base {
   public final double[] operation (final Accumulator ac,
                                    final double[] z0,
                                    final double[] z1) {
-    return new double[] 
+    return new double[]
       { ac.clear().addAll(z0).doubleValue() }; }
 
   public static final void main (final String[] args)  {

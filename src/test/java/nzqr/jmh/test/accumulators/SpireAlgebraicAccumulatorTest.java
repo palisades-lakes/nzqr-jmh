@@ -36,7 +36,7 @@ public final class SpireAlgebraicAccumulatorTest {
         Common.sumTests(
           Common.generators(DIM),
           Common.makeAccumulators(accumulators),
-          EFloatAccumulator.make()); 
+          EFloatAccumulator.make());
       },
       "fails because spire.math.Algebraic doesn't round to double correctly");
 
@@ -46,7 +46,7 @@ public final class SpireAlgebraicAccumulatorTest {
         Common.l2Tests(
           Common.generators(DIM),
           Common.makeAccumulators(accumulators),
-          EFloatAccumulator.make()); 
+          EFloatAccumulator.make());
       },
       "fails, reason unknown yet");
 
@@ -56,7 +56,7 @@ public final class SpireAlgebraicAccumulatorTest {
         Common.dotTests(
           Common.generators(DIM),
           Common.makeAccumulators(accumulators),
-          EFloatAccumulator.make()); 
+          EFloatAccumulator.make());
       },
       "fails, reason unknown yet");
   }

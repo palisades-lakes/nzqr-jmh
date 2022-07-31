@@ -29,7 +29,7 @@ public final class ERationalTest {
       ERational::FromDouble,
       q -> ((ERational) q).ToDouble(),
       (q0,q1) -> ((ERational) q0).Subtract((ERational) q1).Abs(),
-      q -> ERationals.toHexString((ERational) q), 
+      q -> ERationals.toHexString((ERational) q),
       Common::compareTo, Common::compareTo);
 
     Common.floatRoundingTests(
@@ -37,8 +37,8 @@ public final class ERationalTest {
       ERational::FromSingle,
       q -> ((ERational) q).ToSingle(),
       (q0,q1) -> ((ERational) q0).Subtract((ERational) q1).Abs(),
-      q -> ERationals.toHexString((ERational) q), 
-      Common::compareTo, Common::compareTo);  
+      q -> ERationals.toHexString((ERational) q),
+      Common::compareTo, Common::compareTo);
 
   }
 

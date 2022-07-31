@@ -174,7 +174,7 @@ class MutableBigInteger {
     final long v = (len == 2) ?
       ((mag[1] & Numbers.UNSIGNED_MASK) | ((d & Numbers.UNSIGNED_MASK) << 32)) :
         d & Numbers.UNSIGNED_MASK;
-      return sign == -1 ? -v : v;
+    return sign == -1 ? -v : v;
   }
 
   /**
@@ -1860,7 +1860,7 @@ class MutableBigInteger {
         // Terminate when non-decreasing.
         if (xk1 >= xk) {
           return new MutableBigInteger(
-            new int[] { (int)(xk >>> 32), 
+            new int[] { (int)(xk >>> 32),
                         (int)(xk & Numbers.UNSIGNED_MASK)
             });
         }

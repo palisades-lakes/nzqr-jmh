@@ -25,7 +25,7 @@ extends ExactAccumulator<SpireRationalAccumulator> {
   public final Object value () { return _sum; }
 
   @Override
-  public final double doubleValue () { 
+  public final double doubleValue () {
     return _sum.doubleValue(); }
 
   @Override

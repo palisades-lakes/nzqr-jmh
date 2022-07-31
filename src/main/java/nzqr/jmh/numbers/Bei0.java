@@ -72,8 +72,7 @@ public final class Bei0 {
                                      final int upShift) {
     //assert 0<=upShift;
     //assert (! leadingZero(m));
-    if (isZero(m)) { return m; }
-    if (upShift==0) { return m; }
+    if (isZero(m) || (upShift==0)) { return m; }
     final int iShift = (upShift >>> 5);
     final int bShift = (upShift & 0x1f);
     final int n = m.length;
@@ -193,7 +192,7 @@ public final class Bei0 {
       final long u10 = (u1>>>(64-bShift));
       if (0L!=u10) {
         if (u00<u10) { return -1; }
-        if (u00>u10) { return 1; } 
+        if (u00>u10) { return 1; }
         final long us = (u1<<bShift);
         final long u01 = unsigned(u0[i++]);
         final long u11 = Numbers.hiWord(us);
@@ -202,7 +201,7 @@ public final class Bei0 {
         final long u02 = unsigned(u0[i++]);
         final long u12 = Numbers.loWord(us);
         if (u02<u12) { return -1; }
-        if (u02>u12) { return 1; } } 
+        if (u02>u12) { return 1; } }
       else {
         final long us = (u1<<bShift);
         final long u11 = Numbers.hiWord(us);
@@ -218,7 +217,7 @@ public final class Bei0 {
           if (u00<u12) { return -1; }
           if (u00>u12) { return 1; } } } }
 
-    while (i<n0) { if (0!=u0[i++]) { return 1; } } 
+    while (i<n0) { if (0!=u0[i++]) { return 1; } }
     return 0; }
 
   //--------------------------------------------------------------
@@ -850,8 +849,8 @@ public final class Bei0 {
    * Thus, the sum is 2 * (off the diagonal) + diagonal.
    * This is accumulated beginning with the diagonal (which
    * consist of the squares of the digits of the input), which
-   * is then divided by two, the off-diagonal added, and 
-   * multiplied by two again. The low bit is simply a copy of 
+   * is then divided by two, the off-diagonal added, and
+   * multiplied by two again. The low bit is simply a copy of
    * the low bit of the input, so it doesn't need special care.
    */
 
@@ -1195,26 +1194,26 @@ public final class Bei0 {
     final int[] value = m0;
     int[] rm =
       (dh == 0L) ? (new int[xlen + 1]) : (new int[xlen + 2]);
-      long carry = 0;
-      int rstart = rm.length-1;
+    long carry = 0;
+    int rstart = rm.length-1;
+    for (int i = xlen-1; i >= 0; i--) {
+      final long product = (unsigned(value[i]) * dl) + carry;
+      rm[rstart--] = (int) product;
+      carry = product >>> 32; }
+    rm[rstart] = (int) carry;
+    if (dh != 0L) {
+      carry = 0;
+      rstart = rm.length-2;
       for (int i = xlen-1; i >= 0; i--) {
-        final long product = (unsigned(value[i]) * dl) + carry;
+        final long product =
+          (unsigned(value[i]) * dh)
+          + unsigned(rm[rstart]) + carry;
         rm[rstart--] = (int) product;
         carry = product >>> 32; }
-      rm[rstart] = (int) carry;
-      if (dh != 0L) {
-        carry = 0;
-        rstart = rm.length-2;
-        for (int i = xlen-1; i >= 0; i--) {
-          final long product =
-            (unsigned(value[i]) * dh)
-            + unsigned(rm[rstart]) + carry;
-          rm[rstart--] = (int) product;
-          carry = product >>> 32; }
-        rm[0] = (int) carry; }
-      if (carry == 0L) {
-        rm = Arrays.copyOfRange(rm,1,rm.length); }
-      return stripLeadingZeros(rm); }
+      rm[0] = (int) carry; }
+    if (carry == 0L) {
+      rm = Arrays.copyOfRange(rm,1,rm.length); }
+    return stripLeadingZeros(rm); }
 
   //--------------------------------------------------------------
 
@@ -1807,8 +1806,7 @@ public final class Bei0 {
 
   private static final int getInt (final int[] m,
                                    final int n) {
-    if (n < 0) { return 0; }
-    if (n >= m.length) { return 0; }
+    if ((n < 0) || (n >= m.length)) { return 0; }
     final int mInt = m[m.length-n-1];
     return mInt; }
 

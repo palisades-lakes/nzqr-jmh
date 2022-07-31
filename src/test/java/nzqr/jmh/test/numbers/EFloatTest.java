@@ -28,7 +28,7 @@ public final class EFloatTest {
       EFloat::FromDouble,
       q -> ((EFloat) q).ToDouble(),
       (q0,q1) -> ((EFloat) q0).Subtract((EFloat) q1).Abs(),
-      Object::toString, 
+      Object::toString,
       Common::compareTo, Common::compareTo);
 
     Common.floatRoundingTests(
@@ -36,7 +36,7 @@ public final class EFloatTest {
       EFloat::FromSingle,
       q -> ((EFloat) q).ToSingle(),
       (q0,q1) -> ((EFloat) q0).Subtract((EFloat) q1).Abs(),
-      Object::toString, 
+      Object::toString,
       Common::compareTo, Common::compareTo);
 
   }

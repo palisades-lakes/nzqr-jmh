@@ -66,16 +66,16 @@ public final class Defaults {
       .warmupTime(TimeValue.seconds(24))
       .measurementIterations(4)
       .measurementTime(TimeValue.seconds(20))
-      .build(); 
-  return options; }
+      .build();
+    return options; }
 
   //--------------------------------------------------------------
 
   public static final void run (final String fileName,
                                 final String includes) {
 
-    try { 
-      final Runner runner = 
+    try {
+      final Runner runner =
         new Runner(Defaults.options(fileName,includes));
       runner.run(); }
     catch (final RunnerException e) {

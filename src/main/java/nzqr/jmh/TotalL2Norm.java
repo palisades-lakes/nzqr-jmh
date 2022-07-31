@@ -13,9 +13,9 @@ public class TotalL2Norm extends Base {
 
   @Override
   public final double[] operation (final Accumulator ac,
-                                 final double[] z0,
-                                 final double[] z1) {
-    return new double[] 
+                                   final double[] z0,
+                                   final double[] z1) {
+    return new double[]
       {  ac.clear().add2All(z0).doubleValue() }; }
 
   public static final void main (final String[] args)  {

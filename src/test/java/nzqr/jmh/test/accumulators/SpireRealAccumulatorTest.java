@@ -37,7 +37,7 @@ public final class SpireRealAccumulatorTest {
         Common.sumTests(
           Common.generators(DIM),
           Common.makeAccumulators(accumulators),
-          EFloatAccumulator.make()); 
+          EFloatAccumulator.make());
       },
       "fails because spire.math.Real doesn't round to double correctly");
 
@@ -47,19 +47,19 @@ public final class SpireRealAccumulatorTest {
         Common.l2Tests(
           Common.generators(DIM),
           Common.makeAccumulators(accumulators),
-          EFloatAccumulator.make()); 
+          EFloatAccumulator.make());
       },
       "fails, reason unknown yet");
 
-//    Assertions.assertThrows(
-//      AssertionFailedError.class,
-//      () -> {
-        Common.dotTests(
-          Common.generators(DIM),
-          Common.makeAccumulators(accumulators),
-          EFloatAccumulator.make()); 
-//      },
-//      "fails, reason unknown yet");
+    //    Assertions.assertThrows(
+    //      AssertionFailedError.class,
+    //      () -> {
+    Common.dotTests(
+      Common.generators(DIM),
+      Common.makeAccumulators(accumulators),
+      EFloatAccumulator.make());
+    //      },
+    //      "fails, reason unknown yet");
   }
   //--------------------------------------------------------------
 }

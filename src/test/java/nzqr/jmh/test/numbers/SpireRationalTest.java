@@ -28,13 +28,13 @@ public final class SpireRationalTest {
     Assertions.assertThrows(
       AssertionFailedError.class,
       () -> {
-    Common.doubleRoundingTests(
-      SpireRationals::toRational,
-      SpireRationals::toRational,
-      q -> ((Rational) q).doubleValue(),
-      (q0,q1) -> ((Rational) q0).$minus((Rational) q1).abs(),
-      q -> q.toString(), 
-      Common::compareTo, Common::compareTo); },
+        Common.doubleRoundingTests(
+          SpireRationals::toRational,
+          SpireRationals::toRational,
+          q -> ((Rational) q).doubleValue(),
+          (q0,q1) -> ((Rational) q0).$minus((Rational) q1).abs(),
+          q -> q.toString(),
+          Common::compareTo, Common::compareTo); },
       "spire.math.Rational doesn't round to double correctly");
 
     Common.floatRoundingTests(
@@ -42,8 +42,8 @@ public final class SpireRationalTest {
       SpireRationals::toRational,
       q -> ((Rational) q).floatValue(),
       (q0,q1) -> ((Rational) q0).$minus((Rational) q1).abs(),
-      q -> q.toString(), 
-      Common::compareTo, Common::compareTo); 
+      q -> q.toString(),
+      Common::compareTo, Common::compareTo);
 
   }
 

@@ -832,7 +832,7 @@ implements Ringlike<BigInteger> {
       result[bigIndex] = (int) difference;
       difference =
         (unsigned(big[--bigIndex])
-         -unsigned(highWord))
+          -unsigned(highWord))
         + (difference >> 32);
       result[bigIndex] = (int) difference; }
     // Subtract remainder of longer number while borrow propagates
@@ -909,7 +909,7 @@ implements Ringlike<BigInteger> {
     while (littleIndex > 0) {
       difference =
         (unsigned(big[--bigIndex])
-         -unsigned(little[--littleIndex]))
+          -unsigned(little[--littleIndex]))
         + (difference >> 32);
       result[bigIndex] = (int) difference; }
 
@@ -1220,30 +1220,30 @@ implements Ringlike<BigInteger> {
     final int[] value = mag;
     int[] rmag =
       (dh == 0L) ? (new int[xlen + 1]) : (new int[xlen + 2]);
-      long carry = 0;
-      int rstart = rmag.length-1;
+    long carry = 0;
+    int rstart = rmag.length-1;
+    for (int i = xlen-1; i >= 0; i--) {
+      final long product = (unsigned(value[i]) * dl) + carry;
+      rmag[rstart--] = (int) product;
+      carry = product >>> 32;
+    }
+    rmag[rstart] = (int) carry;
+    if (dh != 0L) {
+      carry = 0;
+      rstart = rmag.length-2;
       for (int i = xlen-1; i >= 0; i--) {
-        final long product = (unsigned(value[i]) * dl) + carry;
+        final long product =
+          (unsigned(value[i]) * dh)
+          + unsigned(rmag[rstart]) + carry;
         rmag[rstart--] = (int) product;
         carry = product >>> 32;
       }
-      rmag[rstart] = (int) carry;
-      if (dh != 0L) {
-        carry = 0;
-        rstart = rmag.length-2;
-        for (int i = xlen-1; i >= 0; i--) {
-          final long product =
-            (unsigned(value[i]) * dh)
-            + unsigned(rmag[rstart]) + carry;
-          rmag[rstart--] = (int) product;
-          carry = product >>> 32;
-        }
-        rmag[0] = (int) carry;
-      }
-      if (carry == 0L) {
-        rmag = java.util.Arrays.copyOfRange(rmag,1,rmag.length);
-      }
-      return new BigInteger(rmag,rsign);
+      rmag[0] = (int) carry;
+    }
+    if (carry == 0L) {
+      rmag = java.util.Arrays.copyOfRange(rmag,1,rmag.length);
+    }
+    return new BigInteger(rmag,rsign);
   }
 
   /**
@@ -1508,7 +1508,7 @@ implements Ringlike<BigInteger> {
     if ((start == 0) && (sliceSize >= len)) { return this.abs(); }
     final int intSlice[] = new int[sliceSize];
     System.arraycopy(mag,start,intSlice,0,sliceSize);
-    return 
+    return
       new BigInteger(trustedStripLeadingZeroInts(intSlice),1); }
 
   /**
@@ -1531,7 +1531,7 @@ implements Ringlike<BigInteger> {
     for (int i=len-1;i>=0;i--) {
       x = unsigned(mag[i]);
       w = x-borrow;
-   // Did we make the number go negative?
+      // Did we make the number go negative?
       if (borrow > x) { borrow = 1L; }
       else { borrow = 0L; }
       // 0xAAAAAAAB is the modular inverse of 3 (mod 2^32). Thus,
@@ -1544,7 +1544,7 @@ implements Ringlike<BigInteger> {
       if (q >= 0x55555556L) {
         borrow++;
         if (q >= 0xAAAAAAABL) { borrow++; } } }
-    return 
+    return
       new BigInteger(trustedStripLeadingZeroInts(result),signum); }
 
   /**
@@ -1657,7 +1657,7 @@ implements Ringlike<BigInteger> {
    * into the
    * int array z. The contents of x are not changed.
    */
-  private static int[] squareToLen (final int[] x, 
+  private static int[] squareToLen (final int[] x,
                                     final int len,
                                     int[] z) {
     final int zlen = len << 1;
@@ -1823,13 +1823,13 @@ implements Ringlike<BigInteger> {
     final BigInteger da1 = da0.add(a1);
     final BigInteger v1 = da1.square(true);
     final BigInteger vinf = a2.square(true);
-    final BigInteger v2 = 
+    final BigInteger v2 =
       da1.add(a2).shiftUp(1).subtract(a0).square(true);
 
     // The algorithm requires two divisions by 2 and one by 3.
     // All divisions are known to be exact, that is, they do not
-    // produce remainders, and all results are positive. The 
-    // divisions by 2 are implemented as right shifts which are 
+    // produce remainders, and all results are positive. The
+    // divisions by 2 are implemented as right shifts which are
     // relatively efficient, leaving only a division by 3.
     // The division by 3 is done by an optimized algorithm for
     // this case.
@@ -1842,7 +1842,7 @@ implements Ringlike<BigInteger> {
     tm1 = tm1.subtract(t2);
     // Number of bits to shift left.
     final int ss = k*32;
-    return 
+    return
       vinf.shiftUp(ss).add(t2).shiftUp(ss)
       .add(t1).shiftUp(ss)
       .add(tm1)
@@ -2369,7 +2369,7 @@ implements Ringlike<BigInteger> {
    *          unsigned shift distance, in bits.
    * @return {@code mag << n}
    */
-  private static int[] shiftUp (final int[] mag, 
+  private static int[] shiftUp (final int[] mag,
                                 final int n) {
     final int nInts = n >>> 5;
     final int nBits = n & 0x1f;
@@ -3143,7 +3143,7 @@ implements Ringlike<BigInteger> {
     n =
       (int) Math.round(
         (Math.log((b * LOG_TWO) / logCache[radix]) / LOG_TWO)
-       -1.0);
+        -1.0);
     final BigInteger v = getRadixConversionCache(radix,n);
     final List<BigInteger> results = u.divideAndRemainder(v);
 

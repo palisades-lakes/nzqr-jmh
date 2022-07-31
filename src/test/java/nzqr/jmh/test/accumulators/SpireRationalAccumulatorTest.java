@@ -45,10 +45,10 @@ public final class SpireRationalAccumulatorTest {
     Assertions.assertThrows(
       AssertionFailedError.class,
       () -> {
-    Common.l2Tests(
-      Common.generators(DIM),
-      Common.makeAccumulators(accumulators),
-      EFloatAccumulator.make()); },
+        Common.l2Tests(
+          Common.generators(DIM),
+          Common.makeAccumulators(accumulators),
+          EFloatAccumulator.make()); },
       "fails, reason unknown yet");
 
     Common.dotTests(

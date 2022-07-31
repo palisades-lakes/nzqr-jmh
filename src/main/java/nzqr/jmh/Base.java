@@ -120,7 +120,7 @@ public abstract class Base {
 
   @TearDown(Level.Invocation)
   public final void invocationTeardown () {
-    assert 
+    assert
     0.0 == exact.clear().addL1Distance(truth,p).doubleValue(); }
 
   // not needed while testing exact methods

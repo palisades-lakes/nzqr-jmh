@@ -11,6 +11,7 @@ import java.util.List;
 import nzqr.java.Debug;
 import nzqr.java.Exceptions;
 import nzqr.java.numbers.Ringlike;
+import spire.math.Natural;
 
 /** immutable arbitrary-precision non-negative integers
  * (natural number) represented by big-endian
@@ -53,13 +54,13 @@ public final class NaturalBEI0 implements Ringlike<NaturalBEI0> {
     return Arrays.copyOf(words(),words().length); }
 
   public final NaturalBEI0 setWord (final int i,
-                                final int w) {
+                                    final int w) {
     throw Exceptions.unsupportedOperation(this,"setWord",i,w); }
 
   public final NaturalBEI0 words (final int i0,
-                              final int i1) {
+                                  final int i1) {
     throw Exceptions.unsupportedOperation(this,"words",i0,i1); }
-  
+
   //--------------------------------------------------------------
 
   public final int loInt () {
@@ -233,7 +234,7 @@ public final class NaturalBEI0 implements Ringlike<NaturalBEI0> {
     return unsafe(Bei0.add(words(),m.words())); }
 
   public final NaturalBEI0 add (final NaturalBEI0 m,
-                            final int upShift) {
+                                final int upShift) {
     return add(m.shiftUp(upShift)); }
 
   // only when val <= this
@@ -275,11 +276,11 @@ public final class NaturalBEI0 implements Ringlike<NaturalBEI0> {
     //assert 1L<=that;
     return unsafe(Bei0.multiply(words(),that)); }
 
-//  @Override
-//  public final NaturalBEI0 multiply (final long that,
-//                                 final int shift) {
-//    //assert 1L<=that;
-//    return multiply(valueOf(that,shift)); }
+  //  @Override
+  //  public final NaturalBEI0 multiply (final long that,
+  //                                 final int shift) {
+  //    //assert 1L<=that;
+  //    return multiply(valueOf(that,shift)); }
 
   @Override
   public final NaturalBEI0 multiply (final NaturalBEI0 that) {
@@ -315,7 +316,7 @@ public final class NaturalBEI0 implements Ringlike<NaturalBEI0> {
     final MutableNaturalBEI0 den = MutableNaturalBEI0.valueOf(that.words());
     final MutableNaturalBEI0 r = num.divideKnuth(den,q,true);
     return List.of(
-      valueOf(q.getValue()), 
+      valueOf(q.getValue()),
       valueOf(r.getValue())); }
 
   private final NaturalBEI0 remainderKnuth (final NaturalBEI0 that) {
@@ -337,18 +338,18 @@ public final class NaturalBEI0 implements Ringlike<NaturalBEI0> {
       num.divideAndRemainderBurnikelZiegler(den,q);
     final NaturalBEI0 qq =
       q.isZero() ? valueOf(0L) : valueOf(q.getValue());
-      final NaturalBEI0 rr =
-        r.isZero() ? valueOf(0L) : valueOf(r.getValue());
-        return List.of(qq,rr); }
+    final NaturalBEI0 rr =
+      r.isZero() ? valueOf(0L) : valueOf(r.getValue());
+    return List.of(qq,rr); }
 
   private final NaturalBEI0
   divideBurnikelZiegler (final NaturalBEI0 that) {
-    return 
+    return
       divideAndRemainderBurnikelZiegler(that).get(0); }
 
   private final NaturalBEI0
   remainderBurnikelZiegler (final NaturalBEI0 that) {
-    return  
+    return
       divideAndRemainderBurnikelZiegler(that).get(1); }
 
   //--------------------------------------------------------------
@@ -405,7 +406,7 @@ public final class NaturalBEI0 implements Ringlike<NaturalBEI0> {
   //        valueOf(nd[1].getValue()), }; }
 
   public static final NaturalBEI0[] reduce (final NaturalBEI0 n0,
-                                        final NaturalBEI0 d0) {
+                                            final NaturalBEI0 d0) {
     final int shift =
       Math.min(
         Bei0.loBit(n0.words()),
@@ -557,7 +558,7 @@ public final class NaturalBEI0 implements Ringlike<NaturalBEI0> {
                                            final int len) {
     return unsafe(Bei0.stripLeadingZeros(b,off,len)); }
 
-  /** Return a {@link Natural} equivalent to the unsigned 
+  /** Return a {@link Natural} equivalent to the unsigned
    * value of <code>u</code>.
    */
   public static final NaturalBEI0 valueOf (final int u) {

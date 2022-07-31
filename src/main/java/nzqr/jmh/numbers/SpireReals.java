@@ -13,17 +13,17 @@ import org.apache.commons.rng.sampling.CollectionSampler;
 import org.apache.commons.rng.sampling.distribution.ContinuousSampler;
 import org.apache.commons.rng.sampling.distribution.ContinuousUniformSampler;
 
+import nzqr.java.Exceptions;
 import nzqr.java.algebra.OneSetOneOperation;
 import nzqr.java.algebra.OneSetTwoOperations;
 import nzqr.java.algebra.Set;
-import nzqr.java.Exceptions;
 import nzqr.java.numbers.Doubles;
 import nzqr.java.prng.Generator;
 import nzqr.java.prng.GeneratorBase;
 import nzqr.java.prng.Generators;
+import spire.math.Rational;
 import spire.math.Real;
 import spire.math.Real$;
-import spire.math.Rational;
 import spire.math.SafeLong;
 import spire.math.SafeLong$;
 import spire.math.SafeLongBigInteger;
@@ -66,12 +66,12 @@ public final class SpireReals implements Set {
   public static final Real toReal (final BigInteger x) {
     return toReal(SpireRationals.toRational(x)); }
 
-  public static final Real toReal (final SafeLong n, 
-                                             final SafeLong d) {
+  public static final Real toReal (final SafeLong n,
+                                   final SafeLong d) {
     return toReal(SpireRationals.toRational(n,d)); }
 
   public static final Real toReal (final BigInteger n,
-                                             final BigInteger d) {
+                                   final BigInteger d) {
     return toReal(SpireRationals.toRational(n,d)); }
 
   public static final Real toReal (final Object x) {
@@ -199,7 +199,7 @@ public final class SpireReals implements Set {
   // worth the indirection?
 
   private final Real add (final Real q0,
-                               final Real q1) {
+                          final Real q1) {
     //assert contains(q0);
     //assert contains(q1);
     return q0.$plus(q1); }
@@ -210,7 +210,7 @@ public final class SpireReals implements Set {
       public final String toString () { return "BF.add()"; }
       @Override
       public final Real apply (final Real q0,
-                                    final Real q1) {
+                               final Real q1) {
         return SpireReals.this.add(q0,q1); } }; }
 
   //--------------------------------------------------------------
@@ -239,7 +239,7 @@ public final class SpireReals implements Set {
   //--------------------------------------------------------------
 
   private final Real multiply (final Real q0,
-                                    final Real q1) {
+                               final Real q1) {
     //assert contains(q0);
     //assert contains(q1);
     return q0.$times(q1); }
@@ -250,7 +250,7 @@ public final class SpireReals implements Set {
       public final String toString () { return "BF.multiply()"; }
       @Override
       public final Real apply (final Real q0,
-                                    final Real q1) {
+                               final Real q1) {
         return SpireReals.this.multiply(q0,q1); } }; }
 
   //--------------------------------------------------------------

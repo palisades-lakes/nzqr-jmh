@@ -321,10 +321,10 @@ public final class MutableNaturalBEI0 {
         (y+addend.offset) < addend.value.length
         ? addend.value[y+addend.offset]
           : 0;
-        sum = unsigned(value[x+offset]) +
-          (unsigned(bval)) + carry;
-        result[rstart--] = (int)sum;
-        carry = sum >>> 32; }
+      sum = unsigned(value[x+offset]) +
+        (unsigned(bval)) + carry;
+      result[rstart--] = (int)sum;
+      carry = sum >>> 32; }
 
     // Add remainder of the longer number
     while (x > 0) {
@@ -783,7 +783,7 @@ public final class MutableNaturalBEI0 {
     if (((n%2) != 0) || (n < BURNIKEL_ZIEGLER_THRESHOLD)) {
       return divideKnuth(b,quotient,true); }
 
-    // step 2: view this as [a1,a2,a3,a4] 
+    // step 2: view this as [a1,a2,a3,a4]
     // where each ai is n/2 ints or less
     final MutableNaturalBEI0 aUpper = new MutableNaturalBEI0(this);
     aUpper.safeRightShift(32*(n/2));   // aUpper = [a1,a2,a3]
@@ -861,7 +861,7 @@ public final class MutableNaturalBEI0 {
     r.subtract(d);
     return r; }
 
-  public final static MutableNaturalBEI0 one () { 
+  public final static MutableNaturalBEI0 one () {
     return new MutableNaturalBEI0(1); }
 
   //--------------------------------------------------------------

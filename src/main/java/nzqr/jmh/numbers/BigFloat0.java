@@ -67,9 +67,9 @@ public final class BigFloat0 implements Ringlike<BigFloat0> {
                                       final int e1) {
     if (e0<e1) { return add(p1,t1,e1,p0,t0,e0); }
     final int de = e0-e1;
-    if (p0^p1) { 
+    if (p0^p1) {
       // different signs
-      final NaturalBEI0 t0s = ((de>0) ? t0.shiftUp(de) : t0); 
+      final NaturalBEI0 t0s = ((de>0) ? t0.shiftUp(de) : t0);
       final int c01 = t0s.compareTo(t1);
       // t1 > t0s
       if (0>c01) { return valueOf(p1,t1.subtract(t0s),e1); }
@@ -168,7 +168,7 @@ public final class BigFloat0 implements Ringlike<BigFloat0> {
     final long t1 = (t11>>>shift);
     final int e1 = e11+shift;
     if (e0<e1) { return add6(p0,t0,p1,t1,e1-e0,e0); }
-    if (e0==e1) { return add5a(p0,t0,p1,t1,e0); } 
+    if (e0==e1) { return add5a(p0,t0,p1,t1,e0); }
     return add5a(p0,t0.shiftUp(e0-e1),p1,t1,e1); }
 
   //--------------------------------------------------------------
@@ -206,7 +206,7 @@ public final class BigFloat0 implements Ringlike<BigFloat0> {
   public final BigFloat0
   add (final double z) {
     //assert Double.isFinite(z);
-    // escape on zero needed for add() 
+    // escape on zero needed for add()
     if (0.0==z) { return this; }
     return add(
       nonNegative(),
@@ -228,7 +228,7 @@ public final class BigFloat0 implements Ringlike<BigFloat0> {
   public final BigFloat0
   addAbs (final double z) {
     //assert Double.isFinite(z);
-    // escape on zero needed for add() 
+    // escape on zero needed for add()
     if (0.0==z) { return this; }
     return add(
       nonNegative(),
@@ -260,7 +260,7 @@ public final class BigFloat0 implements Ringlike<BigFloat0> {
 
   public final BigFloat0
   subtract (final double z) {
-    // escape on zero needed for add() 
+    // escape on zero needed for add()
     if (0.0==z) { return this; }
     return add(
       nonNegative(),
@@ -477,7 +477,7 @@ public final class BigFloat0 implements Ringlike<BigFloat0> {
         NaturalBEI0.product(t0,t1),
         e0+e1); }
 
-  public final BigFloat0 
+  public final BigFloat0
   addProducts (final double[] z0,
                final double[] z1)  {
     final int n = z0.length;
@@ -519,8 +519,8 @@ public final class BigFloat0 implements Ringlike<BigFloat0> {
   /** Exact <code>a*this+y</code> (aka fma). */
 
   public static final BigFloat0[] axpy (final double[] a,
-                                       final BigFloat0[] x,
-                                       final double[] y) {
+                                        final BigFloat0[] x,
+                                        final double[] y) {
     final int n = x.length;
     //assert n==x.length;
     //assert n==y.length;
@@ -617,9 +617,9 @@ public final class BigFloat0 implements Ringlike<BigFloat0> {
         Math.min(
           Doubles.MAXIMUM_EXPONENT_INTEGRAL_SIGNIFICAND-e0-1,
           eh-Doubles.SIGNIFICAND_BITS));
-    if (eh-es>Doubles.SIGNIFICAND_BITS) {
-      return 
-        (nn ? 
+    if ((eh-es)>Doubles.SIGNIFICAND_BITS) {
+      return
+        (nn ?
           Double.POSITIVE_INFINITY : Double.NEGATIVE_INFINITY); }
     if (0==es) {
       return doubleMergeBits(nn,s0.longValue(),e0); }
@@ -670,12 +670,11 @@ public final class BigFloat0 implements Ringlike<BigFloat0> {
 
   private static final boolean reducedEquals (final BigFloat0 a,
                                               final BigFloat0 b) {
-    // assuming a and b have minimum significand and maximum 
+    // assuming a and b have minimum significand and maximum
     // exponent
     if (a==b) { return true; }
-    if (null==a) { return false; }
     // assuming reduced
-    if (! a.significand().equals(b.significand())) { return false; }
+    if ((null==a) || ! a.significand().equals(b.significand())) { return false; }
     if (a.significand().isZero()) { return true; }
     if (a.nonNegative()!=b.nonNegative()) { return false; }
     if (a.exponent()!=b.exponent()) { return false; }
@@ -714,7 +713,7 @@ public final class BigFloat0 implements Ringlike<BigFloat0> {
                      final int e0) {
     _nonNegative = p0;
     _significand = t0;
-    _exponent = e0; } 
+    _exponent = e0; }
 
   //--------------------------------------------------------------
 

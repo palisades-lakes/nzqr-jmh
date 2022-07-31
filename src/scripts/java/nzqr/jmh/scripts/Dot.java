@@ -44,7 +44,7 @@ public final class Dot {
     return m; }
 
   private static final double l1Dist (final double[] x0,
-                                     final double[] x1) {
+                                      final double[] x1) {
     final int n = x0.length;
     assert n == x1.length;
     final Accumulator a = BigFloatAccumulator.make();

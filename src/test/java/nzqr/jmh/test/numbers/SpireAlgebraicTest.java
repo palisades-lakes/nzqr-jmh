@@ -35,21 +35,21 @@ public final class SpireAlgebraicTest {
           (q0,q1) -> ((Algebraic) q0).$minus((Algebraic) q1).abs(),
           q -> q.toString(),
           SpireAlgebraics::compareTo,
-          SpireAlgebraics::compareTo); 
+          SpireAlgebraics::compareTo);
       },
       "spire.math.Algebraic doesn't round to double correctly");
 
     Assertions.assertThrows(
       AssertionFailedError.class,
       () -> {
-    Common.floatRoundingTests(
-      SpireAlgebraics::toAlgebraic,
-      SpireAlgebraics::toAlgebraic,
-      q -> ((Algebraic) q).floatValue(),
-      (q0,q1) -> ((Algebraic) q0).$minus((Algebraic) q1).abs(),
-      q -> q.toString(),
-      SpireAlgebraics::compareTo,
-      SpireAlgebraics::compareTo); 
+        Common.floatRoundingTests(
+          SpireAlgebraics::toAlgebraic,
+          SpireAlgebraics::toAlgebraic,
+          q -> ((Algebraic) q).floatValue(),
+          (q0,q1) -> ((Algebraic) q0).$minus((Algebraic) q1).abs(),
+          q -> q.toString(),
+          SpireAlgebraics::compareTo,
+          SpireAlgebraics::compareTo);
       },
       "spire.math.Algebraic doesn't round to float correctly");
 

@@ -35,13 +35,13 @@ public final class SpireRealTest {
           (q0,q1) -> ((Real) q0).$minus((Real) q1).abs(),
           q -> q.toString(),
           SpireReals::compareTo,
-          SpireReals::compareTo); 
+          SpireReals::compareTo);
       },
       "spire.math.Real doesn't round to double correctly");
 
-//    Assertions.assertThrows(
-//      AssertionFailedError.class,
-//      () -> {
+    //    Assertions.assertThrows(
+    //      AssertionFailedError.class,
+    //      () -> {
     Common.floatRoundingTests(
       SpireReals::toReal,
       SpireReals::toReal,
@@ -49,9 +49,9 @@ public final class SpireRealTest {
       (q0,q1) -> ((Real) q0).$minus((Real) q1).abs(),
       q -> q.toString(),
       SpireReals::compareTo,
-      SpireReals::compareTo); 
-//      },
-//      "spire.math.Real doesn't round to float correctly");
+      SpireReals::compareTo);
+    //      },
+    //      "spire.math.Real doesn't round to float correctly");
 
   }
 

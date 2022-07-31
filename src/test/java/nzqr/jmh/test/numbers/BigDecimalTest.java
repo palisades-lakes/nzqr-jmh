@@ -29,7 +29,7 @@ public final class BigDecimalTest {
       BigDecimal::valueOf,
       Numbers::doubleValue,
       (q0,q1) -> ((BigDecimal) q0).subtract((BigDecimal) q1).abs(),
-      Object::toString, 
+      Object::toString,
       Common::compareTo, Common::compareTo);
 
     Common.floatRoundingTests(
@@ -37,7 +37,7 @@ public final class BigDecimalTest {
       BigDecimal::valueOf,
       Numbers::floatValue,
       (q0,q1) -> ((BigDecimal) q0).subtract((BigDecimal) q1).abs(),
-      Object::toString, 
+      Object::toString,
       Common::compareTo, Common::compareTo);
 
   }

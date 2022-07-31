@@ -1,11 +1,9 @@
 package nzqr.jmh.scripts;
 
-import spire.math.Rational;
-import spire.math.Rational$;
-
 import spire.math.Algebraic;
 import spire.math.Algebraic$;
-
+import spire.math.Rational;
+import spire.math.Rational$;
 import spire.math.Real;
 import spire.math.Real$;
 import spire.math.RealAlgebra;
@@ -32,7 +30,7 @@ public final class Spire {
     final Rational q1 = q0.$plus(q0);
     System.out.println(q1);
     System.out.println(q1.doubleValue());
-    
+
     System.out.println();
     final Algebraic a0 = Algebraic$.MODULE$.apply(Math.PI);
     System.out.println(a0);
@@ -43,7 +41,7 @@ public final class Spire {
     final Algebraic a2 = a1.sqrt();
     System.out.println(a2);
     System.out.println(a2.doubleValue());
-    
+
     System.out.println();
     final Real r0 = Real$.MODULE$.apply(Math.PI);
     System.out.println(r0);
@@ -54,13 +52,13 @@ public final class Spire {
     final Real r2 = r1.sqrt();
     System.out.println(r2);
     System.out.println(r2.doubleValue());
-    
+
     System.out.println();
     final RealAlgebra ra = new RealAlgebra();
     final Real r3 = ra.fromAlgebraic(a2);
     System.out.println(r3);
     System.out.println(r3.doubleValue());
-    }
+  }
 
   //--------------------------------------------------------------
 }

@@ -13,10 +13,10 @@ import org.apache.commons.rng.sampling.CollectionSampler;
 import org.apache.commons.rng.sampling.distribution.ContinuousSampler;
 import org.apache.commons.rng.sampling.distribution.ContinuousUniformSampler;
 
+import nzqr.java.Exceptions;
 import nzqr.java.algebra.OneSetOneOperation;
 import nzqr.java.algebra.OneSetTwoOperations;
 import nzqr.java.algebra.Set;
-import nzqr.java.Exceptions;
 import nzqr.java.numbers.Doubles;
 import nzqr.java.prng.Generator;
 import nzqr.java.prng.GeneratorBase;
@@ -63,7 +63,7 @@ public final class SpireRationals implements Set {
     final SafeLong sl = new SafeLongBigInteger(x);
     return Rational$.MODULE$.apply(sl); }
 
-  public static final Rational toRational (final SafeLong n, 
+  public static final Rational toRational (final SafeLong n,
                                            final SafeLong d) {
     return Rational$.MODULE$.apply(n,d); }
 

@@ -13,10 +13,10 @@ import org.apache.commons.rng.sampling.CollectionSampler;
 import org.apache.commons.rng.sampling.distribution.ContinuousSampler;
 import org.apache.commons.rng.sampling.distribution.ContinuousUniformSampler;
 
+import nzqr.java.Exceptions;
 import nzqr.java.algebra.OneSetOneOperation;
 import nzqr.java.algebra.OneSetTwoOperations;
 import nzqr.java.algebra.Set;
-import nzqr.java.Exceptions;
 import nzqr.java.numbers.Doubles;
 import nzqr.java.prng.Generator;
 import nzqr.java.prng.GeneratorBase;
@@ -66,7 +66,7 @@ public final class SpireAlgebraics implements Set {
   public static final Algebraic toAlgebraic (final BigInteger x) {
     return toAlgebraic(SpireRationals.toRational(x)); }
 
-  public static final Algebraic toAlgebraic (final SafeLong n, 
+  public static final Algebraic toAlgebraic (final SafeLong n,
                                              final SafeLong d) {
     return toAlgebraic(SpireRationals.toRational(n,d)); }
 

@@ -54,7 +54,7 @@ public final class RatioTest {
           x -> Numbers.toRatio(Double.valueOf(x)),
           q -> ((Ratio) q).doubleValue(),
           (q0,q1) -> Ratios.abs((Ratio) Numbers.minus(q0,q1)),
-          Object::toString, 
+          Object::toString,
           Common::compareTo, Common::compareTo); },
       "Ratio doesn't round correctly");
 
@@ -66,7 +66,7 @@ public final class RatioTest {
           x -> Numbers.toRatio(Float.valueOf(x)),
           q -> ((Ratio) q).floatValue(),
           (q0,q1) -> Ratios.abs((Ratio) Numbers.minus(q0,q1)),
-          Object::toString, 
+          Object::toString,
           Common::compareTo, Common::compareTo); },
       "Ratio doesn't round correctly");
 

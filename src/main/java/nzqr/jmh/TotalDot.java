@@ -15,7 +15,7 @@ public class TotalDot extends Base {
   public final double[] operation (final Accumulator ac,
                                    final double[] z0,
                                    final double[] z1) {
-    return new double[] 
+    return new double[]
       { ac.clear().addProducts(z0,z1).doubleValue() }; }
 
   public static final void main (final String[] args)  {

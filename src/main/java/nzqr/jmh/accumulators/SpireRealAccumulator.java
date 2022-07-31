@@ -25,7 +25,7 @@ extends ExactAccumulator<SpireRealAccumulator> {
   public final Object value () { return _sum; }
 
   @Override
-  public final double doubleValue () { 
+  public final double doubleValue () {
     return _sum.doubleValue(); }
 
   @Override
@@ -48,7 +48,7 @@ extends ExactAccumulator<SpireRealAccumulator> {
 
   @Override
   public final SpireRealAccumulator addL2 (final double z0,
-                                               final double z1) {
+                                           final double z1) {
     //assert Double.isFinite(z0);
     //assert Double.isFinite(z1);
     final Real zz0 = SpireReals.toReal(z0);
@@ -60,7 +60,7 @@ extends ExactAccumulator<SpireRealAccumulator> {
 
   @Override
   public final SpireRealAccumulator addProduct (final double z0,
-                                                    final double z1) {
+                                                final double z1) {
     //assert Double.isFinite(z0);
     //assert Double.isFinite(z1);
     _sum = _sum.$plus(
