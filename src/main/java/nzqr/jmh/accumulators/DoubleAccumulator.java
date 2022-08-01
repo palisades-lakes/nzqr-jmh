@@ -5,12 +5,11 @@ import nzqr.java.accumulators.Accumulator;
 /** Naive sum of <code>double</code> values.
  *
  * @author palisades dot lakes at gmail dot com
- * @version 2019-04-21
+ * @version 2022-08-01
  */
 
-strictfp
-public final class StrictDoubleAccumulator
-implements Accumulator<StrictDoubleAccumulator> {
+public final class DoubleAccumulator
+implements Accumulator<DoubleAccumulator> {
 
   private double _sum;
 
@@ -29,23 +28,23 @@ implements Accumulator<StrictDoubleAccumulator> {
   public final double doubleValue () { return _sum; }
 
   @Override
-  public final StrictDoubleAccumulator clear () {
+  public final DoubleAccumulator clear () {
     _sum = 0.0; return this; }
 
   @Override
-  public final StrictDoubleAccumulator add (final double z) {
+  public final DoubleAccumulator add (final double z) {
     assert Double.isFinite(z);
     _sum += z;
     return this; }
 
   @Override
-  public final StrictDoubleAccumulator add2 (final double z) {
+  public final DoubleAccumulator add2 (final double z) {
     assert Double.isFinite(z);
     _sum += z*z;
     return this; }
 
   @Override
-  public final StrictDoubleAccumulator addProduct (final double z0,
+  public final DoubleAccumulator addProduct (final double z0,
                                                    final double z1) {
     assert Double.isFinite(z0);
     assert Double.isFinite(1);
@@ -56,10 +55,10 @@ implements Accumulator<StrictDoubleAccumulator> {
   // construction
   //--------------------------------------------------------------
 
-  private StrictDoubleAccumulator () { super(); _sum = 0.0; }
+  private DoubleAccumulator () { super(); _sum = 0.0; }
 
-  public static final StrictDoubleAccumulator make () {
-    return new StrictDoubleAccumulator(); }
+  public static final DoubleAccumulator make () {
+    return new DoubleAccumulator(); }
 
   //--------------------------------------------------------------
 }
