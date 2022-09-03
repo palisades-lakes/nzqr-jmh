@@ -1,4 +1,4 @@
-package nzqr.jmh;
+package nzqr.jmh.benchmarks.accumulate;
 
 /** <pre>
  * java -cp target\benchmarks.jar nzqr.jmh.Partials

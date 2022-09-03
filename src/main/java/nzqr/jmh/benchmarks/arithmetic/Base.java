@@ -1,4 +1,4 @@
-package nzqr.jmh;
+package nzqr.jmh.benchmarks.arithmetic;
 
 import java.util.List;
 

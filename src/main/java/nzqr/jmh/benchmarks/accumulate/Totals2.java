@@ -1,4 +1,4 @@
-package nzqr.jmh;
+package nzqr.jmh.benchmarks.accumulate;
 
 /** <pre>
  * j nzqr.jmh.Totals2

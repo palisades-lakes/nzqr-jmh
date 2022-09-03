@@ -1,4 +1,4 @@
-package nzqr.jmh;
+package nzqr.jmh.benchmarks.accumulate;
 
 import java.util.concurrent.TimeUnit;
 

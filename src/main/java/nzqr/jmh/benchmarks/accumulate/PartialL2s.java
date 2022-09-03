@@ -1,22 +1,22 @@
-package nzqr.jmh;
+package nzqr.jmh.benchmarks.accumulate;
 
 import nzqr.java.accumulators.Accumulator;
 
 /** <pre>
- * java -cp target\benchmarks.jar nzqr.jmh.PartialSums
+ * java -cp target\benchmarks.jar nzqr.jmh.PartialL2s
  * </pre>
  * @author palisades dot lakes at gmail dot com
  * @version 2019-07-27
  */
 
 @SuppressWarnings("unchecked")
-public class PartialSums extends Base {
+public class PartialL2s extends Base {
 
   @Override
   public final double[] operation (final Accumulator ac,
                                    final double[] z0,
                                    final double[] z1) {
-    return ac.clear().partialSums(z0); }
+    return ac.clear().partialL2s(z0); }
 
   public static final void main (final String[] args)  {
-    Defaults.run("PartialSums"); } }
+    Defaults.run("PartialL2s"); } }

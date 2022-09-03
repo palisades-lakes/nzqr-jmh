@@ -1,4 +1,4 @@
-package nzqr.jmh;
+package nzqr.jmh.benchmarks.arithmetic;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -13,13 +13,15 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
 
-/** Benchmark <code>double[]</code> sums.
+import nzqr.java.SystemInfo;
+
+/** Base for arithmetic operation benchmarks.
  *
  * <pre>
- * java -cp target\benchmarks.jar nzqr.jmh.Base
+ * java -cp target\benchmarks.jar nzqr.jmh.benchmarks.arithmetic.Base
  * </pre>
  * @author palisades dot lakes at gmail dot com
- * @version 2019-09-09
+ * @version 2022-09-03
  */
 
 @SuppressWarnings("unchecked")

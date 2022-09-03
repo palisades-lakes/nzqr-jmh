@@ -1,22 +1,22 @@
-package nzqr.jmh;
+package nzqr.jmh.benchmarks.accumulate;
 
 import nzqr.java.accumulators.Accumulator;
 
 /** <pre>
- * java -cp target\benchmarks.jar nzqr.jmh.TotalL2Norm
+ * java -cp target\benchmarks.jar nzqr.jmh.benchmarks.accumulate.TotalSum
  * </pre>
  * @author palisades dot lakes at gmail dot com
  * @version 2019-07-27
  */
 
-public class TotalL2Norm extends Base {
+public class TotalSum extends Base {
 
   @Override
   public final double[] operation (final Accumulator ac,
                                    final double[] z0,
                                    final double[] z1) {
     return new double[]
-      {  ac.clear().add2All(z0).doubleValue() }; }
+      { ac.clear().addAll(z0).doubleValue() }; }
 
   public static final void main (final String[] args)  {
-    Defaults.run("TotalL2Norm"); } }
+    Defaults.run("TotalSum"); } }

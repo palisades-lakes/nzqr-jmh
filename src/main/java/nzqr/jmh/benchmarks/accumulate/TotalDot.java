@@ -1,22 +1,22 @@
-package nzqr.jmh;
+package nzqr.jmh.benchmarks.accumulate;
 
 import nzqr.java.accumulators.Accumulator;
 
 /** <pre>
- * java -cp target\benchmarks.jar nzqr.jmh.PartialL1Distances
+ * j nzqr.jmh.TotalDot
  * </pre>
  * @author palisades dot lakes at gmail dot com
  * @version 2019-07-27
  */
 
-@SuppressWarnings("unchecked")
-public class PartialL1Distances extends Base {
+public class TotalDot extends Base {
 
   @Override
   public final double[] operation (final Accumulator ac,
                                    final double[] z0,
                                    final double[] z1) {
-    return ac.clear().partialL1Distances(z0,z1); }
+    return new double[]
+      { ac.clear().addProducts(z0,z1).doubleValue() }; }
 
   public static final void main (final String[] args)  {
-    Defaults.run("PartialL1Distances"); } }
+    Defaults.run("TotalDot"); } }

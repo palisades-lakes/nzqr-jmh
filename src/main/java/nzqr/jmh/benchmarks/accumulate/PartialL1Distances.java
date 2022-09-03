@@ -1,22 +1,22 @@
-package nzqr.jmh;
+package nzqr.jmh.benchmarks.accumulate;
 
 import nzqr.java.accumulators.Accumulator;
 
 /** <pre>
- * j nzqr.jmh.TotalL1Norm
+ * java -cp target\benchmarks.jar nzqr.jmh.PartialL1Distances
  * </pre>
  * @author palisades dot lakes at gmail dot com
- * @version 2019-07-28
+ * @version 2019-07-27
  */
 
-public class TotalL1Norm extends Base {
+@SuppressWarnings("unchecked")
+public class PartialL1Distances extends Base {
 
   @Override
   public final double[] operation (final Accumulator ac,
                                    final double[] z0,
                                    final double[] z1) {
-    return new double[]
-      {  ac.clear().addAbsAll(z0).doubleValue() }; }
+    return ac.clear().partialL1Distances(z0,z1); }
 
   public static final void main (final String[] args)  {
-    Defaults.run("TotalL1Norm"); } }
+    Defaults.run("PartialL1Distances"); } }
