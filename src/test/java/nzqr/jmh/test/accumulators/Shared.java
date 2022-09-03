@@ -26,7 +26,7 @@ public final class Shared {
         // "nzqr.java.accumulators.RationalFloatAccumulator"
         // ,
         // // Same as non-strict, just slower
-        // "nzqr.jmh.accumulators.StrictDoubleAccumulator",
+        // "nzqr.jmh.accumulators.DoubleAccumulator",
         // "nzqr.jmh.accumulators.StrictDoubleFmaAccumulator",
         // // overflow unless values more limited
         // "nzqr.jmh.accumulators.FloatAccumulator",
