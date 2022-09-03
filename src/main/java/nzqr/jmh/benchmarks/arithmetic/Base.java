@@ -10,16 +10,15 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 
-import nzqr.java.accumulators.Accumulator;
-import nzqr.java.accumulators.BigFloatAccumulator;
+import nzqr.java.numbers.Ringlike;
 import nzqr.java.prng.Generator;
 import nzqr.java.prng.Generators;
 import nzqr.java.test.Common;
 
-/** Benchmark operations on <code>double[]</code>.
+/** Benchmark arithmetic operations on various number classes.
  *
  * @author palisades dot lakes at gmail dot com
- * @version 2019-10-10
+ * @version 2022-09-03
  */
 
 @SuppressWarnings("unchecked")
@@ -44,34 +43,13 @@ public abstract class Base {
   String generator;
   Generator gen;
 
-  Accumulator exact;
-  // exact value(s)
-  double[] truth;
-
+ 
   @Param({
-    //"nzqr.java.accumulators.DoubleAccumulator",
-    //"nzqr.java.accumulators.KahanAccumulator0",
-    "nzqr.java.accumulators.RationalFloatAccumulator",
-    "nzqr.java.accumulators.BigFloatAccumulator",
-    //"nzqr.jmh.accumulators.BigFloat0Accumulator",
-    //"nzqr.java.accumulators.KahanAccumulator",
-    //"nzqr.test.java.accumulators.EFloatAccumulator",
-    //"nzqr.test.java.accumulators.ERationalAccumulator",
-    //"nzqr.java.accumulators.DistilledAccumulator",
-    //"nzqr.java.accumulators.ZhuHayesAccumulator",
-    //"nzqr.jmh.accumulators.ZhuHayesGCAccumulator",
-    //"nzqr.jmh.accumulators.ZhuHayesGCBranch",
-    //"nzqr.jmh.accumulators.ZhuHayesBranch",
-    //"nzqr.jmh.accumulators.BigDecimalAccumulator",
-    //"nzqr.jmh.accumulators.BigFractionAccumulator",
-    //"nzqr.jmh.accumulators.DoubleFmaAccumulator",
-    //"nzqr.jmh.accumulators.KahanFmaAccumulator",
-    //"nzqr.jmh.accumulators.FloatAccumulator",
-    //"nzqr.jmh.accumulators.FloatFmaAccumulator",
-    //"nzqr.jmh.accumulators.RatioAccumulator",
+    "java.math.BigInteger",
+    "nzqr.java.numbers.BoundedNatural",
   })
-  String accumulator;
-  Accumulator acc;
+  String numberClass;
+  Object number;
 
   //--------------------------------------------------------------
 
@@ -84,88 +62,39 @@ public abstract class Base {
     //"524289",
     //"131071",
   })
-  int dim;
+  Object min;
+  Object max;
 
-  double[] x0;
-  double[] x1;
+  Object x0;
+  Object x1;
 
-  // estimated value(s)
-  double[] p;
+  // value
+  Object p;
 
   //--------------------------------------------------------------
   /** This is what is timed. */
 
-  public abstract double[] operation (final Accumulator ac,
-                                      final double[] z0,
-                                      final double[] z1);
+  public abstract Object operation (final Object z0,
+                                    final Object z1);
 
   //--------------------------------------------------------------
 
   /** Re-initialize the prngs with the same seeds for each
    * <code>(accumulator,dim)</code> pair.
    */
-  @Setup(Level.Trial)
-  public final void trialSetup () {
-    gen = Generators.make(generator,dim);
-    //exact = EFloatAccumulator.make();
-    exact = BigFloatAccumulator.make();
-    assert exact.isExact();
-    acc = Common.makeAccumulator(accumulator); }
+//  @Setup(Level.Trial)
+//  public final void trialSetup () {
+//    gen = Generators.make(generator,min,max); }
 
   @Setup(Level.Invocation)
   public final void invocationSetup () {
-    x0 = (double[]) gen.next();
-    x1 = (double[]) gen.next();
-    truth = operation(exact,x0,x1); }
-
-  @TearDown(Level.Invocation)
-  public final void invocationTeardown () {
-    assert
-    0.0 == exact.clear().addL1Distance(truth,p).doubleValue(); }
-
-  // not needed while testing exact methods
-  //  @TearDown(Level.Trial)
-  //  public final void teardownTrial () {
-  //    //System.out.println("teardownTrial");
-  //    final int n = truth.size();
-  //    assert n == est.size();
-  //    final String aname = Classes.className(acc);
-  //    final String bname =
-  //      Classes.className(this).replace("_jmhType","");
-  //    final File parent = new File("output/" + bname);
-  //    parent.mkdirs();
-  //    final File f = new File(parent,
-  //      aname + "-" + generator + "-" + dim + "-" + now() + ".csv");
-  //    PrintWriter pw = null;
-  //    try {
-  //      pw = new PrintWriter(f);
-  //      pw.println("generator,benchmark,accumulator,dim,truth,est");
-  //      for (int i=0;i<n;i++) {
-  //        pw.println(
-  //          generator + "," + bname + "," + aname + "," + dim + ","
-  //            + truth.get(i) + "," + est.get(i)); } }
-  //    catch (final FileNotFoundException e) {
-  //      throw new RuntimeException(e); }
-  //    finally { if (null != pw) { pw.close(); } } }
+    x0 = gen.next();
+    x1 = gen.next(); }
 
   @Benchmark
-  public final double[] bench () {
-    p = operation(acc,x0,x1);
+  public final Object bench () {
+    p = operation(x0,x1);
     return p; }
-
-  //--------------------------------------------------------------
-  //  /** <pre>
-  //   * java -cp target\benchmarks.jar nzqr.jmh.Base
-  //   * </pre>
-  //   */
-
-  //  public static void main (final String[] args)
-  //    throws RunnerException {
-  //    System.out.println("args=" + Arrays.toString(args));
-  //    final Options opt =
-  //      Defaults.options("Generators","TotalDot|TotalL2Norm|TotalSum");
-  //    System.out.println(opt.toString());
-  //    new Runner(opt).run(); }
 
   //--------------------------------------------------------------
 }
