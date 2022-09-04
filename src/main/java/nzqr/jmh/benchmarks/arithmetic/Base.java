@@ -8,17 +8,13 @@ import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
 
-import nzqr.java.numbers.Ringlike;
 import nzqr.java.prng.Generator;
-import nzqr.java.prng.Generators;
-import nzqr.java.test.Common;
 
 /** Benchmark arithmetic operations on various number classes.
  *
  * @author palisades dot lakes at gmail dot com
- * @version 2022-09-03
+ * @version 2022-09-04
  */
 
 @SuppressWarnings("unchecked")
@@ -53,15 +49,15 @@ public abstract class Base {
 
   //--------------------------------------------------------------
 
-  @Param({
-    //"33554433",
-    //"8388609",
-    //"4194303",
-    //"2097153",
-    "1048575",
-    //"524289",
-    //"131071",
-  })
+//  @Param({
+//    //"33554433",
+//    //"8388609",
+//    //"4194303",
+//    //"2097153",
+//    "1048575",
+//    //"524289",
+//    //"131071",
+//  })
   Object min;
   Object max;
 
