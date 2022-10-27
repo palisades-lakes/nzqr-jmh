@@ -10,11 +10,13 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 
 import nzqr.java.prng.Generator;
+import nzqr.java.prng.Generators;
+import nzqr.java.prng.PRNG;
 
 /** Benchmark arithmetic operations on various number classes.
  *
  * @author palisades dot lakes at gmail dot com
- * @version 2022-09-04
+ * @version 2022-10-27
  */
 
 @SuppressWarnings("unchecked")
@@ -29,14 +31,6 @@ public abstract class Base {
 
   //--------------------------------------------------------------
 
-  //@Param({"exponential",})
-  //@Param({"finite",})
-  //@Param({"gaussian",})
-  //@Param({"laplace",})
-  @Param({"uniform",})
-  //@Param({"exponential","finite","gaussian","laplace","uniform",})
-  //@Param({"exponential","laplace","uniform",})
-  String generator;
   Generator gen;
 
  
@@ -45,21 +39,9 @@ public abstract class Base {
     "nzqr.java.numbers.BoundedNatural",
   })
   String numberClass;
-  Object number;
 
   //--------------------------------------------------------------
 
-//  @Param({
-//    //"33554433",
-//    //"8388609",
-//    //"4194303",
-//    //"2097153",
-//    "1048575",
-//    //"524289",
-//    //"131071",
-//  })
-  Object min;
-  Object max;
 
   Object x0;
   Object x1;
@@ -78,9 +60,10 @@ public abstract class Base {
   /** Re-initialize the prngs with the same seeds for each
    * <code>(accumulator,dim)</code> pair.
    */
-//  @Setup(Level.Trial)
-//  public final void trialSetup () {
-//    gen = Generators.make(generator,min,max); }
+  @Setup(Level.Trial)
+  public final void trialSetup () {
+    gen = Generators.positiveBigIntegerGenerator(
+      PRNG.well44497b("seeds/Well44497b-2019-01-07.txt")); }
 
   @Setup(Level.Invocation)
   public final void invocationSetup () {
