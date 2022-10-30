@@ -21,7 +21,7 @@ import nzqr.java.SystemInfo;
  * java -cp target\benchmarks.jar nzqr.jmh.benchmarks.arithmetic.Base
  * </pre>
  * @author palisades dot lakes at gmail dot com
- * @version 2022-09-03
+ * @version 2022-10-30
  */
 
 @SuppressWarnings("unchecked")
@@ -61,11 +61,12 @@ public final class Defaults {
       .shouldFailOnError(true)
       .shouldDoGC(true)
       .jvmArgs(
+        "--enable-preview",
         "-Xmx5g","-Xms5g","-Xmn2500m",
         "-XX:+UseFMA",
         "-Xbatch","-server")
       .warmupIterations(3)
-      .warmupTime(TimeValue.seconds(24))
+      .warmupTime(TimeValue.seconds(20))
       .measurementIterations(4)
       .measurementTime(TimeValue.seconds(20))
       .build();

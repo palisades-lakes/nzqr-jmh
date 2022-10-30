@@ -21,7 +21,7 @@ import nzqr.java.SystemInfo;
  * java -cp target\benchmarks.jar nzqr.jmh.Base
  * </pre>
  * @author palisades dot lakes at gmail dot com
- * @version 2019-09-09
+ * @version 2022-10-30
  */
 
 @SuppressWarnings("unchecked")
@@ -61,9 +61,9 @@ public final class Defaults {
       .shouldFailOnError(true)
       .shouldDoGC(true)
       .jvmArgs(
+        "--enable-preview",
         "-Xmx5g","-Xms5g","-Xmn2500m",
-        "-XX:+UseFMA",
-        "-Xbatch","-server")
+        "-XX:+UseFMA")
       .warmupIterations(3)
       .warmupTime(TimeValue.seconds(24))
       .measurementIterations(4)
