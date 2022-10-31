@@ -80,8 +80,7 @@ public abstract class Base {
    * test class.
    */
   @Setup(Level.Trial)
-  public final void trialSetup () 
-    throws ClassNotFoundException {
+  public final void trialSetup () {
     gen = Generators.nonNegativeBigIntegerGenerator(
       N, PRNG.well44497b("seeds/Well44497b-2019-01-07.txt")); }
 
