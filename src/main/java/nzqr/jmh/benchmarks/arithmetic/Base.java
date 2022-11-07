@@ -91,7 +91,9 @@ public abstract class Base {
   @Setup(Level.Trial)
   public final void trialSetup () {
     gen = Generators.nonNegativeBigIntegerGenerator(
-      nbytes, PRNG.well44497b("seeds/Well44497b-2019-01-07.txt", NINTS)); }
+      nbytes, 
+      PRNG.well44497b("seeds/Well44497b-2019-01-07.txt"), 
+      NINTS); }
 
   @Setup(Level.Invocation)
   public final void invocationSetup () {
