@@ -56,6 +56,7 @@ public abstract class Base {
   String numberClassName;
 
   //--------------------------------------------------------------
+  
   static final int N = 1024;
 
   /** random arrays of BigIntegers on each invocation. */

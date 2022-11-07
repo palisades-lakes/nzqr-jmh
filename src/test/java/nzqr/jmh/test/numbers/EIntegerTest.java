@@ -21,7 +21,7 @@ import nzqr.jmh.numbers.ERationals;
  * </pre>
  *
  * @author palisades dot lakes at gmail dot com
- * @version 2019-05-11
+ * @version 2022-11-07
  */
 
 public final class EIntegerTest {
@@ -35,6 +35,7 @@ public final class EIntegerTest {
   public final void fromBigIntegerTest () {
     final Generator g =
       Generators.bigIntegerGenerator(
+        1024,
         PRNG.well44497b("seeds/Well44497b-2019-01-05.txt"));
     for (int i=0;i<TRYS;i++) {
       // some longs will not be exactly representable as doubles
