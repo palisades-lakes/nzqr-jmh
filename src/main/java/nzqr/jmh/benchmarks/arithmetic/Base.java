@@ -17,7 +17,7 @@ import nzqr.java.prng.PRNG;
 /** Benchmark arithmetic operations on various number classes.
  *
  * @author palisades dot lakes at gmail dot com
- * @version 2022-10-30
+ * @version 2022-11-07
  */
 
 @SuppressWarnings("unchecked")
@@ -57,7 +57,15 @@ public abstract class Base {
 
   //--------------------------------------------------------------
   
-  static final int N = 1024;
+  /** size of BigIntegers to generate. */
+  @Param({
+    "256",
+    "1024",
+    "4096",
+  })
+  int nbytes;
+
+  static final int NINTS = 1024;
 
   /** random arrays of BigIntegers on each invocation. */
   BigInteger[] x0;
@@ -83,7 +91,7 @@ public abstract class Base {
   @Setup(Level.Trial)
   public final void trialSetup () {
     gen = Generators.nonNegativeBigIntegerGenerator(
-      N, PRNG.well44497b("seeds/Well44497b-2019-01-07.txt")); }
+      nbytes, PRNG.well44497b("seeds/Well44497b-2019-01-07.txt", NINTS)); }
 
   @Setup(Level.Invocation)
   public final void invocationSetup () {
