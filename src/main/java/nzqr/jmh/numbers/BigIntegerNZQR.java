@@ -20,12 +20,12 @@ import nzqr.java.numbers.Ringlike;
  * TODO: convert to purely non-negative numbers.
  *
  * @author palisades dot lakes at gmail dot com
- * @version 2019-07-01
+ * @version 2022-11-07
  */
 
 @SuppressWarnings("hiding")
-public final class BigInteger extends Number
-implements Ringlike<BigInteger> {
+public final class BigIntegerNZQR extends Number
+implements Ringlike<BigIntegerNZQR> {
 
   final int signum;
   final int[] mag;
@@ -50,7 +50,7 @@ implements Ringlike<BigInteger> {
   // construction
   //-------------------------------------------------------------
   /** Translates a byte sub-array containing the two's-complement
-   * binary representation of a BigInteger into a BigInteger. The
+   * binary representation of a BigIntegerNZQR into a BigIntegerNZQR. The
    * sub-array is specified via an offset into the array and a
    * length. The sub-array is assumed to be in <i>big-endian</i>
    * byte-order: the most significant byte is the element at index
@@ -66,7 +66,7 @@ implements Ringlike<BigInteger> {
    *          byte array containing a sub-array which is the
    *          big-endian
    *          two's-complement binary representation of a
-   *          BigInteger.
+   *          BigIntegerNZQR.
    * @param off
    *          the start offset of the binary representation.
    * @param len
@@ -81,10 +81,10 @@ implements Ringlike<BigInteger> {
    *           length.
    * @since 9
    */
-  public BigInteger (final byte[] val, final int off,
+  public BigIntegerNZQR (final byte[] val, final int off,
                      final int len) {
     if (val.length == 0) {
-      throw new NumberFormatException("Zero length BigInteger");
+      throw new NumberFormatException("Zero length BigIntegerNZQR");
     }
     Objects.checkFromIndexSize(off,len,val.length);
 
@@ -104,7 +104,7 @@ implements Ringlike<BigInteger> {
   /**
    * Translates a byte array containing the two's-complement
    * binary
-   * representation of a BigInteger into a BigInteger. The input
+   * representation of a BigIntegerNZQR into a BigIntegerNZQR. The input
    * array is
    * assumed to be in <i>big-endian</i> byte-order: the most
    * significant
@@ -115,16 +115,16 @@ implements Ringlike<BigInteger> {
    * @param val
    *          big-endian two's-complement binary representation of
    *          a
-   *          BigInteger.
+   *          BigIntegerNZQR.
    * @throws NumberFormatException
    *           {@code val} is zero bytes long.
    */
-  public BigInteger (final byte[] val) { this(val,0,val.length); }
+  public BigIntegerNZQR (final byte[] val) { this(val,0,val.length); }
 
   /** This private constructor translates an int array containing
    * the
-   * two's-complement binary representation of a BigInteger into a
-   * BigInteger. The input array is assumed to be in
+   * two's-complement binary representation of a BigIntegerNZQR into a
+   * BigIntegerNZQR. The input array is assumed to be in
    * <i>big-endian</i>
    * int-order: the most significant int is in the zeroth element.
    * The
@@ -133,9 +133,9 @@ implements Ringlike<BigInteger> {
    * the constructor call.
    */
 
-  public BigInteger (final int[] val) {
+  public BigIntegerNZQR (final int[] val) {
     if (val.length == 0) {
-      throw new NumberFormatException("empty BigInteger"); }
+      throw new NumberFormatException("empty BigIntegerNZQR"); }
     if (val[0] < 0) {
       mag = makePositive(val);
       signum = -1; }
@@ -145,9 +145,9 @@ implements Ringlike<BigInteger> {
     if (mag.length >= MAX_MAG_LENGTH) { checkRange(); } }
 
   //  /**
-  //   * Translates the sign-magnitude representation of a BigInteger
+  //   * Translates the sign-magnitude representation of a BigIntegerNZQR
   //   * into a
-  //   * BigInteger. The sign is represented as an integer signum
+  //   * BigIntegerNZQR. The sign is represented as an integer signum
   //   * value: -1 for
   //   * negative, 0 for zero, or 1 for positive. The magnitude is a
   //   * sub-array of
@@ -155,7 +155,7 @@ implements Ringlike<BigInteger> {
   //   * significant byte
   //   * is the element at index {@code off}. A zero value of the
   //   * length
-  //   * {@code len} is permissible, and will result in a BigInteger
+  //   * {@code len} is permissible, and will result in a BigIntegerNZQR
   //   * value of 0,
   //   * whether signum is -1, 0 or 1. The {@code magnitude} array is
   //   * assumed to
@@ -193,7 +193,7 @@ implements Ringlike<BigInteger> {
   //   *           length.
   //   * @since 9
   //   */
-  //  public BigInteger (final int signum,
+  //  public BigIntegerNZQR (final int signum,
   //                     final byte[] magnitude,
   //                     final int off,
   //                     final int len) {
@@ -222,9 +222,9 @@ implements Ringlike<BigInteger> {
   //  }
 
   //  /**
-  //   * Translates the sign-magnitude representation of a BigInteger
+  //   * Translates the sign-magnitude representation of a BigIntegerNZQR
   //   * into a
-  //   * BigInteger. The sign is represented as an integer signum
+  //   * BigIntegerNZQR. The sign is represented as an integer signum
   //   * value: -1 for
   //   * negative, 0 for zero, or 1 for positive. The magnitude is a
   //   * byte array
@@ -232,7 +232,7 @@ implements Ringlike<BigInteger> {
   //   * the
   //   * zeroth element. A zero-length magnitude array is permissible,
   //   * and will
-  //   * result in a BigInteger value of 0, whether signum is -1, 0 or
+  //   * result in a BigIntegerNZQR value of 0, whether signum is -1, 0 or
   //   * 1. The
   //   * {@code magnitude} array is assumed to be unchanged for the
   //   * duration of
@@ -251,14 +251,14 @@ implements Ringlike<BigInteger> {
   //   *           {@code magnitude} contains one or more non-zero
   //   *           bytes.
   //   */
-  //  public BigInteger (final int signum, final byte[] magnitude) {
+  //  public BigIntegerNZQR (final int signum, final byte[] magnitude) {
   //    this(signum,magnitude,0,magnitude.length);
   //  }
 
   // /**
   // * A constructor for internal use that translates the
   // sign-magnitude
-  // * representation of a BigInteger into a BigInteger. It checks
+  // * representation of a BigIntegerNZQR into a BigIntegerNZQR. It checks
   // the
   // * arguments and copies the magnitude so this constructor
   // would be
@@ -266,7 +266,7 @@ implements Ringlike<BigInteger> {
   // assumed to be
   // * unchanged for the duration of the constructor call.
   // */
-  // private BigInteger(final int signum, final int[] magnitude) {
+  // private BigIntegerNZQR(final int signum, final int[] magnitude) {
   // this.mag = stripLeadingZeroInts(magnitude);
   //
   // if ((signum < -1) || (signum > 1)) {
@@ -288,8 +288,8 @@ implements Ringlike<BigInteger> {
   // }
 
   /**
-   * Translates the String representation of a BigInteger in the
-   * specified radix into a BigInteger. The String representation
+   * Translates the String representation of a BigIntegerNZQR in the
+   * specified radix into a BigIntegerNZQR. The String representation
    * consists of an optional minus or plus sign followed by a
    * sequence of one or more digits in the specified radix. The
    * character-to-digit mapping is provided by {@code
@@ -297,21 +297,21 @@ implements Ringlike<BigInteger> {
    * characters (whitespace, for example).
    *
    * @param s
-   *          String representation of BigInteger.
+   *          String representation of BigIntegerNZQR.
    * @param radix
    *          radix to be used in interpreting {@code val}.
    * @throws NumberFormatException
    *           {@code val} is not a valid representation
-   *           of a BigInteger in the specified radix, or
+   *           of a BigIntegerNZQR in the specified radix, or
    *           {@code radix} is
    *           outside the range from {@link Character#MIN_RADIX}
    *           to
    *           {@link Character#MAX_RADIX}, inclusive.
    * @see Character#digit
    */
-  public BigInteger (final String s,
+  public BigIntegerNZQR (final String s,
                      final int radix) {
-    //Debug.println("BigInteger");
+    //Debug.println("BigIntegerNZQR");
     //Debug.println("s=" + s);
     //Debug.println("radix=" + radix);
     final int len = s.length();
@@ -334,7 +334,7 @@ implements Ringlike<BigInteger> {
       if (index2 != 0) {
         throw new NumberFormatException("embedded sign char"); }
       cursor = 1; }
-    assert (cursor != len) : "Zero length BigInteger";
+    assert (cursor != len) : "Zero length BigIntegerNZQR";
 
     while ((cursor < len)
       && (Character.digit(s.charAt(cursor),radix) == 0)) {
@@ -410,9 +410,9 @@ implements Ringlike<BigInteger> {
   }
 
   //  /**
-  //   * Translates the decimal String representation of a BigInteger
+  //   * Translates the decimal String representation of a BigIntegerNZQR
   //   * into a
-  //   * BigInteger. The String representation consists of an optional
+  //   * BigIntegerNZQR. The String representation consists of an optional
   //   * minus
   //   * sign followed by a sequence of one or more decimal digits.
   //   * The
@@ -423,17 +423,17 @@ implements Ringlike<BigInteger> {
   //   * example).
   //   *
   //   * @param val
-  //   *          decimal String representation of BigInteger.
+  //   *          decimal String representation of BigIntegerNZQR.
   //   * @throws NumberFormatException
   //   *           {@code val} is not a valid representation
-  //   *           of a BigInteger.
+  //   *           of a BigIntegerNZQR.
   //   * @see Character#digit
   //   */
-  //  public BigInteger (final String val) {
+  //  public BigIntegerNZQR (final String val) {
   //    this(val,10);
   //  }
 
-  public BigInteger (final int[] magnitude, final int signum) {
+  public BigIntegerNZQR (final int[] magnitude, final int signum) {
     this.signum = (magnitude.length == 0 ? 0 : signum);
     this.mag = magnitude;
     if (mag.length >= MAX_MAG_LENGTH) { checkRange(); } }
@@ -445,7 +445,7 @@ implements Ringlike<BigInteger> {
   // assumed to be
   // * unchanged for the duration of the constructor call.
   // */
-  // private BigInteger(final byte[] magnitude, final int signum)
+  // private BigIntegerNZQR(final byte[] magnitude, final int signum)
   // {
   // this.signum = (magnitude.length == 0 ? 0 : signum);
   // this.mag = stripLeadingZeroBytes(magnitude, 0,
@@ -457,7 +457,7 @@ implements Ringlike<BigInteger> {
 
   /**
    * Throws an {@code ArithmeticException} if the
-   * {@code BigInteger} would be
+   * {@code BigIntegerNZQR} would be
    * out of the supported range.
    *
    * @throws ArithmeticException
@@ -472,9 +472,9 @@ implements Ringlike<BigInteger> {
 
   private static final void reportOverflow () {
     throw new ArithmeticException(
-      "BigInteger would overflow supported range"); }
+      "BigIntegerNZQR would overflow supported range"); }
 
-  public static final BigInteger valueOf (final long val) {
+  public static final BigIntegerNZQR valueOf (final long val) {
     // If -MAX_CONSTANT < val < MAX_CONSTANT, return stashed
     // constant
     if (val == 0) { return ZERO; }
@@ -482,7 +482,7 @@ implements Ringlike<BigInteger> {
       return posConst[(int) val]; }
     else if ((val < 0) && (val >= -MAX_CONSTANT)) {
       return negConst[(int) -val]; }
-    return new BigInteger(val); }
+    return new BigIntegerNZQR(val); }
 
   private static final int[] shiftUp (final long x,
                                       final int upShift) {
@@ -494,14 +494,14 @@ implements Ringlike<BigInteger> {
                        (int) (x & 0xFFFFFFFFL), };
     return shiftUp(xs,upShift); }
 
-  public static final BigInteger nonNegative (final long x,
+  public static final BigIntegerNZQR nonNegative (final long x,
                                               final int upShift) {
-    return new BigInteger(shiftUp(x,upShift),1); }
+    return new BigIntegerNZQR(shiftUp(x,upShift),1); }
 
-  /** Constructs a BigInteger with the specified value, which may
+  /** Constructs a BigIntegerNZQR with the specified value, which may
    * not be zero.
    */
-  private BigInteger (long val) {
+  private BigIntegerNZQR (long val) {
     if (val < 0) { val = -val; signum = -1; }
     else { signum = 1; }
     final int highWord = (int) (val >>> 32);
@@ -514,29 +514,29 @@ implements Ringlike<BigInteger> {
       mag[1] = (int) val; } }
 
   /**
-   * Returns a BigInteger with the given two's complement
+   * Returns a BigIntegerNZQR with the given two's complement
    * representation.
    * Assumes that the input array will not be modified (the
    * returned
-   * BigInteger will reference the input array if feasible).
+   * BigIntegerNZQR will reference the input array if feasible).
    */
-  private static BigInteger valueOf (final int val[]) {
+  private static BigIntegerNZQR valueOf (final int val[]) {
     return (val[0] > 0
-      ? new BigInteger(val,1)
-        : new BigInteger(val)); }
+      ? new BigIntegerNZQR(val,1)
+        : new BigIntegerNZQR(val)); }
 
   private static final int MAX_CONSTANT = 16;
-  private static BigInteger posConst[] =
-    new BigInteger[MAX_CONSTANT + 1];
-  private static BigInteger negConst[] =
-    new BigInteger[MAX_CONSTANT + 1];
+  private static BigIntegerNZQR posConst[] =
+    new BigIntegerNZQR[MAX_CONSTANT + 1];
+  private static BigIntegerNZQR negConst[] =
+    new BigIntegerNZQR[MAX_CONSTANT + 1];
 
   /** The cache of powers of each radix. This allows us to not
    * have to recalculate powers of radix^(2^n) more than once.
    * This speeds Schoenhage recursive base conversion
    * significantly.
    */
-  private static volatile BigInteger[][] powerCache;
+  private static volatile BigIntegerNZQR[][] powerCache;
 
   /** The cache of logarithms of radices for base conversion. */
   private static final double[] logCache;
@@ -549,24 +549,24 @@ implements Ringlike<BigInteger> {
     for (int i = 1; i <= MAX_CONSTANT; i++) {
       final int[] magnitude = new int[1];
       magnitude[0] = i;
-      posConst[i] = new BigInteger(magnitude,1);
-      negConst[i] = new BigInteger(magnitude,-1); }
+      posConst[i] = new BigIntegerNZQR(magnitude,1);
+      negConst[i] = new BigIntegerNZQR(magnitude,-1); }
     // Initialize the cache of radix^(2^x) values used for base
     // conversion with just the very first value. Additional
     // values will be created on demand.
-    powerCache = new BigInteger[Character.MAX_RADIX + 1][];
+    powerCache = new BigIntegerNZQR[Character.MAX_RADIX + 1][];
     logCache = new double[Character.MAX_RADIX + 1];
     for (int i = Character.MIN_RADIX; i <= Character.MAX_RADIX;
       i++) {
-      powerCache[i] = new BigInteger[] { BigInteger.valueOf(i) };
+      powerCache[i] = new BigIntegerNZQR[] { BigIntegerNZQR.valueOf(i) };
       logCache[i] = Math.log(i); } }
 
-  public static final BigInteger ZERO =
-    new BigInteger(new int[0],0);
-  public static final BigInteger ONE = valueOf(1);
-  public static final BigInteger TWO = valueOf(2);
-  private static final BigInteger NEGATIVE_ONE = valueOf(-1);
-  public static final BigInteger TEN = valueOf(10);
+  public static final BigIntegerNZQR ZERO =
+    new BigIntegerNZQR(new int[0],0);
+  public static final BigIntegerNZQR ONE = valueOf(1);
+  public static final BigIntegerNZQR TWO = valueOf(2);
+  private static final BigIntegerNZQR NEGATIVE_ONE = valueOf(-1);
+  public static final BigIntegerNZQR TEN = valueOf(10);
 
   //--------------------------------------------------------------
   // add
@@ -617,31 +617,31 @@ implements Ringlike<BigInteger> {
       return bigger; }
     return result; }
 
-  public final BigInteger add (final long val) {
+  public final BigIntegerNZQR add (final long val) {
     if (val == 0) { return this; }
     if (signum == 0) { return valueOf(val); }
     if (Long.signum(val) == signum) {
-      return new BigInteger(addMagnitude(mag,Math.abs(val)),signum); }
+      return new BigIntegerNZQR(addMagnitude(mag,Math.abs(val)),signum); }
     final int cmp = compareMagnitude(val);
     if (cmp == 0) { return ZERO; }
     int[] resultMag =
       (cmp > 0 ? subtract(mag,Math.abs(val))
         : subtract(Math.abs(val),mag));
     resultMag = trustedStripLeadingZeroInts(resultMag);
-    return new BigInteger(resultMag,cmp == signum ? 1 : -1); }
+    return new BigIntegerNZQR(resultMag,cmp == signum ? 1 : -1); }
 
-  public final BigInteger add4 (final long val) {
+  public final BigIntegerNZQR add4 (final long val) {
     if (val == 0) { return this; }
     if (signum == 0) { return valueOf(val); }
     if (Long.signum(val) == signum) {
-      return new BigInteger(addMagnitude(mag,Math.abs(val)),signum); }
+      return new BigIntegerNZQR(addMagnitude(mag,Math.abs(val)),signum); }
     final int cmp = compareMagnitude(val);
     if (cmp == 0) { return ZERO; }
     int[] resultMag =
       (cmp > 0 ? subtract(mag,Math.abs(val))
         : subtract(Math.abs(val),mag));
     resultMag = trustedStripLeadingZeroInts(resultMag);
-    return new BigInteger(resultMag,cmp == signum ? 1 : -1); }
+    return new BigIntegerNZQR(resultMag,cmp == signum ? 1 : -1); }
 
   //--------------------------------------------------------------
   /** Adds the contents of the int arrays x and y. Allocate a new
@@ -682,23 +682,23 @@ implements Ringlike<BigInteger> {
     return result; }
 
   @Override
-  public final BigInteger add (final BigInteger val) {
+  public final BigIntegerNZQR add (final BigIntegerNZQR val) {
     if (val.signum == 0) { return this; }
     if (signum == 0) { return val; }
     if (val.signum == signum) {
-      return new BigInteger(add(mag,val.mag),signum); }
+      return new BigIntegerNZQR(add(mag,val.mag),signum); }
     final int cmp = compareMagnitude(val);
     if (cmp == 0) { return ZERO; }
     int[] resultMag =
       (cmp > 0 ? subtract(mag,val.mag) : subtract(val.mag,mag));
     resultMag = trustedStripLeadingZeroInts(resultMag);
-    return new BigInteger(resultMag,cmp == signum ? 1 : -1); }
+    return new BigIntegerNZQR(resultMag,cmp == signum ? 1 : -1); }
 
-  public final BigInteger addMagnitude4 (final long val,
+  public final BigIntegerNZQR addMagnitude4 (final long val,
                                          final int upShift) {
     if (0 == signum) {
-      return new BigInteger(shiftUp(val,upShift),1); }
-    return new BigInteger(add(mag,shiftUp(val,upShift)),1); }
+      return new BigIntegerNZQR(shiftUp(val,upShift),1); }
+    return new BigIntegerNZQR(add(mag,shiftUp(val,upShift)),1); }
 
   //--------------------------------------------------------------
 
@@ -796,18 +796,18 @@ implements Ringlike<BigInteger> {
 
     return r0; }
 
-  public final BigInteger addMagnitude (final long val,
+  public final BigIntegerNZQR addMagnitude (final long val,
                                         final int upShift) {
     if (0 == signum) {
-      return new BigInteger(shiftUp(val,upShift),1); }
-    //return new BigInteger(add(mag,shiftUp(val,upShift)),1); }
+      return new BigIntegerNZQR(shiftUp(val,upShift),1); }
+    //return new BigIntegerNZQR(add(mag,shiftUp(val,upShift)),1); }
     final int[] r0 = addMagnitude(mag,val,upShift);
     //      final int[] r1 = add(mag,shiftUp(val,upShift));
     //      assert Arrays.equals(r0,r1) :
     //        "\n" + Numbers.toHexString(r0)
     //        + "\n" + Numbers.toHexString(r1);
 
-    return new BigInteger(r0,1); }
+    return new BigIntegerNZQR(r0,1); }
 
   //--------------------------------------------------------------
   // subtract
@@ -843,23 +843,23 @@ implements Ringlike<BigInteger> {
     while (bigIndex > 0) { result[--bigIndex] = big[bigIndex]; }
     return result; }
 
-  public final BigInteger subtract (final long val) {
+  public final BigIntegerNZQR subtract (final long val) {
     //    assert signum >=0;
     //    assert val >= 0L;
     final int c = compareTo(val);
     if (0 == c) { return ZERO; }
     //    assert c > 0;
     if (0L == val) { return this; }
-    return new BigInteger(subtract(mag,val),1); }
+    return new BigIntegerNZQR(subtract(mag,val),1); }
 
-  public final BigInteger subtract4 (final long val) {
+  public final BigIntegerNZQR subtract4 (final long val) {
     //    assert signum >=0;
     //    assert val >= 0L;
     final int c = compareTo(val);
     if (0 == c) { return ZERO; }
     //    assert c > 0;
     if (0L == val) { return this; }
-    return new BigInteger(subtract(mag,val),1); }
+    return new BigIntegerNZQR(subtract(mag,val),1); }
 
   //--------------------------------------------------------------
 
@@ -927,11 +927,11 @@ implements Ringlike<BigInteger> {
     return r; }
 
   @Override
-  public final BigInteger subtract (final BigInteger val) {
+  public final BigIntegerNZQR subtract (final BigIntegerNZQR val) {
     if (val.signum == 0) { return this; }
     if (signum == 0) { return val.negate(); }
     if (val.signum != signum) {
-      return new BigInteger(add(mag,val.mag),signum); }
+      return new BigIntegerNZQR(add(mag,val.mag),signum); }
     final int cmp = compareMagnitude(val);
     //    assert 0 <= cmp :
     //      "\ncmp=" + cmp
@@ -941,7 +941,7 @@ implements Ringlike<BigInteger> {
     int[] resultMag =
       (cmp > 0 ? subtract(mag,val.mag) : subtract(val.mag,mag));
     resultMag = trustedStripLeadingZeroInts(resultMag);
-    return new BigInteger(resultMag,cmp == signum ? 1 : -1); }
+    return new BigIntegerNZQR(resultMag,cmp == signum ? 1 : -1); }
 
   //--------------------------------------------------------------
   // assuming little*2<sup>bitShift</sup> <= big
@@ -998,41 +998,41 @@ implements Ringlike<BigInteger> {
     while (0<=i) { result[i] = big[i]; i--; }
     return trustedStripLeadingZeroInts(result); }
 
-  public final BigInteger subtract (final long val,
+  public final BigIntegerNZQR subtract (final long val,
                                     final int upShift) {
     //assert 0 < signum;
     if (0L == val) { return this; }
     //assert 0L < val;
-    return new BigInteger(subtract(mag,val,upShift),1); }
+    return new BigIntegerNZQR(subtract(mag,val,upShift),1); }
 
-  public final BigInteger subtractFrom (final long val,
+  public final BigIntegerNZQR subtractFrom (final long val,
                                         final int upShift) {
     if (0 == signum) {
-      return new BigInteger(shiftUp(val,upShift),1); }
+      return new BigIntegerNZQR(shiftUp(val,upShift),1); }
     //assert 0 < signum;
     //assert 0L < val;
     return
-      new BigInteger(subtract(shiftUp(val,upShift),mag),1); }
+      new BigIntegerNZQR(subtract(shiftUp(val,upShift),mag),1); }
 
   //--------------------------------------------------------------
 
-  public final BigInteger subtract4 (final long val,
+  public final BigIntegerNZQR subtract4 (final long val,
                                      final int upShift) {
     //assert 0 < signum;
     if (0L == val) { return this; }
     //assert 0L < val;
     ////Debug.println("4little=" + Long.toHexString(val));
     return
-      new BigInteger(subtract(mag,shiftUp(val,upShift)),1); }
+      new BigIntegerNZQR(subtract(mag,shiftUp(val,upShift)),1); }
 
-  public final BigInteger subtractFrom4 (final long val,
+  public final BigIntegerNZQR subtractFrom4 (final long val,
                                          final int upShift) {
     if (0 == signum) {
-      return new BigInteger(shiftUp(val,upShift),1); }
+      return new BigIntegerNZQR(shiftUp(val,upShift),1); }
     //assert 0 < signum;
     //assert 0L < val;
     return
-      new BigInteger(subtract(shiftUp(val,upShift),mag),1); }
+      new BigIntegerNZQR(subtract(shiftUp(val,upShift),mag),1); }
 
   //--------------------------------------------------------------
   // multiply
@@ -1060,23 +1060,23 @@ implements Ringlike<BigInteger> {
   private static final int TOOM_COOK_THRESHOLD = 240;
 
   /** The threshold value for using squaring code to perform
-   * multiplication of a {@code BigInteger} instance by itself. If
+   * multiplication of a {@code BigIntegerNZQR} instance by itself. If
    * the number of ints in the number are larger than this value,
    * {@code multiply(this)} will return {@code square()}.
    */
   private static final int MULTIPLY_SQUARE_THRESHOLD = 20;
 
-  /** Returns a BigInteger whose value is {@code (this * val)}. If
+  /** Returns a BigIntegerNZQR whose value is {@code (this * val)}. If
    * the invocation is recursive certain overflow checks are
    * skipped.
    *
    * @param val
-   *          value to be multiplied by this BigInteger.
+   *          value to be multiplied by this BigIntegerNZQR.
    * @param isRecursion
    *          whether this is a recursive invocation
    * @return {@code this * val}
    */
-  private BigInteger multiply (final BigInteger val,
+  private BigIntegerNZQR multiply (final BigIntegerNZQR val,
                                final boolean isRecursion) {
     if ((val.signum == 0) || (signum == 0)) { return ZERO; }
 
@@ -1099,7 +1099,7 @@ implements Ringlike<BigInteger> {
       }
       int[] result = multiplyToLen(mag,xlen,val.mag,ylen,null);
       result = trustedStripLeadingZeroInts(result);
-      return new BigInteger(result,resultSign);
+      return new BigIntegerNZQR(result,resultSign);
     }
     if ((xlen < TOOM_COOK_THRESHOLD)
       && (ylen < TOOM_COOK_THRESHOLD)) {
@@ -1168,11 +1168,11 @@ implements Ringlike<BigInteger> {
     return multiplyToomCook3(this,val);
   }
 
-  private static BigInteger multiplyByInt (final int[] x,
+  private static BigIntegerNZQR multiplyByInt (final int[] x,
                                            final int y,
                                            final int sign) {
     if (Integer.bitCount(y) == 1) {
-      return new BigInteger(
+      return new BigIntegerNZQR(
         shiftUp(x,Integer.numberOfTrailingZeros(y)),sign);
     }
     final int xlen = x.length;
@@ -1191,7 +1191,7 @@ implements Ringlike<BigInteger> {
     else {
       rmag[rstart] = (int) carry;
     }
-    return new BigInteger(rmag,sign);
+    return new BigIntegerNZQR(rmag,sign);
   }
 
   /**
@@ -1203,12 +1203,12 @@ implements Ringlike<BigInteger> {
 
   /**
    * Package private methods used by BigDecimal code to multiply a
-   * BigInteger
+   * BigIntegerNZQR
    * with a long. Assumes v is not equal to INFLATED.
    */
-  public final BigInteger multiply (long v) {
+  public final BigIntegerNZQR multiply (long v) {
     if ((v == 0) || (signum == 0)) { return ZERO; }
-    if (v == INFLATED) { return multiply(BigInteger.valueOf(v)); }
+    if (v == INFLATED) { return multiply(BigIntegerNZQR.valueOf(v)); }
     final int rsign = (v > 0 ? signum : -signum);
     if (v < 0) {
       v = -v;
@@ -1243,7 +1243,7 @@ implements Ringlike<BigInteger> {
     if (carry == 0L) {
       rmag = java.util.Arrays.copyOfRange(rmag,1,rmag.length);
     }
-    return new BigInteger(rmag,rsign);
+    return new BigIntegerNZQR(rmag,rsign);
   }
 
   /**
@@ -1333,8 +1333,8 @@ implements Ringlike<BigInteger> {
    *
    * See: http://en.wikipedia.org/wiki/Karatsuba_algorithm
    */
-  private static BigInteger multiplyKaratsuba (final BigInteger x,
-                                               final BigInteger y) {
+  private static BigIntegerNZQR multiplyKaratsuba (final BigIntegerNZQR x,
+                                               final BigIntegerNZQR y) {
     final int xlen = x.mag.length;
     final int ylen = y.mag.length;
 
@@ -1343,20 +1343,20 @@ implements Ringlike<BigInteger> {
 
     // xl and yl are the lower halves of x and y respectively,
     // xh and yh are the upper halves.
-    final BigInteger xl = x.getLower(half);
-    final BigInteger xh = x.getUpper(half);
-    final BigInteger yl = y.getLower(half);
-    final BigInteger yh = y.getUpper(half);
+    final BigIntegerNZQR xl = x.getLower(half);
+    final BigIntegerNZQR xh = x.getUpper(half);
+    final BigIntegerNZQR yl = y.getLower(half);
+    final BigIntegerNZQR yh = y.getUpper(half);
 
-    final BigInteger p1 = xh.multiply(yh);  // p1 = xh*yh
-    final BigInteger p2 = xl.multiply(yl);  // p2 = xl*yl
+    final BigIntegerNZQR p1 = xh.multiply(yh);  // p1 = xh*yh
+    final BigIntegerNZQR p2 = xl.multiply(yl);  // p2 = xl*yl
 
     // p3=(xh+xl)*(yh+yl)
-    final BigInteger p3 = xh.add(xl).multiply(yh.add(yl));
+    final BigIntegerNZQR p3 = xh.add(xl).multiply(yh.add(yl));
 
     // result = p1 * 2^(32*2*half) + (p3-p1-p2) * 2^(32*half)
     // + p2
-    final BigInteger result =
+    final BigIntegerNZQR result =
       p1.shiftUp(32 * half).add(p3.subtract(p1).subtract(p2))
       .shiftUp(32 * half).add(p2);
 
@@ -1396,8 +1396,8 @@ implements Ringlike<BigInteger> {
    * LNCS #4547. Springer, Madrid, Spain, June 21-22, 2007.
    *
    */
-  private static BigInteger multiplyToomCook3 (final BigInteger a,
-                                               final BigInteger b) {
+  private static BigIntegerNZQR multiplyToomCook3 (final BigIntegerNZQR a,
+                                               final BigIntegerNZQR b) {
     final int alen = a.mag.length;
     final int blen = b.mag.length;
 
@@ -1413,7 +1413,7 @@ implements Ringlike<BigInteger> {
     // significant
     // bits of the numbers a and b, and a0 and b0 the least
     // significant.
-    BigInteger a0, a1, a2, b0, b1, b2;
+    BigIntegerNZQR a0, a1, a2, b0, b1, b2;
     a2 = a.getToomSlice(k,r,0,largest);
     a1 = a.getToomSlice(k,r,1,largest);
     a0 = a.getToomSlice(k,r,2,largest);
@@ -1421,7 +1421,7 @@ implements Ringlike<BigInteger> {
     b1 = b.getToomSlice(k,r,1,largest);
     b0 = b.getToomSlice(k,r,2,largest);
 
-    BigInteger v0, v1, v2, vm1, vinf, t1, t2, tm1, da1, db1;
+    BigIntegerNZQR v0, v1, v2, vm1, vinf, t1, t2, tm1, da1, db1;
 
     v0 = a0.multiply(b0,true);
     da1 = a2.add(a0);
@@ -1455,7 +1455,7 @@ implements Ringlike<BigInteger> {
     // Number of bits to shift left.
     final int ss = k * 32;
 
-    final BigInteger result =
+    final BigIntegerNZQR result =
       vinf.shiftUp(ss).add(t2).shiftUp(ss).add(t1)
       .shiftUp(ss).add(tm1).shiftUp(ss).add(v0);
 
@@ -1464,7 +1464,7 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Returns a slice of a BigInteger for use in Toom-Cook
+   * Returns a slice of a BigIntegerNZQR for use in Toom-Cook
    * multiplication.
    *
    * @param lowerSize
@@ -1485,7 +1485,7 @@ implements Ringlike<BigInteger> {
    *          different-sized
    *          numbers.
    */
-  private BigInteger getToomSlice (final int lowerSize,
+  private BigIntegerNZQR getToomSlice (final int lowerSize,
                                    final int upperSize,
                                    final int slice,
                                    final int fullsize) {
@@ -1509,7 +1509,7 @@ implements Ringlike<BigInteger> {
     final int intSlice[] = new int[sliceSize];
     System.arraycopy(mag,start,intSlice,0,sliceSize);
     return
-      new BigInteger(trustedStripLeadingZeroInts(intSlice),1); }
+      new BigIntegerNZQR(trustedStripLeadingZeroInts(intSlice),1); }
 
   /**
    * Does an exact division (that is, the remainder is known to be
@@ -1523,7 +1523,7 @@ implements Ringlike<BigInteger> {
    * positive
    * arguments only.
    */
-  private final BigInteger exactDivideBy3 () {
+  private final BigIntegerNZQR exactDivideBy3 () {
     final int len = mag.length;
     final int[] result = new int[len];
     long x, w, q, borrow;
@@ -1545,15 +1545,15 @@ implements Ringlike<BigInteger> {
         borrow++;
         if (q >= 0xAAAAAAABL) { borrow++; } } }
     return
-      new BigInteger(trustedStripLeadingZeroInts(result),signum); }
+      new BigIntegerNZQR(trustedStripLeadingZeroInts(result),signum); }
 
   /**
-   * Returns a new BigInteger representing n lower ints of the
+   * Returns a new BigIntegerNZQR representing n lower ints of the
    * number.
    * This is used by Karatsuba multiplication and Karatsuba
    * squaring.
    */
-  private BigInteger getLower (final int n) {
+  private BigIntegerNZQR getLower (final int n) {
     final int len = mag.length;
 
     if (len <= n) { return abs(); }
@@ -1561,17 +1561,17 @@ implements Ringlike<BigInteger> {
     final int lowerInts[] = new int[n];
     System.arraycopy(mag,len-n,lowerInts,0,n);
 
-    return new BigInteger(trustedStripLeadingZeroInts(lowerInts),
+    return new BigIntegerNZQR(trustedStripLeadingZeroInts(lowerInts),
       1);
   }
 
   /**
-   * Returns a new BigInteger representing mag.length-n upper
+   * Returns a new BigIntegerNZQR representing mag.length-n upper
    * ints of the number. This is used by Karatsuba multiplication
    * and
    * Karatsuba squaring.
    */
-  private BigInteger getUpper (final int n) {
+  private BigIntegerNZQR getUpper (final int n) {
     final int len = mag.length;
 
     if (len <= n) { return ZERO; }
@@ -1580,21 +1580,21 @@ implements Ringlike<BigInteger> {
     final int upperInts[] = new int[upperLen];
     System.arraycopy(mag,0,upperInts,0,upperLen);
 
-    return new BigInteger(trustedStripLeadingZeroInts(upperInts),
+    return new BigIntegerNZQR(trustedStripLeadingZeroInts(upperInts),
       1);
   }
 
-  /** Returns a BigInteger whose value is {@code (this * val)}.
+  /** Returns a BigIntegerNZQR whose value is {@code (this * val)}.
    *
    * @implNote An implementation may offer better algorithmic
    *           performance when {@code val == this}.
    *
    * @param val
-   *          value to be multiplied by this BigInteger.
+   *          value to be multiplied by this BigIntegerNZQR.
    * @return {@code this * val}
    */
   @Override
-  public BigInteger multiply (final BigInteger val) {
+  public BigIntegerNZQR multiply (final BigIntegerNZQR val) {
     return multiply(val,false);
   }
 
@@ -1603,13 +1603,13 @@ implements Ringlike<BigInteger> {
   //--------------------------------------------------------------
 
   /**
-   * Returns a BigInteger whose value is
+   * Returns a BigIntegerNZQR whose value is
    * {@code (this<sup>2</sup>)}.
    *
    * @return {@code this<sup>2</sup>}
    */
   @Override
-  public final BigInteger square () { return square(false); }
+  public final BigIntegerNZQR square () { return square(false); }
 
   /** The threshold value for using Karatsuba squaring. If the
    * number of ints in the number are larger than this value,
@@ -1626,7 +1626,7 @@ implements Ringlike<BigInteger> {
   private static final int TOOM_COOK_SQUARE_THRESHOLD = 216;
 
   /**
-   * Returns a BigInteger whose value is
+   * Returns a BigIntegerNZQR whose value is
    * {@code (this<sup>2</sup>)}. If
    * the invocation is recursive certain overflow checks are
    * skipped.
@@ -1635,14 +1635,14 @@ implements Ringlike<BigInteger> {
    *          whether this is a recursive invocation
    * @return {@code this<sup>2</sup>}
    */
-  private BigInteger square (final boolean isRecursion) {
+  private BigIntegerNZQR square (final boolean isRecursion) {
     if (signum == 0) { return ZERO; }
     final int len = mag.length;
 
     if (len < KARATSUBA_SQUARE_THRESHOLD) {
       //System.out.println("squareToLen");
       final int[] z = squareToLen(mag,len,null);
-      return new BigInteger(trustedStripLeadingZeroInts(z),1); }
+      return new BigIntegerNZQR(trustedStripLeadingZeroInts(z),1); }
     if (len < TOOM_COOK_SQUARE_THRESHOLD) {
       //System.out.println("squareKaratsuba");
       return squareKaratsuba(); }
@@ -1771,7 +1771,7 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Squares a BigInteger using the Karatsuba squaring algorithm.
+   * Squares a BigIntegerNZQR using the Karatsuba squaring algorithm.
    * It should
    * be used when both numbers are larger than a certain threshold
    * (found
@@ -1780,14 +1780,14 @@ implements Ringlike<BigInteger> {
    * has better asymptotic performance than the algorithm used in
    * squareToLen.
    */
-  private BigInteger squareKaratsuba () {
+  private BigIntegerNZQR squareKaratsuba () {
     final int half = (mag.length + 1) / 2;
 
-    final BigInteger xl = getLower(half);
-    final BigInteger xh = getUpper(half);
+    final BigIntegerNZQR xl = getLower(half);
+    final BigIntegerNZQR xh = getUpper(half);
 
-    final BigInteger xhs = xh.square();  // xhs = xh^2
-    final BigInteger xls = xl.square();  // xls = xl^2
+    final BigIntegerNZQR xhs = xh.square();  // xhs = xh^2
+    final BigIntegerNZQR xls = xl.square();  // xls = xl^2
 
     // xh^2 << 64 + (((xl+xh)^2-(xh^2 + xl^2)) << 32) + xl^2
     return xhs.shiftUp(half * 32)
@@ -1796,7 +1796,7 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Squares a BigInteger using the 3-way Toom-Cook squaring
+   * Squares a BigIntegerNZQR using the 3-way Toom-Cook squaring
    * algorithm. It
    * should be used when both numbers are larger than a certain
    * threshold
@@ -1806,7 +1806,7 @@ implements Ringlike<BigInteger> {
    * used in
    * squareToLen or squareKaratsuba.
    */
-  private final BigInteger squareToomCook3 () {
+  private final BigIntegerNZQR squareToomCook3 () {
     final int len = mag.length;
     // k is the size (in ints) of the lower-order slices.
     final int k = (len+2)/3;   // Equal to ceil(largest/3)
@@ -1814,16 +1814,16 @@ implements Ringlike<BigInteger> {
     final int r = len-(2*k);
     // Obtain slices of the numbers. a2 is the most significant
     // bits of the number, and a0 the least significant.
-    final BigInteger a2 = getToomSlice(k,r,0,len);
-    final BigInteger a1 = getToomSlice(k,r,1,len);
-    final BigInteger a0 = getToomSlice(k,r,2,len);
-    final BigInteger v0 = a0.square(true);
-    final BigInteger da0 = a2.add(a0);
-    final BigInteger vm1 = da0.subtract(a1).square(true);
-    final BigInteger da1 = da0.add(a1);
-    final BigInteger v1 = da1.square(true);
-    final BigInteger vinf = a2.square(true);
-    final BigInteger v2 =
+    final BigIntegerNZQR a2 = getToomSlice(k,r,0,len);
+    final BigIntegerNZQR a1 = getToomSlice(k,r,1,len);
+    final BigIntegerNZQR a0 = getToomSlice(k,r,2,len);
+    final BigIntegerNZQR v0 = a0.square(true);
+    final BigIntegerNZQR da0 = a2.add(a0);
+    final BigIntegerNZQR vm1 = da0.subtract(a1).square(true);
+    final BigIntegerNZQR da1 = da0.add(a1);
+    final BigIntegerNZQR v1 = da1.square(true);
+    final BigIntegerNZQR vinf = a2.square(true);
+    final BigIntegerNZQR v2 =
       da1.add(a2).shiftUp(1).subtract(a0).square(true);
 
     // The algorithm requires two divisions by 2 and one by 3.
@@ -1833,9 +1833,9 @@ implements Ringlike<BigInteger> {
     // relatively efficient, leaving only a division by 3.
     // The division by 3 is done by an optimized algorithm for
     // this case.
-    BigInteger t2 = v2.subtract(vm1).exactDivideBy3();
-    BigInteger tm1 = v1.subtract(vm1).shiftDown(1);
-    BigInteger t1 = v1.subtract(v0);
+    BigIntegerNZQR t2 = v2.subtract(vm1).exactDivideBy3();
+    BigIntegerNZQR tm1 = v1.subtract(vm1).shiftDown(1);
+    BigIntegerNZQR t1 = v1.subtract(v0);
     t2 = t2.subtract(t1).shiftDown(1);
     t1 = t1.subtract(tm1).subtract(vinf);
     t2 = t2.subtract(vinf.shiftUp(1));
@@ -1857,8 +1857,8 @@ implements Ringlike<BigInteger> {
   public static final int BURNIKEL_ZIEGLER_OFFSET = 40;
 
   private static final boolean
-  useKnuthDivision (final BigInteger num,
-                    final BigInteger den) {
+  useKnuthDivision (final BigIntegerNZQR num,
+                    final BigIntegerNZQR den) {
     final int nn = num.mag.length;
     final int nd = den.mag.length;
     return
@@ -1870,8 +1870,8 @@ implements Ringlike<BigInteger> {
   // Knuth algorithm
   //--------------------------------------------------------------
 
-  private final BigInteger
-  divideKnuth (final BigInteger that) {
+  private final BigIntegerNZQR
+  divideKnuth (final BigIntegerNZQR that) {
     final MutableBigInteger q = new MutableBigInteger();
     final MutableBigInteger a = new MutableBigInteger(this.mag);
     final MutableBigInteger b = new MutableBigInteger(that.mag);
@@ -1879,17 +1879,17 @@ implements Ringlike<BigInteger> {
     return q.toBigInteger(this.signum * that.signum); }
 
   /** Long division */
-  private final BigInteger[]
-    divideAndRemainderKnuth (final BigInteger that) {
+  private final BigIntegerNZQR[]
+    divideAndRemainderKnuth (final BigIntegerNZQR that) {
     final MutableBigInteger q = new MutableBigInteger();
     final MutableBigInteger a = new MutableBigInteger(this.mag);
     final MutableBigInteger b = new MutableBigInteger(that.mag);
     final MutableBigInteger r = a.divideKnuth(b,q);
-    return new BigInteger[]
+    return new BigIntegerNZQR[]
       { q.toBigInteger(this.signum * that.signum),
         r.toBigInteger(this.signum), }; }
 
-  private final BigInteger remainderKnuth (final BigInteger that) {
+  private final BigIntegerNZQR remainderKnuth (final BigIntegerNZQR that) {
     final MutableBigInteger q = new MutableBigInteger();
     final MutableBigInteger a = new MutableBigInteger(this.mag);
     final MutableBigInteger b = new MutableBigInteger(that.mag);
@@ -1898,25 +1898,25 @@ implements Ringlike<BigInteger> {
 
   //--------------------------------------------------------------
 
-  private final BigInteger[]
-    divideAndRemainderBurnikelZiegler (final BigInteger that) {
+  private final BigIntegerNZQR[]
+    divideAndRemainderBurnikelZiegler (final BigIntegerNZQR that) {
     final MutableBigInteger q = new MutableBigInteger();
     final MutableBigInteger num = new MutableBigInteger(this);
     final MutableBigInteger den = new MutableBigInteger(that);
     final MutableBigInteger r =
       num.divideAndRemainderBurnikelZiegler(den,q);
-    final BigInteger qBigInt =
+    final BigIntegerNZQR qBigInt =
       q.isZero() ? ZERO : q.toBigInteger(signum * that.signum);
-    final BigInteger rBigInt =
+    final BigIntegerNZQR rBigInt =
       r.isZero() ? ZERO : r.toBigInteger(signum);
-    return new BigInteger[] { qBigInt, rBigInt }; }
+    return new BigIntegerNZQR[] { qBigInt, rBigInt }; }
 
-  private final BigInteger
-  divideBurnikelZiegler (final BigInteger that) {
+  private final BigIntegerNZQR
+  divideBurnikelZiegler (final BigIntegerNZQR that) {
     return divideAndRemainderBurnikelZiegler(that)[0]; }
 
-  private final BigInteger
-  remainderBurnikelZiegler (final BigInteger that) {
+  private final BigIntegerNZQR
+  remainderBurnikelZiegler (final BigIntegerNZQR that) {
     return divideAndRemainderBurnikelZiegler(that)[1]; }
 
   //--------------------------------------------------------------
@@ -1924,46 +1924,46 @@ implements Ringlike<BigInteger> {
   //--------------------------------------------------------------
 
   @Override
-  public final BigInteger
-  divide (final BigInteger that) {
+  public final BigIntegerNZQR
+  divide (final BigIntegerNZQR that) {
     if (useKnuthDivision(this,that)) { return divideKnuth(that); }
     return divideBurnikelZiegler(that); }
 
   @Override
-  public List<BigInteger>
-  divideAndRemainder (final BigInteger that) {
+  public List<BigIntegerNZQR>
+  divideAndRemainder (final BigIntegerNZQR that) {
     if (useKnuthDivision(this,that)) {
       return Arrays.asList(divideAndRemainderKnuth(that)); }
     return
       Arrays.asList(divideAndRemainderBurnikelZiegler(that)); }
 
   @Override
-  public final BigInteger remainder (final BigInteger that) {
+  public final BigIntegerNZQR remainder (final BigIntegerNZQR that) {
     if (useKnuthDivision(this,that)) {
       return remainderKnuth(that); }
     return remainderBurnikelZiegler(that); }
 
   //--------------------------------------------------------------
   /**
-   * Returns a BigInteger whose value is
+   * Returns a BigIntegerNZQR whose value is
    * <code>(this<sup>exponent</sup>)</code>.
    * Note that {@code exponent} is an integer rather than a
-   * BigInteger.
+   * BigIntegerNZQR.
    *
    * @param exponent
-   *          exponent to which this BigInteger is to be raised.
+   *          exponent to which this BigIntegerNZQR is to be raised.
    * @return <code>this<sup>exponent</sup></code>
    * @throws ArithmeticException
    *           {@code exponent} is negative. (This would
    *           cause the operation to yield a non-integer value.)
    */
-  public BigInteger pow (final int exponent) {
+  public BigIntegerNZQR pow (final int exponent) {
     if (exponent < 0) {
       throw new ArithmeticException("Negative exponent");
     }
     if (signum == 0) { return (exponent == 0 ? ONE : this); }
 
-    BigInteger partToSquare = this.abs();
+    BigIntegerNZQR partToSquare = this.abs();
 
     // Factor out powers of two from the base, as the
     // exponentiation of
@@ -2049,7 +2049,7 @@ implements Ringlike<BigInteger> {
     // Large number algorithm. This is basically identical to
     // the algorithm above, but calls multiply() and square()
     // which may use more efficient algorithms for large numbers.
-    BigInteger answer = ONE;
+    BigIntegerNZQR answer = ONE;
 
     int workingExponent = exponent;
     // Perform exponentiation using repeated squaring trick
@@ -2075,7 +2075,7 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Returns the integer square root of this BigInteger. The
+   * Returns the integer square root of this BigIntegerNZQR. The
    * integer square
    * root of the corresponding mathematical integer {@code n} is
    * the largest
@@ -2098,9 +2098,9 @@ implements Ringlike<BigInteger> {
    *           {@code sqrt(-1)}.)
    * @since 9
    */
-  public BigInteger sqrt () {
+  public BigIntegerNZQR sqrt () {
     if (this.signum < 0) {
-      throw new ArithmeticException("Negative BigInteger");
+      throw new ArithmeticException("Negative BigIntegerNZQR");
     }
 
     return new MutableBigInteger(this.mag).sqrt().toBigInteger();
@@ -2125,15 +2125,15 @@ implements Ringlike<BigInteger> {
    * @see #sqrt()
    * @since 9
    */
-  public BigInteger[] sqrtAndRemainder () {
-    final BigInteger s = sqrt();
-    final BigInteger r = this.subtract(s.square());
-    assert r.compareTo(BigInteger.ZERO) >= 0;
-    return new BigInteger[] { s, r };
+  public BigIntegerNZQR[] sqrtAndRemainder () {
+    final BigIntegerNZQR s = sqrt();
+    final BigIntegerNZQR r = this.subtract(s.square());
+    assert r.compareTo(BigIntegerNZQR.ZERO) >= 0;
+    return new BigIntegerNZQR[] { s, r };
   }
 
   @Override
-  public final BigInteger gcd (final BigInteger val) {
+  public final BigIntegerNZQR gcd (final BigIntegerNZQR val) {
     if (val.signum == 0) { return this.abs(); }
     else if (this.signum == 0) { return val.abs(); }
     final MutableBigInteger a = new MutableBigInteger(this);
@@ -2187,31 +2187,31 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Returns a BigInteger whose value is the absolute value of
+   * Returns a BigIntegerNZQR whose value is the absolute value of
    * this
-   * BigInteger.
+   * BigIntegerNZQR.
    *
    * @return {@code abs(this)}
    */
   @Override
-  public BigInteger abs () {
+  public BigIntegerNZQR abs () {
     return (signum >= 0 ? this : this.negate());
   }
 
   /**
-   * Returns a BigInteger whose value is {@code (-this)}.
+   * Returns a BigIntegerNZQR whose value is {@code (-this)}.
    *
    * @return {@code -this}
    */
   @Override
-  public BigInteger negate () {
-    return new BigInteger(this.mag,-this.signum);
+  public BigIntegerNZQR negate () {
+    return new BigIntegerNZQR(this.mag,-this.signum);
   }
 
   /**
-   * Returns the signum function of this BigInteger.
+   * Returns the signum function of this BigIntegerNZQR.
    *
-   * @return -1, 0 or 1 as the value of this BigInteger is
+   * @return -1, 0 or 1 as the value of this BigIntegerNZQR is
    *         negative, zero or
    *         positive.
    */
@@ -2222,10 +2222,10 @@ implements Ringlike<BigInteger> {
   // Modular Arithmetic Operations
 
   /**
-   * Returns a BigInteger whose value is {@code (this mod m}).
+   * Returns a BigIntegerNZQR whose value is {@code (this mod m}).
    * This method
    * differs from {@code remainder} in that it always returns a
-   * <i>non-negative</i> BigInteger.
+   * <i>non-negative</i> BigIntegerNZQR.
    *
    * @param m
    *          the modulus.
@@ -2234,13 +2234,13 @@ implements Ringlike<BigInteger> {
    *           {@code m} &le; 0
    * @see #remainder
    */
-  public BigInteger mod (final BigInteger m) {
+  public BigIntegerNZQR mod (final BigIntegerNZQR m) {
     if (m.signum <= 0) {
       throw new ArithmeticException(
-        "BigInteger: modulus not positive");
+        "BigIntegerNZQR: modulus not positive");
     }
 
-    final BigInteger result = this.remainder(m);
+    final BigIntegerNZQR result = this.remainder(m);
     return (result.signum >= 0 ? result : result.add(m));
   }
 
@@ -2332,7 +2332,7 @@ implements Ringlike<BigInteger> {
   // Shift Operations
 
   /**
-   * Returns a BigInteger whose value is {@code (this << n)}.
+   * Returns a BigIntegerNZQR whose value is {@code (this << n)}.
    * The shift distance, {@code n}, may be negative, in which case
    * this method performs a right shift.
    * (Computes <code>floor(this * 2<sup>n</sup>)</code>.)
@@ -2342,10 +2342,10 @@ implements Ringlike<BigInteger> {
    * @return {@code this << n}
    * @see #shiftDown
    */
-  public BigInteger shiftUp (final int n) {
+  public BigIntegerNZQR shiftUp (final int n) {
     if (signum == 0) { return ZERO; }
     if (n > 0) {
-      return new BigInteger(shiftUp(mag,n),signum);
+      return new BigIntegerNZQR(shiftUp(mag,n),signum);
     }
     else if (n == 0) {
       return this;
@@ -2401,7 +2401,7 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Returns a BigInteger whose value is {@code (this >> n)}. Sign
+   * Returns a BigIntegerNZQR whose value is {@code (this >> n)}. Sign
    * extension is performed. The shift distance, {@code n}, may be
    * negative, in which case this method performs a left shift.
    * (Computes <code>floor(this / 2<sup>n</sup>)</code>.)
@@ -2411,16 +2411,16 @@ implements Ringlike<BigInteger> {
    * @return {@code this >> n}
    * @see #shiftUp
    */
-  public BigInteger shiftDown (final int n) {
+  public BigIntegerNZQR shiftDown (final int n) {
     if (signum == 0) { return ZERO; }
     if (n > 0) { return shiftDownImpl(n); }
     else if (n == 0) { return this; }
     // Possible int overflow in {@code -n} is not a trouble,
     // because shiftUp considers its argument unsigned
-    else { return new BigInteger(shiftUp(mag,-n),signum); } }
+    else { return new BigIntegerNZQR(shiftUp(mag,-n),signum); } }
 
   /**
-   * Returns a BigInteger whose value is {@code (this >> n)}. The
+   * Returns a BigIntegerNZQR whose value is {@code (this >> n)}. The
    * shift
    * distance, {@code n}, is considered unsigned.
    * (Computes <code>floor(this * 2<sup>-n</sup>)</code>.)
@@ -2429,7 +2429,7 @@ implements Ringlike<BigInteger> {
    *          unsigned shift distance, in bits.
    * @return {@code this >> n}
    */
-  private BigInteger shiftDownImpl (final int n) {
+  private BigIntegerNZQR shiftDownImpl (final int n) {
     final int nInts = n >>> 5;
     final int nBits = n & 0x1f;
     final int magLen = mag.length;
@@ -2479,7 +2479,7 @@ implements Ringlike<BigInteger> {
       }
     }
 
-    return new BigInteger(newMag,signum);
+    return new BigIntegerNZQR(newMag,signum);
   }
 
   private static final int[] javaIncrement (int[] val) {
@@ -2498,17 +2498,17 @@ implements Ringlike<BigInteger> {
   // Bitwise Operations
 
   /**
-   * Returns a BigInteger whose value is {@code (this & val)}.
+   * Returns a BigIntegerNZQR whose value is {@code (this & val)}.
    * (This
-   * method returns a negative BigInteger if and only if this and
+   * method returns a negative BigIntegerNZQR if and only if this and
    * val are
    * both negative.)
    *
    * @param val
-   *          value to be AND'ed with this BigInteger.
+   *          value to be AND'ed with this BigIntegerNZQR.
    * @return {@code this & val}
    */
-  public BigInteger and (final BigInteger val) {
+  public BigIntegerNZQR and (final BigIntegerNZQR val) {
     final int[] result =
       new int[Math.max(intLength(),val.intLength())];
     for (int i = 0; i < result.length; i++) {
@@ -2521,17 +2521,17 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Returns a BigInteger whose value is {@code (this | val)}.
+   * Returns a BigIntegerNZQR whose value is {@code (this | val)}.
    * (This method
-   * returns a negative BigInteger if and only if either this or
+   * returns a negative BigIntegerNZQR if and only if either this or
    * val is
    * negative.)
    *
    * @param val
-   *          value to be OR'ed with this BigInteger.
+   *          value to be OR'ed with this BigIntegerNZQR.
    * @return {@code this | val}
    */
-  public BigInteger or (final BigInteger val) {
+  public BigIntegerNZQR or (final BigIntegerNZQR val) {
     final int[] result =
       new int[Math.max(intLength(),val.intLength())];
     for (int i = 0; i < result.length; i++) {
@@ -2544,17 +2544,17 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Returns a BigInteger whose value is {@code (this ^ val)}.
+   * Returns a BigIntegerNZQR whose value is {@code (this ^ val)}.
    * (This method
-   * returns a negative BigInteger if and only if exactly one of
+   * returns a negative BigIntegerNZQR if and only if exactly one of
    * this and
    * val are negative.)
    *
    * @param val
-   *          value to be XOR'ed with this BigInteger.
+   *          value to be XOR'ed with this BigIntegerNZQR.
    * @return {@code this ^ val}
    */
-  public BigInteger xor (final BigInteger val) {
+  public BigIntegerNZQR xor (final BigIntegerNZQR val) {
     final int[] result =
       new int[Math.max(intLength(),val.intLength())];
     for (int i = 0; i < result.length; i++) {
@@ -2567,14 +2567,14 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Returns a BigInteger whose value is {@code (~this)}. (This
+   * Returns a BigIntegerNZQR whose value is {@code (~this)}. (This
    * method
-   * returns a negative value if and only if this BigInteger is
+   * returns a negative value if and only if this BigIntegerNZQR is
    * non-negative.)
    *
    * @return {@code ~this}
    */
-  public BigInteger not () {
+  public BigIntegerNZQR not () {
     final int[] result = new int[intLength()];
     for (int i = 0; i < result.length; i++) {
       result[i] = ~getInt(result.length-i-1);
@@ -2584,22 +2584,22 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Returns a BigInteger whose value is {@code (this & ~val)}.
+   * Returns a BigIntegerNZQR whose value is {@code (this & ~val)}.
    * This
    * method, which is equivalent to {@code and(val.not())}, is
    * provided as
    * a convenience for masking operations. (This method returns a
    * negative
-   * BigInteger if and only if {@code this} is negative and
+   * BigIntegerNZQR if and only if {@code this} is negative and
    * {@code val} is
    * positive.)
    *
    * @param val
    *          value to be complemented and AND'ed with this
-   *          BigInteger.
+   *          BigIntegerNZQR.
    * @return {@code this & ~val}
    */
-  public BigInteger andNot (final BigInteger val) {
+  public BigIntegerNZQR andNot (final BigIntegerNZQR val) {
     final int[] result =
       new int[Math.max(intLength(),val.intLength())];
     for (int i = 0; i < result.length; i++) {
@@ -2634,8 +2634,8 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Returns a BigInteger whose value is equivalent to this
-   * BigInteger
+   * Returns a BigIntegerNZQR whose value is equivalent to this
+   * BigIntegerNZQR
    * with the designated bit set. (Computes
    * {@code (this | (1<<n))}.)
    *
@@ -2645,7 +2645,7 @@ implements Ringlike<BigInteger> {
    * @throws ArithmeticException
    *           {@code n} is negative.
    */
-  public BigInteger setBit (final int n) {
+  public BigIntegerNZQR setBit (final int n) {
     if (n < 0) {
       throw new ArithmeticException("Negative bit address");
     }
@@ -2664,8 +2664,8 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Returns a BigInteger whose value is equivalent to this
-   * BigInteger
+   * Returns a BigIntegerNZQR whose value is equivalent to this
+   * BigIntegerNZQR
    * with the designated bit cleared.
    * (Computes {@code (this & ~(1<<n))}.)
    *
@@ -2675,7 +2675,7 @@ implements Ringlike<BigInteger> {
    * @throws ArithmeticException
    *           {@code n} is negative.
    */
-  public BigInteger clearBit (final int n) {
+  public BigIntegerNZQR clearBit (final int n) {
     if (n < 0) {
       throw new ArithmeticException("Negative bit address");
     }
@@ -2694,8 +2694,8 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Returns a BigInteger whose value is equivalent to this
-   * BigInteger
+   * Returns a BigIntegerNZQR whose value is equivalent to this
+   * BigIntegerNZQR
    * with the designated bit flipped.
    * (Computes {@code (this ^ (1<<n))}.)
    *
@@ -2705,7 +2705,7 @@ implements Ringlike<BigInteger> {
    * @throws ArithmeticException
    *           {@code n} is negative.
    */
-  public BigInteger flipBit (final int n) {
+  public BigIntegerNZQR flipBit (final int n) {
     if (n < 0) {
       throw new ArithmeticException("Negative bit address");
     }
@@ -2726,12 +2726,12 @@ implements Ringlike<BigInteger> {
   /**
    * Returns the index of the rightmost (lowest-order) one bit in
    * this
-   * BigInteger (the number of zero bits to the right of the
+   * BigIntegerNZQR (the number of zero bits to the right of the
    * rightmost
-   * one bit). Returns -1 if this BigInteger contains no one bits.
+   * one bit). Returns -1 if this BigIntegerNZQR contains no one bits.
    * (Computes {@code (this == 0? -1 : log2(this & -this))}.)
    *
-   * @return index of the rightmost one bit in this BigInteger.
+   * @return index of the rightmost one bit in this BigIntegerNZQR.
    */
   public int getLowestSetBit () {
     int lsb = lowestSetBitPlusTwo-2;
@@ -2757,7 +2757,7 @@ implements Ringlike<BigInteger> {
 
   /**
    * Returns the number of bits in the minimal two's-complement
-   * representation of this BigInteger, <em>excluding</em> a sign
+   * representation of this BigIntegerNZQR, <em>excluding</em> a sign
    * bit.
    * For positive BigIntegers, this is equivalent to the number of
    * bits in
@@ -2767,7 +2767,7 @@ implements Ringlike<BigInteger> {
    * {@code (ceil(log2(this < 0 ? -this : this+1)))}.)
    *
    * @return number of bits in the minimal two's-complement
-   *         representation of this BigInteger, <em>excluding</em>
+   *         representation of this BigIntegerNZQR, <em>excluding</em>
    *         a sign bit.
    */
   public int bitLength () {
@@ -2803,13 +2803,13 @@ implements Ringlike<BigInteger> {
   /**
    * Returns the number of bits in the two's complement
    * representation
-   * of this BigInteger that differ from its sign bit. This method
+   * of this BigIntegerNZQR that differ from its sign bit. This method
    * is
    * useful when implementing bit-vector style sets atop
    * BigIntegers.
    *
    * @return number of bits in the two's complement representation
-   *         of this BigInteger that differ from its sign bit.
+   *         of this BigIntegerNZQR that differ from its sign bit.
    */
   public int bitCount () {
     int bc = bitCountPlusOne-1;
@@ -2837,7 +2837,7 @@ implements Ringlike<BigInteger> {
   // Comparison Operations
 
   /**
-   * Compares this BigInteger with the specified BigInteger. This
+   * Compares this BigIntegerNZQR with the specified BigIntegerNZQR. This
    * method is provided in preference to individual methods for
    * each
    * of the six boolean comparison operators ({@literal <}, ==,
@@ -2848,14 +2848,14 @@ implements Ringlike<BigInteger> {
    * &lt;<i>op</i>&gt; is one of the six comparison operators.
    *
    * @param val
-   *          BigInteger to which this BigInteger is to be
+   *          BigIntegerNZQR to which this BigIntegerNZQR is to be
    *          compared.
-   * @return -1, 0 or 1 as this BigInteger is numerically less
+   * @return -1, 0 or 1 as this BigIntegerNZQR is numerically less
    *         than, equal
    *         to, or greater than {@code val}.
    */
   @Override
-  public int compareTo (final BigInteger val) {
+  public int compareTo (final BigIntegerNZQR val) {
     if (signum == val.signum) {
       switch (signum) {
       case 1:
@@ -2892,7 +2892,7 @@ implements Ringlike<BigInteger> {
           ? -1 : 1; } }
     return 0; }
 
-  public final int compareMagnitude (final BigInteger val) {
+  public final int compareMagnitude (final BigIntegerNZQR val) {
     return compareMagnitude(mag,val.mag); }
 
   public final int compareMagnitude (final long val) {
@@ -2979,8 +2979,8 @@ implements Ringlike<BigInteger> {
   @Override
   public boolean equals (final Object x) {
     if (x == this) { return true; }
-    if (!(x instanceof BigInteger)) { return false; }
-    final BigInteger xInt = (BigInteger) x;
+    if (!(x instanceof BigIntegerNZQR)) { return false; }
+    final BigIntegerNZQR xInt = (BigIntegerNZQR) x;
     if (xInt.signum != signum) { return false; }
     final int[] m = mag;
     final int len = m.length;
@@ -2990,7 +2990,7 @@ implements Ringlike<BigInteger> {
       if (xm[i] != m[i]) { return false; } }
     return true; }
 
-  /** Returns the String representation of this BigInteger in the
+  /** Returns the String representation of this BigIntegerNZQR in the
    * given radix. If the radix is outside the range from {@link
    * Character#MIN_RADIX} to {@link Character#MAX_RADIX}
    * inclusive,
@@ -2998,16 +2998,16 @@ implements Ringlike<BigInteger> {
    * {@code Integer.toString}). The digit-to-character mapping
    * provided by {@code Character.forDigit} is used, and a minus
    * sign is prepended if appropriate. (This representation is
-   * compatible with the {@link #BigInteger(String, int) (String,
+   * compatible with the {@link #BigIntegerNZQR(String, int) (String,
    * int)} constructor.)
    *
    * @param radix
    *          radix of the String representation.
-   * @return String representation of this BigInteger in the given
+   * @return String representation of this BigIntegerNZQR in the given
    *         radix.
    * @see Integer#toString
    * @see Character#forDigit
-   * @see #BigInteger(java.lang.String, int)
+   * @see #BigIntegerNZQR(java.lang.String, int)
    */
   //@Override
   public final String toString (int radix) {
@@ -3046,17 +3046,17 @@ implements Ringlike<BigInteger> {
     final String digitGroup[] = new String[maxNumDigitGroups];
 
     // Translate number to string, a digit group at a time
-    BigInteger tmp = this.abs();
+    BigIntegerNZQR tmp = this.abs();
     int numGroups = 0;
     while (tmp.signum != 0) {
-      final BigInteger d = longRadix[radix];
+      final BigIntegerNZQR d = longRadix[radix];
 
       final MutableBigInteger q = new MutableBigInteger(),
         a = new MutableBigInteger(tmp.mag),
         b = new MutableBigInteger(d.mag);
       final MutableBigInteger r = a.divide(b,q);
-      final BigInteger q2 = q.toBigInteger(tmp.signum * d.signum);
-      final BigInteger r2 = r.toBigInteger(tmp.signum * d.signum);
+      final BigIntegerNZQR q2 = q.toBigInteger(tmp.signum * d.signum);
+      final BigIntegerNZQR r2 = r.toBigInteger(tmp.signum * d.signum);
 
       digitGroup[numGroups++] =
         Long.toString(r2.longValue(),radix);
@@ -3095,7 +3095,7 @@ implements Ringlike<BigInteger> {
   private static final int SCHOENHAGE_BASE_CONVERSION_THRESHOLD =
     20;
   /**
-   * Converts the specified BigInteger to a string and appends to
+   * Converts the specified BigIntegerNZQR to a string and appends to
    * {@code sb}. This implements the recursive Schoenhage
    * algorithm
    * for base conversions.
@@ -3112,7 +3112,7 @@ implements Ringlike<BigInteger> {
    * @param digits
    *          The minimum number of digits to pad to.
    */
-  private static void toString (final BigInteger u,
+  private static void toString (final BigIntegerNZQR u,
                                 final StringBuilder sb,
                                 final int radix,
                                 final int digits) {
@@ -3144,8 +3144,8 @@ implements Ringlike<BigInteger> {
       (int) Math.round(
         (Math.log((b * LOG_TWO) / logCache[radix]) / LOG_TWO)
         -1.0);
-    final BigInteger v = getRadixConversionCache(radix,n);
-    final List<BigInteger> results = u.divideAndRemainder(v);
+    final BigIntegerNZQR v = getRadixConversionCache(radix,n);
+    final List<BigIntegerNZQR> results = u.divideAndRemainder(v);
 
     final int expectedDigits = 1 << n;
 
@@ -3163,9 +3163,9 @@ implements Ringlike<BigInteger> {
    * using
    * {@code Future}.
    */
-  private static BigInteger getRadixConversionCache (final int radix,
+  private static BigIntegerNZQR getRadixConversionCache (final int radix,
                                                      final int exponent) {
-    BigInteger[] cacheLine = powerCache[radix]; // volatile read
+    BigIntegerNZQR[] cacheLine = powerCache[radix]; // volatile read
     if (exponent < cacheLine.length) {
       return cacheLine[exponent];
     }
@@ -3176,7 +3176,7 @@ implements Ringlike<BigInteger> {
       cacheLine[i] = cacheLine[i-1].pow(2);
     }
 
-    BigInteger[][] pc = powerCache; // volatile read again
+    BigIntegerNZQR[][] pc = powerCache; // volatile read again
     if (exponent >= pc[radix].length) {
       pc = pc.clone();
       pc[radix] = cacheLine;
@@ -3196,35 +3196,35 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Returns the decimal String representation of this BigInteger.
+   * Returns the decimal String representation of this BigIntegerNZQR.
    * The digit-to-character mapping provided by
    * {@code Character.forDigit} is used, and a minus sign is
    * prepended if appropriate. (This representation is compatible
-   * with the {@link #BigInteger(String) (String)} constructor,
+   * with the {@link #BigIntegerNZQR(String) (String)} constructor,
    * and
    * allows for String concatenation with Java's + operator.)
    *
-   * @return decimal String representation of this BigInteger.
+   * @return decimal String representation of this BigIntegerNZQR.
    * @see Character#forDigit
-   * @see #BigInteger(java.lang.String)
+   * @see #BigIntegerNZQR(java.lang.String)
    */
   @Override
   public String toString () { return toString(0x10); }
 
   /**
    * Returns a byte array containing the two's-complement
-   * representation of this BigInteger. The byte array will be in
+   * representation of this BigIntegerNZQR. The byte array will be in
    * <i>big-endian</i> byte-order: the most significant byte is in
    * the zeroth element. The array will contain the minimum number
-   * of bytes required to represent this BigInteger, including at
+   * of bytes required to represent this BigIntegerNZQR, including at
    * least one sign bit, which is {@code (ceil((this.bitLength() +
    * 1)/8))}. (This representation is compatible with the
-   * {@link #BigInteger(byte[]) (byte[])} constructor.)
+   * {@link #BigIntegerNZQR(byte[]) (byte[])} constructor.)
    *
    * @return a byte array containing the two's-complement
    *         representation of
-   *         this BigInteger.
-   * @see #BigInteger(byte[])
+   *         this BigIntegerNZQR.
+   * @see #BigIntegerNZQR(byte[])
    */
   public byte[] toByteArray () {
     final int byteLen = (bitLength() / 8) + 1;
@@ -3246,18 +3246,18 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Converts this BigInteger to an {@code int}. This
+   * Converts this BigIntegerNZQR to an {@code int}. This
    * conversion is analogous to a
    * <i>narrowing primitive conversion</i> from {@code long} to
    * {@code int} as defined in
    * <cite>The Java&trade; Language Specification</cite>:
-   * if this BigInteger is too big to fit in an
+   * if this BigIntegerNZQR is too big to fit in an
    * {@code int}, only the low-order 32 bits are returned.
    * Note that this conversion can lose information about the
-   * overall magnitude of the BigInteger value as well as return a
+   * overall magnitude of the BigIntegerNZQR value as well as return a
    * result with the opposite sign.
    *
-   * @return this BigInteger converted to an {@code int}.
+   * @return this BigIntegerNZQR converted to an {@code int}.
    * @see #intValueExact()
    * @jls 5.1.3 Narrowing Primitive Conversion
    */
@@ -3269,29 +3269,29 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Converts this BigInteger to a {@link jam.math.BigInteger}.
+   * Converts this BigIntegerNZQR to a {@link BigIntegerNZQR.math.BigInteger}.
    */
   public final java.math.BigInteger jmBigIntegerValue () {
     return new java.math.BigInteger(toByteArray());
   }
 
-  public static final BigInteger valueOf (final java.math.BigInteger bi) {
-    return new BigInteger(bi.toByteArray()); }
+  public static final BigIntegerNZQR valueOf (final java.math.BigInteger bi) {
+    return new BigIntegerNZQR(bi.toByteArray()); }
 
 
   /**
-   * Converts this BigInteger to a {@code long}. This
+   * Converts this BigIntegerNZQR to a {@code long}. This
    * conversion is analogous to a
    * <i>narrowing primitive conversion</i> from {@code long} to
    * {@code int} as defined in
    * <cite>The Java&trade; Language Specification</cite>:
-   * if this BigInteger is too big to fit in a
+   * if this BigIntegerNZQR is too big to fit in a
    * {@code long}, only the low-order 64 bits are returned.
    * Note that this conversion can lose information about the
-   * overall magnitude of the BigInteger value as well as return a
+   * overall magnitude of the BigIntegerNZQR value as well as return a
    * result with the opposite sign.
    *
-   * @return this BigInteger converted to a {@code long}.
+   * @return this BigIntegerNZQR converted to a {@code long}.
    * @see #longValueExact()
    * @jls 5.1.3 Narrowing Primitive Conversion
    */
@@ -3306,19 +3306,19 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Converts this BigInteger to a {@code float}. This
+   * Converts this BigIntegerNZQR to a {@code float}. This
    * conversion is similar to the
    * <i>narrowing primitive conversion</i> from {@code double} to
    * {@code float} as defined in
    * <cite>The Java&trade; Language Specification</cite>:
-   * if this BigInteger has too great a magnitude
+   * if this BigIntegerNZQR has too great a magnitude
    * to represent as a {@code float}, it will be converted to
    * {@link Float#NEGATIVE_INFINITY} or {@link
    * Float#POSITIVE_INFINITY} as appropriate. Note that even when
    * the return value is finite, this conversion can lose
-   * information about the precision of the BigInteger value.
+   * information about the precision of the BigIntegerNZQR value.
    *
-   * @return this BigInteger converted to a {@code float}.
+   * @return this BigIntegerNZQR converted to a {@code float}.
    * @jls 5.1.3 Narrowing Primitive Conversion
    */
   @Override
@@ -3413,19 +3413,19 @@ implements Ringlike<BigInteger> {
   }
 
   /**
-   * Converts this BigInteger to a {@code double}. This
+   * Converts this BigIntegerNZQR to a {@code double}. This
    * conversion is similar to the
    * <i>narrowing primitive conversion</i> from {@code double} to
    * {@code float} as defined in
    * <cite>The Java&trade; Language Specification</cite>:
-   * if this BigInteger has too great a magnitude
+   * if this BigIntegerNZQR has too great a magnitude
    * to represent as a {@code double}, it will be converted to
    * {@link Double#NEGATIVE_INFINITY} or {@link
    * Double#POSITIVE_INFINITY} as appropriate. Note that even when
    * the return value is finite, this conversion can lose
-   * information about the precision of the BigInteger value.
+   * information about the precision of the BigIntegerNZQR value.
    *
-   * @return this BigInteger converted to a {@code double}.
+   * @return this BigIntegerNZQR converted to a {@code double}.
    * @jls 5.1.3 Narrowing Primitive Conversion
    */
   @Override
@@ -3716,7 +3716,7 @@ implements Ringlike<BigInteger> {
     16, 15, 15, 15, 14, 14, 14, 14, 13, 13, 13, 13, 13, 13, 12,
     12, 12, 12, 12, 12, 12, 12 };
 
-  private static BigInteger longRadix[] =
+  private static BigIntegerNZQR longRadix[] =
   { null, null, valueOf(0x4000000000000000L),
     valueOf(0x383d9170b85ff80bL), valueOf(0x4000000000000000L),
     valueOf(0x6765c793fa10079dL), valueOf(0x41c21cb8e1000000L),
@@ -3802,7 +3802,7 @@ implements Ringlike<BigInteger> {
    * undefined.
    *
    * <p>
-   * Note: never used for a BigInteger with a magnitude of zero.
+   * Note: never used for a BigIntegerNZQR with a magnitude of zero.
    *
    * @see #getInt.
    */
@@ -3827,14 +3827,14 @@ implements Ringlike<BigInteger> {
     -8287574255936472291L;
 
   /**
-   * Serializable fields for BigInteger.
+   * Serializable fields for BigIntegerNZQR.
    *
    * @serialField signum
    *                int
-   *                signum of this BigInteger
+   *                signum of this BigIntegerNZQR
    * @serialField magnitude
    *                byte[]
-   *                magnitude array of this BigInteger
+   *                magnitude array of this BigIntegerNZQR
    * @serialField bitCount
    *                int
    *                appears in the serialized form for backward
@@ -3861,56 +3861,56 @@ implements Ringlike<BigInteger> {
     new ObjectStreamField("lowestSetBit",Integer.TYPE) };
 
   /**
-   * Converts this {@code BigInteger} to a {@code long}, checking
-   * for lost information. If the value of this {@code BigInteger}
+   * Converts this {@code BigIntegerNZQR} to a {@code long}, checking
+   * for lost information. If the value of this {@code BigIntegerNZQR}
    * is out of the range of the {@code long} type, then an
    * {@code ArithmeticException} is thrown.
    *
-   * @return this {@code BigInteger} converted to a {@code long}.
+   * @return this {@code BigIntegerNZQR} converted to a {@code long}.
    * @throws ArithmeticException
    *           if the value of {@code this} will
    *           not exactly fit in a {@code long}.
-   * @see BigInteger#longValue
+   * @see BigIntegerNZQR#longValue
    * @since 1.8
    */
   public long longValueExact () {
     if ((mag.length <= 2) && (bitLength() <= 63)) {
       return longValue();
     }
-    throw new ArithmeticException("BigInteger out of long range");
+    throw new ArithmeticException("BigIntegerNZQR out of long range");
   }
 
   /**
-   * Converts this {@code BigInteger} to an {@code int}, checking
-   * for lost information. If the value of this {@code BigInteger}
+   * Converts this {@code BigIntegerNZQR} to an {@code int}, checking
+   * for lost information. If the value of this {@code BigIntegerNZQR}
    * is out of the range of the {@code int} type, then an
    * {@code ArithmeticException} is thrown.
    *
-   * @return this {@code BigInteger} converted to an {@code int}.
+   * @return this {@code BigIntegerNZQR} converted to an {@code int}.
    * @throws ArithmeticException
    *           if the value of {@code this} will
    *           not exactly fit in an {@code int}.
-   * @see BigInteger#intValue
+   * @see BigIntegerNZQR#intValue
    * @since 1.8
    */
   public int intValueExact () {
     if ((mag.length <= 1) && (bitLength() <= 31)) {
       return intValue();
     }
-    throw new ArithmeticException("BigInteger out of int range");
+    throw new ArithmeticException("BigIntegerNZQR out of int range");
   }
 
   /**
-   * Converts this {@code BigInteger} to a {@code short}, checking
-   * for lost information. If the value of this {@code BigInteger}
+   * Converts this {@code BigIntegerNZQR} to a {@code short}, checking
+   * for lost information. If the value of this {@code BigIntegerNZQR}
    * is out of the range of the {@code short} type, then an
    * {@code ArithmeticException} is thrown.
    *
-   * @return this {@code BigInteger} converted to a {@code short}.
+   * @return this {@code BigIntegerNZQR} converted to a {@code short}.
    * @throws ArithmeticException
    *           if the value of {@code this} will
    *           not exactly fit in a {@code short}.
-   * @see BigInteger#shortValue
+   * @see BigIntegerNZQR#shortValue
    * @since 1.8
    */
   public short shortValueExact () {
@@ -3922,20 +3922,20 @@ implements Ringlike<BigInteger> {
       }
     }
     throw new ArithmeticException(
-      "BigInteger out of short range");
+      "BigIntegerNZQR out of short range");
   }
 
   /**
-   * Converts this {@code BigInteger} to a {@code byte}, checking
-   * for lost information. If the value of this {@code BigInteger}
+   * Converts this {@code BigIntegerNZQR} to a {@code byte}, checking
+   * for lost information. If the value of this {@code BigIntegerNZQR}
    * is out of the range of the {@code byte} type, then an
    * {@code ArithmeticException} is thrown.
    *
-   * @return this {@code BigInteger} converted to a {@code byte}.
+   * @return this {@code BigIntegerNZQR} converted to a {@code byte}.
    * @throws ArithmeticException
    *           if the value of {@code this} will
    *           not exactly fit in a {@code byte}.
-   * @see BigInteger#byteValue
+   * @see BigIntegerNZQR#byteValue
    * @since 1.8
    */
   public byte byteValueExact () {
@@ -3946,6 +3946,6 @@ implements Ringlike<BigInteger> {
         return byteValue();
       }
     }
-    throw new ArithmeticException("BigInteger out of byte range");
+    throw new ArithmeticException("BigIntegerNZQR out of byte range");
   }
 }

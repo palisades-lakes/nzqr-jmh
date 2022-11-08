@@ -83,9 +83,9 @@ class MutableBigInteger {
 
   /**
    * Construct a new MutableBigInteger with a magnitude equal to the
-   * specified BigInteger.
+   * specified BigIntegerNZQR.
    */
-  MutableBigInteger(final BigInteger b) {
+  MutableBigInteger(final BigIntegerNZQR b) {
     intLen = b.mag.length;
     value = Arrays.copyOf(b.mag, intLen);
   }
@@ -135,19 +135,19 @@ class MutableBigInteger {
   //          : d); }
 
   /**
-   * Convert this MutableBigInteger to a BigInteger object.
+   * Convert this MutableBigInteger to a BigIntegerNZQR object.
    */
-  BigInteger toBigInteger(final int sign) {
+  BigIntegerNZQR toBigInteger(final int sign) {
     if ((intLen == 0) || (sign == 0)) {
-      return BigInteger.ZERO;
+      return BigIntegerNZQR.ZERO;
     }
-    return new BigInteger(getMagnitudeArray(), sign);
+    return new BigIntegerNZQR(getMagnitudeArray(), sign);
   }
 
   /**
-   * Converts this number to a nonnegative {@code BigInteger}.
+   * Converts this number to a nonnegative {@code BigIntegerNZQR}.
    */
-  BigInteger toBigInteger() {
+  BigIntegerNZQR toBigInteger() {
     normalize();
     return toBigInteger(isZero() ? 0 : 1);
   }
@@ -167,9 +167,9 @@ class MutableBigInteger {
     final int len = mag.length;
     final int d = mag[0];
     // If this MutableBigInteger can not be fitted into long, we need to
-    // make a BigInteger object for the resultant BigDecimal object.
+    // make a BigIntegerNZQR object for the resultant BigDecimal object.
     if ((len > 2) || ((d < 0) && (len == 2))) {
-      return BigInteger.INFLATED;
+      return BigIntegerNZQR.INFLATED;
     }
     final long v = (len == 2) ?
       ((mag[1] & Numbers.UNSIGNED_MASK) | ((d & Numbers.UNSIGNED_MASK) << 32)) :
@@ -450,7 +450,7 @@ class MutableBigInteger {
    */
   @Override
   public String toString() {
-    final BigInteger b = toBigInteger(1);
+    final BigIntegerNZQR b = toBigInteger(1);
     return b.toString();
   }
 
@@ -479,7 +479,7 @@ class MutableBigInteger {
     if (nBits == 0) {
       return;
     }
-    final int bitsInHighWord = BigInteger.bitLengthForInt(value[offset]);
+    final int bitsInHighWord = BigIntegerNZQR.bitLengthForInt(value[offset]);
     if (nBits >= bitsInHighWord) {
       this.primitiveLeftShift(32 - nBits);
       this.intLen--;
@@ -512,7 +512,7 @@ class MutableBigInteger {
     }
     final int nInts = n >>> 5;
     final int nBits = n&0x1F;
-    final int bitsInHighWord = BigInteger.bitLengthForInt(value[offset]);
+    final int bitsInHighWord = BigIntegerNZQR.bitLengthForInt(value[offset]);
 
     // If shift can be done without moving words, do so
     if (n <= (32-bitsInHighWord)) {
@@ -647,12 +647,12 @@ class MutableBigInteger {
   }
 
   /**
-   * Returns a {@code BigInteger} equal to the {@code n}
+   * Returns a {@code BigIntegerNZQR} equal to the {@code n}
    * low ints of this number.
    */
-  private BigInteger getLower(final int n) {
+  private BigIntegerNZQR getLower(final int n) {
     if (isZero()) {
-      return BigInteger.ZERO;
+      return BigIntegerNZQR.ZERO;
     } else if (intLen < n) {
       return toBigInteger(1);
     } else {
@@ -662,7 +662,7 @@ class MutableBigInteger {
         len--;
       }
       final int sign = len > 0 ? 1 : 0;
-      return new BigInteger(Arrays.copyOfRange(value, (offset+intLen)-len, offset+intLen), sign);
+      return new BigIntegerNZQR(Arrays.copyOfRange(value, (offset+intLen)-len, offset+intLen), sign);
     }
   }
 
@@ -1105,8 +1105,8 @@ class MutableBigInteger {
 
   MutableBigInteger divide(final MutableBigInteger b,
                            final MutableBigInteger quotient, final boolean needRemainder) {
-    if ((b.intLen < BigInteger.BURNIKEL_ZIEGLER_THRESHOLD) ||
-      ((intLen - b.intLen) < BigInteger.BURNIKEL_ZIEGLER_OFFSET)) {
+    if ((b.intLen < BigIntegerNZQR.BURNIKEL_ZIEGLER_THRESHOLD) ||
+      ((intLen - b.intLen) < BigIntegerNZQR.BURNIKEL_ZIEGLER_OFFSET)) {
       return divideKnuth(b, quotient, needRemainder);
     }
     return divideAndRemainderBurnikelZiegler(b, quotient);
@@ -1202,7 +1202,7 @@ class MutableBigInteger {
       return this;
     }
     // step 1: let m = min{2^k | (2^k)*BURNIKEL_ZIEGLER_THRESHOLD > s}
-    final int m = 1 << (32-Integer.numberOfLeadingZeros(s/BigInteger.BURNIKEL_ZIEGLER_THRESHOLD));
+    final int m = 1 << (32-Integer.numberOfLeadingZeros(s/BigIntegerNZQR.BURNIKEL_ZIEGLER_THRESHOLD));
 
     final int j = ((s+m)-1) / m;      // step 2a: j = ceil(s/m)
     final int n = j * m;            // step 2b: block length in 32-bit units
@@ -1260,7 +1260,7 @@ class MutableBigInteger {
     final int n = b.intLen;
 
     // step 1: base case
-    if (((n%2) != 0) || (n < BigInteger.BURNIKEL_ZIEGLER_THRESHOLD)) {
+    if (((n%2) != 0) || (n < BigIntegerNZQR.BURNIKEL_ZIEGLER_THRESHOLD)) {
       return divideKnuth(b, quotient);
     }
 
@@ -1302,7 +1302,7 @@ class MutableBigInteger {
     // step 2: view b as [b1,b2] where each bi is n ints or less
     final MutableBigInteger b1 = new MutableBigInteger(b);
     b1.safeRightShift(n * 32);
-    final BigInteger b2 = b.getLower(n);
+    final BigIntegerNZQR b2 = b.getLower(n);
 
     MutableBigInteger r;
     MutableBigInteger d;
@@ -1374,7 +1374,7 @@ class MutableBigInteger {
     return new MutableBigInteger(newVal);
   }
 
-  /** @see BigInteger#bitLength() */
+  /** @see BigIntegerNZQR#bitLength() */
   private final long bitLength() {
     if (intLen == 0) { return 0; }
     return (intLen*32L) - Integer.numberOfLeadingZeros(value[offset]); }
@@ -1850,7 +1850,7 @@ class MutableBigInteger {
 
     if (bitLength() <= 63) {
       // Initial estimate is the square root of the positive long value.
-      final long v = new BigInteger(this.value, 1).longValueExact();
+      final long v = new BigIntegerNZQR(this.value, 1).longValueExact();
       long xk = (long)Math.floor(Math.sqrt(v));
 
       // Refine the estimate.
@@ -1886,8 +1886,8 @@ class MutableBigInteger {
     xk.normalize();
 
     // Use the square root of the shifted value as an approximation.
-    final double d = new BigInteger(xk.value, 1).doubleValue();
-    final BigInteger bi = BigInteger.valueOf((long)Math.ceil(Math.sqrt(d)));
+    final double d = new BigIntegerNZQR(xk.value, 1).doubleValue();
+    final BigIntegerNZQR bi = BigIntegerNZQR.valueOf((long)Math.ceil(Math.sqrt(d)));
     xk = new MutableBigInteger(bi.mag);
 
     // Shift the approximate square root back into the original range.
@@ -2168,7 +2168,7 @@ class MutableBigInteger {
       r = a.divide(b, q);
 
       if (r.intLen == 0) {
-        throw new ArithmeticException("BigInteger not invertible.");
+        throw new ArithmeticException("BigIntegerNZQR not invertible.");
       }
 
       swapper = r;
@@ -2192,7 +2192,7 @@ class MutableBigInteger {
       r = b.divide(a, q);
 
       if (r.intLen == 0) {
-        throw new ArithmeticException("BigInteger not invertible.");
+        throw new ArithmeticException("BigIntegerNZQR not invertible.");
       }
 
       swapper = b;

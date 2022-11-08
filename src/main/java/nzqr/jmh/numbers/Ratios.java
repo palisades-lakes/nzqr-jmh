@@ -143,7 +143,7 @@ public final class Ratios implements Set {
   // numerator and denominators are equal.
   // Guessing our Ratios are usually already reduced.
   // Try n0*d1 == n1*d0 instead
-  // TODO: use BigInteger.bitLength() to decide
+  // TODO: use BigIntegerNZQR.bitLength() to decide
   // which method to use?
 
   // clojure.lang.Ratio doesn't equate 1/1 and 2/2!

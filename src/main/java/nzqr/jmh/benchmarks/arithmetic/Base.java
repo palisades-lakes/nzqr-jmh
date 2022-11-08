@@ -10,6 +10,7 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 
 import nzqr.java.numbers.BoundedNatural;
+import nzqr.java.numbers.jdk19.BigIntegerJDK;
 import nzqr.java.prng.Generator;
 import nzqr.java.prng.Generators;
 import nzqr.java.prng.PRNG;
@@ -35,6 +36,8 @@ public abstract class Base {
                                              final String dest) {
     if (dest.equals("BigInteger")) { 
       return x; }
+    else if (dest.equals("BigIntegerJDK")) { 
+      return new BigIntegerJDK(x.toByteArray()); }
     else if (dest.equals("BoundedNatural")) { 
       return BoundedNatural.valueOf(x); }
     else {
@@ -50,6 +53,7 @@ public abstract class Base {
 
   /** conversions from BigInteger to other number classes. */
   @Param({
+    "BigIntegerJDK",
     "BigInteger",
     "BoundedNatural",
   })
