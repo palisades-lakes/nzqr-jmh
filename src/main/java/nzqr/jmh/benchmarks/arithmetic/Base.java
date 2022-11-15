@@ -10,10 +10,10 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 
 import nzqr.java.numbers.BoundedNatural;
-import nzqr.java.numbers.jdk19.BigIntegerJDK;
 import nzqr.java.prng.Generator;
 import nzqr.java.prng.Generators;
 import nzqr.java.prng.PRNG;
+import nzqr.jmh.numbers.jdk19.BigIntegerJDK;
 
 /** Benchmark arithmetic operations on various number classes.
  *
@@ -53,9 +53,9 @@ public abstract class Base {
 
   /** conversions from BigInteger to other number classes. */
   @Param({
+    "BoundedNatural",
     "BigIntegerJDK",
     "BigInteger",
-    "BoundedNatural",
   })
   String numberClassName;
 

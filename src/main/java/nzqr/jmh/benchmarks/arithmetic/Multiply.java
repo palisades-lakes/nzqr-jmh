@@ -1,12 +1,10 @@
 package nzqr.jmh.benchmarks.arithmetic;
 
-import nzqr.java.numbers.Naturals;
-
 /** <pre>
  * java -cp target\benchmarks.jar nzqr.jmh.benchmarks.arithmetic.Multiply
  * </pre>
  * @author palisades dot lakes at gmail dot com
- * @version 2022-10-30
+ * @version 2022-11-14
  */
 
 public class Multiply extends Base {
