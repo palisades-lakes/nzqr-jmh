@@ -10,9 +10,10 @@ package nzqr.jmh.benchmarks.arithmetic;
 public class DivideAndRemainder extends Base {
 
   @Override
-  public final Object operation (final Object z0,
-                                 final Object z1) {
-    return Naturals.get().divideAndRemainder(z0,z1); }
+  public final Object operation(final Object z0,
+                                final Object z1) {
+    return Naturals.get().divideAndRemainder(z0, z1);
+  }
 
   public static final void main (final String[] args)  {
     Defaults.run("DivideAndRemainder"); } }
