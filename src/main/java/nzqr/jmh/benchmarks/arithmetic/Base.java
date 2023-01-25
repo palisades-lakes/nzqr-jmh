@@ -18,10 +18,9 @@ import nzqr.jmh.numbers.jdk19.BigIntegerJDK;
 /** Benchmark arithmetic operations on various number classes.
  *
  * @author palisades dot lakes at gmail dot com
- * @version 2022-11-07
+ * @version 2023-01-24
  */
 
-@SuppressWarnings("unchecked")
 @State(Scope.Thread)
 public abstract class Base {
 
@@ -34,14 +33,13 @@ public abstract class Base {
 
   public static final Object fromBigInteger (final BigInteger x,
                                              final String dest) {
-    if (dest.equals("BigInteger")) { 
-      return x; }
-    else if (dest.equals("BigIntegerJDK")) { 
-      return new BigIntegerJDK(x.toByteArray()); }
-    else if (dest.equals("BoundedNatural")) { 
-      return BoundedNatural.valueOf(x); }
-    else {
-      throw new UnsupportedOperationException(); } }
+    return switch (dest) {
+      case "BigInteger" -> x;
+      case "BigIntegerJDK" -> new BigIntegerJDK(x.toByteArray());
+      case "BoundedNatural" -> BoundedNatural.valueOf(x);
+      default -> throw new UnsupportedOperationException();
+    };
+  }
 
   public static final Object[] fromBigInteger (final BigInteger[] x,
                                                final String dest) {
@@ -66,10 +64,11 @@ public abstract class Base {
     "256",
     "1024",
     "4096",
+    "8192",
   })
   int nbytes;
 
-  static final int NINTS = 1024;
+  static final int NINTS = 2048;
 
   /** random arrays of BigIntegers on each invocation. */
   BigInteger[] x0;

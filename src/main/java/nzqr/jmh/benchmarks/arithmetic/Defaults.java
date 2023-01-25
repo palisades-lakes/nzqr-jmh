@@ -21,10 +21,9 @@ import nzqr.java.SystemInfo;
  * java -cp target\benchmarks.jar nzqr.jmh.benchmarks.arithmetic.Base
  * </pre>
  * @author palisades dot lakes at gmail dot com
- * @version 2022-10-31
+ * @version 2023-01-24
  */
 
-@SuppressWarnings("unchecked")
 public final class Defaults {
 
   //--------------------------------------------------------------
@@ -40,7 +39,8 @@ public final class Defaults {
   public static final Options options (final String fileName,
                                        final String includes) {
     final File parent = new File("output");
-    parent.mkdirs();
+    final boolean created = parent.mkdirs();
+    assert created;
     final File csv =
       new File(parent,
         fileName
@@ -49,7 +49,7 @@ public final class Defaults {
         + ".csv");
     //final File json =
     //  new File(parent, fileName + "-" + now() + ".json");
-    final Options options = new OptionsBuilder()
+    return new OptionsBuilder()
       .mode(Mode.AverageTime)
       .timeUnit(TimeUnit.MILLISECONDS)
       .include(includes)
@@ -62,16 +62,18 @@ public final class Defaults {
       .shouldDoGC(true)
       .jvmArgs(
         "--enable-preview",
-        "-Xmx5g","-Xms5g","-Xmn2500m",
+        "-Xmx12g",
+        "-Xms12g",
+        //"-Xmn2500m",
         "-XX:+UseFMA",
-        "-Xbatch","-server")
+        "-Xbatch",
+        "-server")
       .forks(3)
-      .warmupIterations(3)
-      .warmupTime(TimeValue.seconds(10))
-      .measurementIterations(3)
-      .measurementTime(TimeValue.seconds(10))
-      .build();
-    return options; }
+      .warmupIterations(4)
+      .warmupTime(TimeValue.seconds(12))
+      .measurementIterations(4)
+      .measurementTime(TimeValue.seconds(16))
+      .build(); }
 
   //--------------------------------------------------------------
 
