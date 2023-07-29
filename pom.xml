@@ -1,14 +1,12 @@
-<project
- xmlns="https://maven.apache.org/POM/4.0.0"
- xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+ <modelVersion>4.0.0</modelVersion>
  <properties>
   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   <!-- JMH version to use with this project. -->
   <jmh.version>1.36</jmh.version>
   <!-- Java source/target to use for compilation. -->
-  <java-version>20 clean </java-version>
+  <java-version>20</java-version>
   <!-- Name of the benchmark Uber-JAR to generate. -->
   <uberjar.name>benchmarks</uberjar.name>
   <commons-math3-version>3.6.1</commons-math3-version>
@@ -43,14 +41,13 @@
   <spire_2_12_version>0.17.0</spire_2_12_version>
   <spire_2_13_version>0.18.0</spire_2_13_version>
  </properties>
- <modelVersion>4.0.0</modelVersion>
  <groupId>palisades-lakes</groupId>
  <artifactId>nzqr-jmh</artifactId>
  <version>0.0.0</version>
  <packaging>jar</packaging>
  <name>NZQR benchmarks via JMH</name>
  <dependencies>
- <!-- 
+ <!--
   <dependency>
    <groupId>org.typelevel</groupId>
    <artifactId>spire_2.12</artifactId>
@@ -61,6 +58,16 @@
    <groupId>org.typelevel</groupId>
    <artifactId>spire_2.13</artifactId>
    <version>${spire_2_13_version}</version>
+   <exclusions>
+    <exclusion>
+     <groupId>org.scala-lang</groupId>
+     <artifactId>scala-library</artifactId>
+    </exclusion>
+    <exclusion>
+     <groupId>org.jsoup</groupId>
+     <artifactId>jsoup</artifactId>
+    </exclusion>
+   </exclusions>
   </dependency>
   <dependency>
    <groupId>org.openjdk.jmh</groupId>
@@ -105,12 +112,12 @@
    <artifactId>oshi-core</artifactId>
    <version>${oshi-version}</version>
   </dependency>
-  <!-- Rational.doubleValue() is interesting, but no easy way to go double -> Rational 
-   <dependency> <groupId>org.jscience</groupId> <artifactId>jscience</artifactId> <version>${jscience-version}</version> 
+  <!-- Rational.doubleValue() is interesting, but no easy way to go double -> Rational
+   <dependency> <groupId>org.jscience</groupId> <artifactId>jscience</artifactId> <version>${jscience-version}</version>
    </dependency> -->
-  <!-- BigRational not useful <dependency> <groupId>de.uni-mannheim.rz.krum</groupId> 
+  <!-- BigRational not useful <dependency> <groupId>de.uni-mannheim.rz.krum</groupId>
    <artifactId>jas</artifactId> <version>${jas-version}</version> </dependency> -->
-  <!-- no easy path double -> Rational double <dependency> <groupId>org.apfloat</groupId> 
+  <!-- no easy path double -> Rational double <dependency> <groupId>org.apfloat</groupId>
    <artifactId>apfloat</artifactId> <version>${apfloat-version}</version> </dependency> -->
   <dependency>
    <groupId>org.junit.jupiter</groupId>
@@ -138,11 +145,11 @@
  </dependencies>
  <build>
   <plugins>
-   <!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>exec-maven-plugin</artifactId> 
-    <version>1.6.0</version> <executions> <execution> <id>run-benchmarks</id> <phase>integration-test</phase> 
-    <goals> <goal>exec</goal> </goals> <configuration> <classpathScope>test</classpathScope> 
-    <executable>java</executable> <arguments> <argument>-classpath</argument> <classpath 
-    /> <argument>org.openjdk.jmh.Main</argument> <argument>.*</argument> </arguments> 
+   <!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>exec-maven-plugin</artifactId>
+    <version>1.6.0</version> <executions> <execution> <id>run-benchmarks</id> <phase>integration-test</phase>
+    <goals> <goal>exec</goal> </goals> <configuration> <classpathScope>test</classpathScope>
+    <executable>java</executable> <arguments> <argument>-classpath</argument> <classpath
+    /> <argument>org.openjdk.jmh.Main</argument> <argument>.*</argument> </arguments>
     </configuration> </execution> </executions> </plugin> -->
    <plugin>
     <groupId>org.apache.maven.plugins</groupId>
@@ -163,7 +170,7 @@
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-shade-plugin</artifactId>
     <!-- <version>2.2</version> -->
-    <version>3.2.4</version> 
+    <version>3.2.4</version>
     <executions>
      <execution>
       <phase>package</phase>

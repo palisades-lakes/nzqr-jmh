@@ -1,18 +1,5 @@
 package nzqr.jmh.numbers;
 
-import java.math.BigInteger;
-import java.util.List;
-import java.util.Map;
-import java.util.function.BiPredicate;
-import java.util.function.BinaryOperator;
-import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
-
-import org.apache.commons.rng.UniformRandomProvider;
-import org.apache.commons.rng.sampling.CollectionSampler;
-import org.apache.commons.rng.sampling.distribution.ContinuousSampler;
-import org.apache.commons.rng.sampling.distribution.ContinuousUniformSampler;
-
 import nzqr.java.Exceptions;
 import nzqr.java.algebra.OneSetOneOperation;
 import nzqr.java.algebra.OneSetTwoOperations;
@@ -21,12 +8,19 @@ import nzqr.java.numbers.Doubles;
 import nzqr.java.prng.Generator;
 import nzqr.java.prng.GeneratorBase;
 import nzqr.java.prng.Generators;
-import spire.math.Rational;
-import spire.math.Real;
-import spire.math.Real$;
-import spire.math.SafeLong;
-import spire.math.SafeLong$;
-import spire.math.SafeLongBigInteger;
+import org.apache.commons.rng.UniformRandomProvider;
+import org.apache.commons.rng.sampling.CollectionSampler;
+import org.apache.commons.rng.sampling.distribution.ContinuousSampler;
+import org.apache.commons.rng.sampling.distribution.ContinuousUniformSampler;
+import spire.math.*;
+
+import java.math.BigInteger;
+import java.util.List;
+import java.util.Map;
+import java.util.function.BiPredicate;
+import java.util.function.BinaryOperator;
+import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 /** The set of computable real numbers, represented by
  * <code>spire.math.Real</code>
