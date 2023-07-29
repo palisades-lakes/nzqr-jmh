@@ -375,11 +375,11 @@ public final class SpireRationals implements Set {
         return z; } }; }
 
   /** Intended primarily for testing. Sample a random double
-   * (see {@link nzqr.java.prng.DoubleSampler})
+   * (see nzqr.java.prng.DoubleSampler)
    * and convert to <code>Rational</code>
-   * with {@link #DOUBLE_P} probability;
-   * otherwise return {@link Rational#ZERO} or
-   * {@link Rational#ONE}, {@link Rational#MINUS_ONE},
+   * with DOUBLE_P probability;
+   * otherwise return {@link SpireRationals#ZERO} or
+   * {@link SpireRationals#ONE},
    * with equal probability (these are potential edge cases).
    */
 

@@ -376,11 +376,11 @@ public final class SpireReals implements Set {
         return z; } }; }
 
   /** Intended primarily for testing. Sample a random double
-   * (see {@link nzqr.java.prng.DoubleSampler})
+   * (see nzqr.java.prng.DoubleSampler}
    * and convert to <code>Real</code>
-   * with {@link #DOUBLE_P} probability;
-   * otherwise return {@link Real#ZERO} or
-   * {@link Real#ONE}, {@link Real#MINUS_ONE},
+   * with DOUBLE_P probability;
+   * otherwise return {@link SpireReals#ZERO} or
+   * {@link SpireReals#ONE}, <code>ONE.unary_$minus()</code>>,
    * with equal probability (these are potential edge cases).
    */
 

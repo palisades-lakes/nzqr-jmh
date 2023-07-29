@@ -175,11 +175,11 @@ public final class BigDecimals implements Set {
   // construction
   //--------------------------------------------------------------
   /** Intended primarily for testing. Sample a random double
-   * (see {@link nzqr.java.prng.DoubleSampler})
+   * (see nzqr.java.prng.DoubleSampler)
    * and convert to <code>BigDecimal</code>
-   * with {@link #DOUBLE_P} probability;
-   * otherwise return {@link BigDecimal#EMPTY} or
-   * {@link BigDecimal#ONE}, {@link BigDecimal#TEN},
+   * with DOUBLE_P probability;
+   * otherwise return <code>BigDecimal.valueOf(0L)</code> or
+   * {@link BigDecimal#ONE}, <code>BigDecimal.valueOf(10L)</code>,
    * with equal probability (these are potential edge cases).
    *
    * TODO: sample rounding modes?

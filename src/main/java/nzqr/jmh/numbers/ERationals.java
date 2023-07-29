@@ -426,11 +426,11 @@ public final class ERationals implements Set {
         return z; } }; }
 
   /** Intended primarily for testing. Sample a random double
-   * (see {@link nzqr.java.prng.DoubleSampler})
+   * (see <code>nzqr.java.prng.DoubleSampler</code>)
    * and convert to <code>ERational</code>
-   * with {@link #DOUBLE_P} probability;
-   * otherwise return {@link ERational#ZERO} or
-   * {@link ERational#ONE}, {@link ERational#MINUS_ONE},
+   * with DOUBLE_P probability;
+   * otherwise return {@link ERational#Zero} or
+   * {@link ERational#One}, <code>ERational.One.Negate()</code>>,
    * with equal probability (these are potential edge cases).
    */
 

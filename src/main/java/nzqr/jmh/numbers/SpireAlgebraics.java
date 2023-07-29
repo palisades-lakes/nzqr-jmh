@@ -382,11 +382,11 @@ public final class SpireAlgebraics implements Set {
         return z; } }; }
 
   /** Intended primarily for testing. Sample a random double
-   * (see {@link nzqr.java.prng.DoubleSampler})
+   * (see <code>nzqr.java.prng.DoubleSampler</code>)
    * and convert to <code>Algebraic</code>
-   * with {@link #DOUBLE_P} probability;
-   * otherwise return {@link Algebraic#ZERO} or
-   * {@link Algebraic#ONE}, {@link Algebraic#MINUS_ONE},
+   * with DOUBLE_P probability;
+   * otherwise return {@link SpireAlgebraics#ZERO} or
+   * {@link SpireAlgebraics#ONE}, <code>ONE.unary_$minus()</code>>,
    * with equal probability (these are potential edge cases).
    */
 

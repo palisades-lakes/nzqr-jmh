@@ -172,11 +172,11 @@ public final class Ratios implements Set {
 
   //--------------------------------------------------------------
   /** Intended primarily for testing. Sample a random double
-   * (see {@link nzqr.java.prng.DoubleSampler})
+   * (see <code>nzqr.java.prng.DoubleSampler</code>)
    * and convert to <code>BigDecimal</code>
-   * with {@link #DOUBLE_P} probability;
-   * otherwise return {@link Ratio#ZERO} or
-   * {@link Ratio#ONE}, {@link Ratio#TEN},
+   * with DOUBLE_P probability;
+   * otherwise return ZERO or
+   * ONE, TEN,
    * with equal probability (these are potential edge cases).
    *
    * TODO: sample rounding modes?

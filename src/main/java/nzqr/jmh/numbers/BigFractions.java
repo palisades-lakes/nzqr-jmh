@@ -361,9 +361,9 @@ public final class BigFractions implements Set {
         return z; } }; }
 
   /** Intended primarily for testing. Sample a random double
-   * (see {@link nzqr.java.prng.DoubleSampler})
+   * (see <code>nzqr.java.prng.DoubleSampler</code>)
    * and convert to <code>BigFraction</code>
-   * with {@link #DOUBLE_P} probability;
+   * with DOUBLE_P probability;
    * otherwise return {@link BigFraction#ZERO} or
    * {@link BigFraction#ONE}, {@link BigFraction#MINUS_ONE},
    * with equal probability (these are potential edge cases).
