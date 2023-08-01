@@ -11,6 +11,7 @@
   <uberjar.name>benchmarks</uberjar.name>
   <commons-math3-version>3.6.1</commons-math3-version>
   <commons-rng-version>1.5</commons-rng-version>
+  <jsoup-version>1.16.1</jsoup-version>
   <junit-jupiter-version>5.10.0</junit-jupiter-version>
   <junit-platform-version>1.10.0</junit-platform-version>
   <lifecycle-mapping-version>1.0.0</lifecycle-mapping-version>
@@ -38,6 +39,8 @@
   <parboiled-java-version>1.4.1</parboiled-java-version>
   <potemkin-version>0.4.6</potemkin-version>
   <slf4j-version>2.0.7</slf4j-version>
+  <scala3-library-version>3.3.0</scala3-library-version>
+  <scala-library-version>2.13.10</scala-library-version>
   <spire_2_12_version>0.17.0</spire_2_12_version>
   <spire_2_13_version>0.18.0</spire_2_13_version>
  </properties>
@@ -54,6 +57,17 @@
    <version>${spire_2_12_version}</version>
   </dependency>
    -->
+  <!-- https://mvnrepository.com/artifact/org.scala-lang/scala3-library -->
+  <dependency>
+   <groupId>org.scala-lang</groupId>
+   <artifactId>scala-library</artifactId>
+   <version>${scala-library-version}</version>
+  </dependency>
+  <dependency>
+   <groupId>org.scala-lang</groupId>
+   <artifactId>scala3-library_3</artifactId>
+   <version>${scala3-library-version}</version>
+  </dependency>
   <dependency>
    <groupId>org.typelevel</groupId>
    <artifactId>spire_2.13</artifactId>
@@ -61,11 +75,7 @@
    <exclusions>
     <exclusion>
      <groupId>org.scala-lang</groupId>
-     <artifactId>scala-library</artifactId>
-    </exclusion>
-    <exclusion>
-     <groupId>org.jsoup</groupId>
-     <artifactId>jsoup</artifactId>
+     <artifactId>scala3-library_3</artifactId>
     </exclusion>
    </exclusions>
   </dependency>
@@ -96,6 +106,12 @@
    <artifactId>nzqr</artifactId>
    <version>0.0.0</version>
    <classifier>tests</classifier>
+   <exclusions>
+    <exclusion>
+     <groupId>org.jsoup</groupId>
+     <artifactId>jsoup</artifactId>
+    </exclusion>
+   </exclusions>
   </dependency>
   <dependency>
    <groupId>org.apache.commons</groupId>
