@@ -14,6 +14,7 @@ import nzqr.java.numbers.Doubles;
 import nzqr.java.numbers.RationalFloat;
 import nzqr.java.prng.Generator;
 import nzqr.java.prng.PRNG;
+import org.openjdk.jmh.infra.Blackhole;
 
 // java -ea --illegal-access=warn -jar target/benchmarks.jar Roundtrip
 
@@ -22,7 +23,7 @@ import nzqr.java.prng.PRNG;
  * java -ea -jar target\benchmarks.jar TotalSum
  * </pre>
  * @author palisades dot lakes at gmail dot com
- * @version 2019-10-02
+ * @version 2023-08-16
  */
 @SuppressWarnings("unchecked")
 @State(Scope.Thread)
@@ -36,7 +37,7 @@ public class Roundtrip {
 
   @SuppressWarnings("static-method")
   @Benchmark
-  public final boolean roundtrip () {
+  public final boolean roundtrip (final Blackhole blackhole) {
     final UniformRandomProvider urp =
       PRNG.well44497b("seeds/Well44497b-2019-01-05.txt");
     final Generator g = Doubles.finiteGenerator(urp);
@@ -46,6 +47,7 @@ public class Roundtrip {
       final RationalFloat q = RationalFloat.valueOf(x0);
       final double x1 = q.doubleValue();
       identical = identical && (x1 == x0); }
+    blackhole.consume(identical);
     assert identical;
     return identical; }
 

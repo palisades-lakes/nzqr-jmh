@@ -14,11 +14,12 @@ import nzqr.java.prng.Generator;
 import nzqr.java.prng.Generators;
 import nzqr.java.prng.PRNG;
 import nzqr.jmh.numbers.jdk19.BigIntegerJDK;
+import org.openjdk.jmh.infra.Blackhole;
 
 /** Benchmark arithmetic operations on various number classes.
  *
  * @author palisades dot lakes at gmail dot com
- * @version 2023-01-24
+ * @version 2023-08-16
  */
 
 @State(Scope.Thread)
@@ -62,9 +63,9 @@ public abstract class Base {
   /** size of BigIntegers to generate. */
   @Param({
     "256",
-    "1024",
-    "4096",
-    "8192",
+//    "1024",
+//    "4096",
+//    "8192",
   })
   int nbytes;
 
@@ -108,9 +109,10 @@ public abstract class Base {
   }
 
   @Benchmark
-  public final Object bench () {
+  public final Object bench (final Blackhole blackhole) {
     final int n = y0.length;
     for (int i=0;i<n;i++) { p[i] = operation(y0[i],y1[i]); }
+    blackhole.consume(p);
     return p; }
 
   //--------------------------------------------------------------

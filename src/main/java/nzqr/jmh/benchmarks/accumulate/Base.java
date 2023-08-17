@@ -1,6 +1,6 @@
 package nzqr.jmh.benchmarks.accumulate;
 
-import java.util.List;
+//import java.util.List;
 
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
@@ -15,22 +15,23 @@ import nzqr.java.accumulators.BigFloatAccumulator;
 import nzqr.java.prng.Generator;
 import nzqr.java.prng.Generators;
 import nzqr.java.test.Common;
+import org.openjdk.jmh.infra.Blackhole;
 
 /** Benchmark operations on <code>double[]</code>.
  *
  * @author palisades dot lakes at gmail dot com
- * @version 2019-10-10
+ * @version 2023-08-16
  */
 
-@SuppressWarnings("unchecked")
+//@SuppressWarnings("unchecked")
 @State(Scope.Thread)
 public abstract class Base {
 
   //--------------------------------------------------------------
 
-  public static final void save (final double x,
-                                 final List data) {
-    data.add(Double.valueOf(x)); }
+//  public static final void save (final double x,
+//                                 final List data) {
+//    data.add(Double.valueOf(x)); }
 
   //--------------------------------------------------------------
 
@@ -149,8 +150,9 @@ public abstract class Base {
   //    finally { if (null != pw) { pw.close(); } } }
 
   @Benchmark
-  public final double[] bench () {
+  public final double[] bench (final Blackhole blackhole) {
     p = operation(acc,x0,x1);
+    blackhole.consume(p);
     return p; }
 
   //--------------------------------------------------------------

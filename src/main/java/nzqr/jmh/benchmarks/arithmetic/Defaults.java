@@ -21,7 +21,7 @@ import nzqr.java.SystemInfo;
  * java -cp target\benchmarks.jar nzqr.jmh.benchmarks.arithmetic.Base
  * </pre>
  * @author palisades dot lakes at gmail dot com
- * @version 2023-01-24
+ * @version 2023-08-16
  */
 
 public final class Defaults {
