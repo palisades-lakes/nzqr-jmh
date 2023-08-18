@@ -13,7 +13,7 @@ import nzqr.java.numbers.BoundedNatural;
 import nzqr.java.prng.Generator;
 import nzqr.java.prng.Generators;
 import nzqr.java.prng.PRNG;
-import nzqr.jmh.numbers.jdk19.BigIntegerJDK;
+import nzqr.openjdk.math.BigIntegerJDK;
 import org.openjdk.jmh.infra.Blackhole;
 
 /** Benchmark arithmetic operations on various number classes.
@@ -63,9 +63,9 @@ public abstract class Base {
   /** size of BigIntegers to generate. */
   @Param({
     "256",
-//    "1024",
-//    "4096",
-//    "8192",
+    "1024",
+    "4096",
+    "8192",
   })
   int nbytes;
 

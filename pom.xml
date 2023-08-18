@@ -103,6 +103,11 @@
   </dependency>
   <dependency>
    <groupId>palisades-lakes</groupId>
+   <artifactId>nzqr-openjdk</artifactId>
+   <version>0.0.0</version>
+  </dependency>
+  <dependency>
+   <groupId>palisades-lakes</groupId>
    <artifactId>nzqr</artifactId>
    <version>0.0.0</version>
    <classifier>tests</classifier>

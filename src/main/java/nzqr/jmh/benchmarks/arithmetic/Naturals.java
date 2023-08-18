@@ -14,7 +14,7 @@ import nzqr.java.algebra.OneSetOneOperation;
 import nzqr.java.algebra.OneSetTwoOperations;
 import nzqr.java.algebra.Set;
 import nzqr.java.numbers.BoundedNatural;
-import nzqr.jmh.numbers.jdk19.BigIntegerJDK;
+import nzqr.openjdk.math.BigIntegerJDK;
 import nzqr.java.prng.Generator;
 import nzqr.java.prng.GeneratorBase;
 import nzqr.java.prng.Generators;
@@ -43,7 +43,7 @@ import nzqr.java.prng.Generators;
  * @version 2022-11-14
  */
 @SuppressWarnings({"unchecked","static-method","preview","boxing"})
-public final class Naturals implements Set {
+public final class   Naturals implements Set {
 
   // NOTE: instanceof pattern matching in java 18 is a preview
   // may need to be re-written as if-then-else cascade...
