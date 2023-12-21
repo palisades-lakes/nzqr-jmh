@@ -29,6 +29,7 @@ public abstract class Base {
 
   Generator gen;
 
+  /** conversions from BigInteger to other number classes. */
   // TODO: use method objects rather than class names
   // and avoid else if expression
 
@@ -50,11 +51,10 @@ public abstract class Base {
     return y; }
 
 
-  /** conversions from BigInteger to other number classes. */
   @Param({
-    "BoundedNatural",
     "BigIntegerJDK",
     "BigInteger",
+    "BoundedNatural",
   })
   String numberClassName;
 

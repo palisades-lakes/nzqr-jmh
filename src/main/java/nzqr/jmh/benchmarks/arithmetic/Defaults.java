@@ -21,7 +21,7 @@ import nzqr.java.SystemInfo;
  * java -cp target\benchmarks.jar nzqr.jmh.benchmarks.arithmetic.Base
  * </pre>
  * @author palisades dot lakes at gmail dot com
- * @version 2023-08-16
+ * @version 2023-12-21
  */
 
 public final class Defaults {
@@ -69,9 +69,9 @@ public final class Defaults {
         "-Xbatch",
         "-server")
       .forks(3)
-      .warmupIterations(4)
-      .warmupTime(TimeValue.seconds(12))
-      .measurementIterations(4)
+      .warmupIterations(5)
+      .warmupTime(TimeValue.seconds(16))
+      .measurementIterations(5)
       .measurementTime(TimeValue.seconds(16))
       .build(); }
 
