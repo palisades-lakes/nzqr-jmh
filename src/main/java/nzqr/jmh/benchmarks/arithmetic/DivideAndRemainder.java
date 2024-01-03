@@ -4,7 +4,7 @@ package nzqr.jmh.benchmarks.arithmetic;
  * java --enable-preview -cp target\benchmarks.jar nzqr.jmh.benchmarks.arithmetic.DivideAndRemainder
  * </pre>
  * @author palisades dot lakes at gmail dot com
- * @version 2023-08-16
+ * @version 2023-12-31
  */
 
 public class DivideAndRemainder extends Base {
@@ -13,5 +13,4 @@ public class DivideAndRemainder extends Base {
                                  final Object z1) {
     return Naturals.get().divideAndRemainder(z0, z1); }
   public static final void main (final String[] args) {
-    Defaults.run("DivideAndRemainder"); }
-}
+    Defaults.run("DivideAndRemainder"); } }

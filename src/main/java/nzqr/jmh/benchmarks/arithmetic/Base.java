@@ -19,7 +19,7 @@ import org.openjdk.jmh.infra.Blackhole;
 /** Benchmark arithmetic operations on various number classes.
  *
  * @author palisades dot lakes at gmail dot com
- * @version 2023-08-16
+ * @version 2024-01-03
  */
 
 @State(Scope.Thread)
@@ -59,14 +59,12 @@ public abstract class Base {
   String numberClassName;
 
   //--------------------------------------------------------------
-  
-  /** size of BigIntegers to generate. */
+    /** size of BigIntegers to generate. */
   @Param({
-    "256",
-    "1024",
-    "4096",
     "8192",
-  })
+    "4096",
+    "1024",
+    "256", })
   int nbytes;
 
   static final int NINTS = 2048;

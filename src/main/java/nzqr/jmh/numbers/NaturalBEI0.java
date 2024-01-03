@@ -366,13 +366,16 @@ public final class NaturalBEI0 implements Ringlike<NaturalBEI0> {
     return divideBurnikelZiegler(u); }
 
   @Override
-  public List<NaturalBEI0>
+  public NaturalBEI0[]
   divideAndRemainder (final NaturalBEI0 that) {
     //assert (! that.isZero());
     final NaturalBEI0 u = that;
+    final List<NaturalBEI0> qr;
     if (useKnuthDivision(this,u)) {
-      return divideAndRemainderKnuth(u); }
-    return divideAndRemainderBurnikelZiegler(u); }
+      qr = divideAndRemainderKnuth(u); }
+    else {
+    qr = divideAndRemainderBurnikelZiegler(u); }
+    return new NaturalBEI0[] { qr.get(0), qr.get(1), }; }
 
   @Override
   public final NaturalBEI0 remainder (final NaturalBEI0 that) {
