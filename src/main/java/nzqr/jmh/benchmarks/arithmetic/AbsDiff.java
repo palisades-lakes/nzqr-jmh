@@ -1,10 +1,10 @@
 package nzqr.jmh.benchmarks.arithmetic;
 
 /** <pre>
- * java -cp target\benchmarks.jar nzqr.jmh.benchmarks.arithmetic.AbsDiff
+ * java --enable-preview -cp target\benchmarks.jar nzqr.jmh.benchmarks.arithmetic.AbsDiff
  * </pre>
  * @author palisades dot lakes at gmail dot com
- * @version 2022-11-14
+ * @version 2024-01-15
  */
 
 public class AbsDiff extends Base {
