@@ -6,7 +6,7 @@ import java.util.List;
  * Not instantiable. Class slots/methods only.
  *
  * @author mcdonald dot john dot alan at gmail dot com
- * @version 2019-07-22
+ * @version 2024-01-16
  */
 public final class Shared {
 
@@ -16,13 +16,11 @@ public final class Shared {
   public static final List<String> accumulators () {
     return
       List.of(
-        "nzqr.jmh.accumulators.BigFloat0Accumulator"
         //,
-        //"nzqr.jmh.accumulators.IFastAccumulator",
-        //"nzqr.jmh.accumulators.ZhuHayesGCAccumulator",
-        //"nzqr.jmh.accumulators.ZhuHayesGCBranch",
-        //"nzqr.jmh.accumulators.ZhuHayesBranch"
-        // ,
+        "nzqr.jmh.accumulators.IFastAccumulator",
+        "nzqr.jmh.accumulators.ZhuHayesGCAccumulator",
+        "nzqr.jmh.accumulators.ZhuHayesGCBranch",
+        "nzqr.jmh.accumulators.ZhuHayesBranch"
         // "nzqr.java.accumulators.RationalFloatAccumulator"
         // ,
         // // Same as non-strict, just slower

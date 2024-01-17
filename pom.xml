@@ -102,23 +102,6 @@
    <version>0.0.0</version>
   </dependency>
   <dependency>
-   <groupId>palisades-lakes</groupId>
-   <artifactId>nzqr-openjdk</artifactId>
-   <version>0.0.0</version>
-  </dependency>
-  <dependency>
-   <groupId>palisades-lakes</groupId>
-   <artifactId>nzqr</artifactId>
-   <version>0.0.0</version>
-   <classifier>tests</classifier>
-   <exclusions>
-    <exclusion>
-     <groupId>org.jsoup</groupId>
-     <artifactId>jsoup</artifactId>
-    </exclusion>
-   </exclusions>
-  </dependency>
-  <dependency>
    <groupId>org.apache.commons</groupId>
    <artifactId>commons-math3</artifactId>
    <version>${commons-math3-version}</version>
@@ -163,6 +146,26 @@
    <artifactId>slf4j-nop</artifactId>
    <version>${slf4j-version}</version>
   </dependency>
+
+  <dependency>
+   <groupId>palisades-lakes</groupId>
+   <artifactId>nzqr-openjdk</artifactId>
+   <version>0.0.0</version>
+  </dependency>
+
+  <dependency>
+   <groupId>palisades-lakes</groupId>
+   <artifactId>nzqr</artifactId>
+   <version>0.0.0</version>
+   <classifier>tests</classifier>
+   <exclusions>
+    <exclusion>
+     <groupId>org.jsoup</groupId>
+     <artifactId>jsoup</artifactId>
+    </exclusion>
+   </exclusions>
+  </dependency>
+
  </dependencies>
  <build>
   <plugins>
