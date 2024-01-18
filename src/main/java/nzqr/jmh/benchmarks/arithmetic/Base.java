@@ -19,7 +19,7 @@ import org.openjdk.jmh.infra.Blackhole;
 /** Benchmark arithmetic operations on various number classes.
  *
  * @author palisades dot lakes at gmail dot com
- * @version 2024-01-03
+ * @version 2024-01-017
  */
 
 @State(Scope.Thread)
@@ -39,9 +39,7 @@ public abstract class Base {
       case "BigInteger" -> x;
       case "BigIntegerJDK" -> new BigIntegerJDK(x.toByteArray());
       case "BoundedNatural" -> BoundedNatural.valueOf(x);
-      default -> throw new UnsupportedOperationException();
-    };
-  }
+      default -> throw new UnsupportedOperationException(); }; }
 
   public static final Object[] fromBigInteger (final BigInteger[] x,
                                                final String dest) {
@@ -52,7 +50,7 @@ public abstract class Base {
 
 
   @Param({
-    //"BigInteger",
+    "BigInteger",
     "BigIntegerJDK",
     "BoundedNatural",
   })
@@ -64,7 +62,8 @@ public abstract class Base {
     "8192",
     "4096",
     "1024",
-    "256", })
+    "256",
+  })
   int nbytes;
 
   static final int NINTS = 2048;
