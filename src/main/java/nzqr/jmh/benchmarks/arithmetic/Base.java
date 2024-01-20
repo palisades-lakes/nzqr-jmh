@@ -2,6 +2,7 @@ package nzqr.jmh.benchmarks.arithmetic;
 
 import java.math.BigInteger;
 
+import nzqr.java.numbers.NaiveUnboundedNatural;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Param;
@@ -19,7 +20,7 @@ import org.openjdk.jmh.infra.Blackhole;
 /** Benchmark arithmetic operations on various number classes.
  *
  * @author palisades dot lakes at gmail dot com
- * @version 2024-01-017
+ * @version 2024-01-20
  */
 
 @State(Scope.Thread)
@@ -39,6 +40,7 @@ public abstract class Base {
       case "BigInteger" -> x;
       case "BigIntegerJDK" -> new BigIntegerJDK(x.toByteArray());
       case "BoundedNatural" -> BoundedNatural.valueOf(x);
+      case "NaiveUnboundedNatural" -> NaiveUnboundedNatural.valueOf(x);
       default -> throw new UnsupportedOperationException(); }; }
 
   public static final Object[] fromBigInteger (final BigInteger[] x,
@@ -50,18 +52,19 @@ public abstract class Base {
 
 
   @Param({
-    "BigInteger",
-    "BigIntegerJDK",
+//    "BigInteger",
+//    "BigIntegerJDK",
+    "NaiveUnboundedNatural",
     "BoundedNatural",
-  })
+    })
   String numberClassName;
 
   //--------------------------------------------------------------
     /** size of BigIntegers to generate. */
   @Param({
-    "8192",
-    "4096",
-    "1024",
+//    "8192",
+//    "4096",
+//    "1024",
     "256",
   })
   int nbytes;

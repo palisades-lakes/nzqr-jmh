@@ -7,6 +7,7 @@ import java.util.function.BiPredicate;
 import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
 
+import nzqr.java.numbers.NaiveUnboundedNatural;
 import org.apache.commons.rng.UniformRandomProvider;
 import org.apache.commons.rng.sampling.CollectionSampler;
 
@@ -40,7 +41,7 @@ import nzqr.java.prng.Generators;
  * both BigInteger and newly written classes.
  *
  * @author palisades dot lakes at gmail dot com
- * @version 2023-12-31
+ * @version 2024-01-20
  */
 @SuppressWarnings({"unchecked","static-method","preview","boxing"})
 public final class   Naturals implements Set {
@@ -85,6 +86,25 @@ public final class   Naturals implements Set {
       case Long y -> BoundedNatural.valueOf(y.longValue());
       case BoundedNatural y -> y;
       case BigInteger y -> BoundedNatural.valueOf(y);
+      default ->
+        throw new UnsupportedOperationException(
+          "can't convert " + x.getClass().getName() +
+            " to BoundedNatural"); }; }
+
+  // TODO: without BoundedNatural intermediary instance
+  private static final NaiveUnboundedNatural toNaiveUnboundedNatural (final Object x) {
+    return switch (x)  {
+      case Byte y -> NaiveUnboundedNatural.valueOf(
+        BoundedNatural.valueOf(y.longValue()));
+      case Short y -> NaiveUnboundedNatural.valueOf(
+        BoundedNatural.valueOf(y.longValue()));
+      case Integer y -> NaiveUnboundedNatural.valueOf(
+        BoundedNatural.valueOf(y.longValue()));
+      case Long y -> NaiveUnboundedNatural.valueOf(
+        BoundedNatural.valueOf(y.longValue()));
+      case BoundedNatural y -> NaiveUnboundedNatural.valueOf(y);
+      case BigInteger y -> NaiveUnboundedNatural.valueOf(y);
+      case NaiveUnboundedNatural y -> y;
       default ->
         throw new UnsupportedOperationException(
           "can't convert " + x.getClass().getName() +
@@ -147,6 +167,7 @@ public final class   Naturals implements Set {
       case final BigInteger y1 -> y1.add(toBigInteger(x0));
       case final BigIntegerJDK y1 -> y1.add(toBigIntegerJDK(x0));
       case final BoundedNatural y1 -> y1.add(toBoundedNatural(x0));
+      case final NaiveUnboundedNatural y1 -> y1.add(toNaiveUnboundedNatural(x0));
       default -> throw new UnsupportedOperationException(
         "can't add " +
           x0.getClass().getName() +
