@@ -7,7 +7,7 @@ import java.util.function.BiPredicate;
 import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
 
-import nzqr.java.numbers.NaiveUnboundedNatural;
+import nzqr.java.numbers.UnboundedNatural;
 import org.apache.commons.rng.UniformRandomProvider;
 import org.apache.commons.rng.sampling.CollectionSampler;
 
@@ -27,7 +27,7 @@ import nzqr.java.prng.Generators;
  * Implementations (eventually):
  * <ul>
  * <li> {@link BoundedNatural}
- * <li> <code>NaiveUnboundedNatural</code>
+ * <li> <code>UnboundedNatural</code>
  * <li> <code>UnboundedNatural</code>
  * <li> <code>java.math.BigInteger</code> (only nonnegative)
  * <li> <code>java.lang.Long</code> (only nonnegative)
@@ -92,19 +92,19 @@ public final class   Naturals implements Set {
             " to BoundedNatural"); }; }
 
   // TODO: without BoundedNatural intermediary instance
-  private static final NaiveUnboundedNatural toNaiveUnboundedNatural (final Object x) {
+  private static final UnboundedNatural toUnboundedNatural (final Object x) {
     return switch (x)  {
-      case Byte y -> NaiveUnboundedNatural.valueOf(
+      case Byte y -> UnboundedNatural.valueOf(
         BoundedNatural.valueOf(y.longValue()));
-      case Short y -> NaiveUnboundedNatural.valueOf(
+      case Short y -> UnboundedNatural.valueOf(
         BoundedNatural.valueOf(y.longValue()));
-      case Integer y -> NaiveUnboundedNatural.valueOf(
+      case Integer y -> UnboundedNatural.valueOf(
         BoundedNatural.valueOf(y.longValue()));
-      case Long y -> NaiveUnboundedNatural.valueOf(
+      case Long y -> UnboundedNatural.valueOf(
         BoundedNatural.valueOf(y.longValue()));
-      case BoundedNatural y -> NaiveUnboundedNatural.valueOf(y);
-      case BigInteger y -> NaiveUnboundedNatural.valueOf(y);
-      case NaiveUnboundedNatural y -> y;
+      case BoundedNatural y -> UnboundedNatural.valueOf(y);
+      case BigInteger y -> UnboundedNatural.valueOf(y);
+      case UnboundedNatural y -> y;
       default ->
         throw new UnsupportedOperationException(
           "can't convert " + x.getClass().getName() +
@@ -167,7 +167,7 @@ public final class   Naturals implements Set {
       case final BigInteger y1 -> y1.add(toBigInteger(x0));
       case final BigIntegerJDK y1 -> y1.add(toBigIntegerJDK(x0));
       case final BoundedNatural y1 -> y1.add(toBoundedNatural(x0));
-      case final NaiveUnboundedNatural y1 -> y1.add(toNaiveUnboundedNatural(x0));
+      case final UnboundedNatural y1 -> y1.add(toUnboundedNatural(x0));
       default -> throw new UnsupportedOperationException(
         "can't add " +
           x0.getClass().getName() +
