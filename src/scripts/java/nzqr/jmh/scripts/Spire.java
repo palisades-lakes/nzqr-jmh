@@ -11,12 +11,12 @@ import spire.math.RealAlgebra;
 /** Experiment with calling Scala spire.
  *
  * <pre>
- * j --source 12 -ea src/scripts/java/nzqr/jmh/scripts/Spire.java
+ * j --source 25 -ea src/scripts/java/nzqr/jmh/scripts/Spire.java
  * </pre>
  * @author palisades dot lakes at gmail dot com
- * @version 2019-11-30
+ * @version 2026-05-03
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unused"})
 public final class Spire {
 
 

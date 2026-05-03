@@ -2,57 +2,62 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jmh.version>1.37</jmh.version>
-    <java-version>25</java-version>
-    <!-- Name of the benchmark Uber-JAR to generate. -->
-    <uberjar.name>benchmarks</uberjar.name>
-    <commons-math3-version>3.6.1</commons-math3-version>
-    <commons-rng-version>1.6</commons-rng-version>
-    <jsoup-version>1.22.1</jsoup-version>
-    <junit-jupiter-version>6.0.3</junit-jupiter-version>
-    <junit-platform-version>6.0.3</junit-platform-version>
-    <lifecycle-mapping-version>1.0.0</lifecycle-mapping-version>
-    <maven-assembly-version>3.8.0</maven-assembly-version>
-    <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-    <maven.compiler.source>25</maven.compiler.source>
-    <maven.compiler.target>25</maven.compiler.target>
-    <maven-clean-version>3.5.0</maven-clean-version>
-    <maven-compiler-version>3.15.0</maven-compiler-version>
-    <maven-dependency-version>3.10.0</maven-dependency-version>
-    <maven-deploy-plugin-version>3.1.4</maven-deploy-plugin-version>
-    <maven-enforcer-version>3.6.2</maven-enforcer-version>
-    <maven-install-plugin-version>3.1.4</maven-install-plugin-version>
-    <maven-jar-version>3.5.0</maven-jar-version>
-    <maven-javadoc-version>3.12.0</maven-javadoc-version>
-    <maven-project-info-reports-version>3.9.0</maven-project-info-reports-version>
-    <maven-release-plugin-version>3.3.1</maven-release-plugin-version>
-    <maven-resources-plugin-version>3.5.0</maven-resources-plugin-version>
-    <maven-scm-plugin-version>2.2.1</maven-scm-plugin-version>
-    <maven-shade-plugin-version>3.6.2</maven-shade-plugin-version>
-    <maven-site-version>4.0.0-M16</maven-site-version>
-    <maven-source-plugin-version>3.4.0</maven-source-plugin-version>
-<!--    <maven-surefire-version>3.1.2</maven-surefire-version>-->
-    <maven-surefire-version>3.5.5</maven-surefire-version>
-    <metadata-extractor-version>2.19.0</metadata-extractor-version>
-    <numbers-java-version>1.8.2</numbers-java-version>
-    <oshi-version>6.11.1</oshi-version>
-    <pandect-version>1.0.2</pandect-version>
-    <parboiled-java-version>1.4.1</parboiled-java-version>
-    <potemkin-version>0.4.9</potemkin-version>
-    <slf4j-version>2.0.17</slf4j-version>
-    <scala3-library-version>3.8.3</scala3-library-version>
-    <scala-library-version>3.8.3</scala-library-version>
-    <spire_2_12_version>0.17.0</spire_2_12_version>
-    <spire_2_13_version>0.18.0</spire_2_13_version>
-    <spire_3_version>0.18.0</spire_3_version>
-  </properties>
-  <groupId>palisades-lakes</groupId>
+  <parent>
+    <groupId>palisades-lakes</groupId>
+    <artifactId>palisades-lakes-parent</artifactId>
+    <version>0.0.11</version>
+  </parent>
+  <!--  <groupId>palisades-lakes</groupId>-->
   <artifactId>nzqr-jmh</artifactId>
   <version>0.0.0</version>
   <packaging>jar</packaging>
   <name>NZQR benchmarks via JMH</name>
+  <!--  <properties>-->
+  <!--    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+  <!--    <jmh.version>1.37</jmh.version>-->
+  <!--    <java-version>25</java-version>-->
+  <!--    &lt;!&ndash; Name of the benchmark Uber-JAR to generate. &ndash;&gt;-->
+  <!--    <uberjar.name>benchmarks</uberjar.name>-->
+  <!--    <commons-math3-version>3.6.1</commons-math3-version>-->
+  <!--    <commons-rng-version>1.6</commons-rng-version>-->
+  <!--    <jsoup-version>1.22.1</jsoup-version>-->
+  <!--    <junit-jupiter-version>6.0.3</junit-jupiter-version>-->
+  <!--    <junit-platform-version>6.0.3</junit-platform-version>-->
+  <!--    <lifecycle-mapping-version>1.0.0</lifecycle-mapping-version>-->
+  <!--    <maven-assembly-version>3.8.0</maven-assembly-version>-->
+  <!--    <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>-->
+  <!--    <maven.compiler.source>25</maven.compiler.source>-->
+  <!--    <maven.compiler.target>25</maven.compiler.target>-->
+  <!--    <maven-clean-version>3.5.0</maven-clean-version>-->
+  <!--    <maven-compiler-version>3.15.0</maven-compiler-version>-->
+  <!--    <maven-dependency-version>3.10.0</maven-dependency-version>-->
+  <!--    <maven-deploy-plugin-version>3.1.4</maven-deploy-plugin-version>-->
+  <!--    <maven-enforcer-version>3.6.2</maven-enforcer-version>-->
+  <!--    <maven-install-plugin-version>3.1.4</maven-install-plugin-version>-->
+  <!--    <maven-jar-version>3.5.0</maven-jar-version>-->
+  <!--    <maven-javadoc-version>3.12.0</maven-javadoc-version>-->
+  <!--    <maven-project-info-reports-version>3.9.0</maven-project-info-reports-version>-->
+  <!--    <maven-release-plugin-version>3.3.1</maven-release-plugin-version>-->
+  <!--    <maven-resources-plugin-version>3.5.0</maven-resources-plugin-version>-->
+  <!--    <maven-scm-plugin-version>2.2.1</maven-scm-plugin-version>-->
+  <!--    <maven-shade-plugin-version>3.6.2</maven-shade-plugin-version>-->
+  <!--    <maven-site-version>4.0.0-M16</maven-site-version>-->
+  <!--    <maven-source-plugin-version>3.4.0</maven-source-plugin-version>-->
+  <!--&lt;!&ndash;    <maven-surefire-version>3.1.2</maven-surefire-version>&ndash;&gt;-->
+  <!--    <maven-surefire-version>3.5.5</maven-surefire-version>-->
+  <!--    <metadata-extractor-version>2.19.0</metadata-extractor-version>-->
+  <!--    <numbers-java-version>1.8.2</numbers-java-version>-->
+  <!--    <oshi-version>6.11.1</oshi-version>-->
+  <!--    <pandect-version>1.0.2</pandect-version>-->
+  <!--    <parboiled-java-version>1.4.1</parboiled-java-version>-->
+  <!--    <potemkin-version>0.4.9</potemkin-version>-->
+  <!--    <slf4j-version>2.0.17</slf4j-version>-->
+  <!--    <scala3-library-version>3.8.3</scala3-library-version>-->
+  <!--    <scala-library-version>3.8.3</scala-library-version>-->
+  <!--    <spire_2_12_version>0.17.0</spire_2_12_version>-->
+  <!--    <spire_2_13_version>0.18.0</spire_2_13_version>-->
+  <!--    <spire_3_version>0.18.0</spire_3_version>-->
+  <!--  </properties>-->
   <dependencies>
     <!--
      <dependency>
@@ -84,17 +89,17 @@
         </exclusion>
       </exclusions>
     </dependency>
-<!--    <dependency>-->
-<!--      <groupId>org.typelevel</groupId>-->
-<!--      <artifactId>spire_2.13</artifactId>-->
-<!--      <version>${spire_2_13_version}</version>-->
-<!--      <exclusions>-->
-<!--        <exclusion>-->
-<!--          <groupId>org.scala-lang</groupId>-->
-<!--          <artifactId>scala3-library_3</artifactId>-->
-<!--        </exclusion>-->
-<!--      </exclusions>-->
-<!--    </dependency>-->
+    <!--    <dependency>-->
+    <!--      <groupId>org.typelevel</groupId>-->
+    <!--      <artifactId>spire_2.13</artifactId>-->
+    <!--      <version>${spire_2_13_version}</version>-->
+    <!--      <exclusions>-->
+    <!--        <exclusion>-->
+    <!--          <groupId>org.scala-lang</groupId>-->
+    <!--          <artifactId>scala3-library_3</artifactId>-->
+    <!--        </exclusion>-->
+    <!--      </exclusions>-->
+    <!--    </dependency>-->
     <dependency>
       <groupId>org.openjdk.jmh</groupId>
       <artifactId>jmh-core</artifactId>
@@ -111,11 +116,6 @@
       <artifactId>jmh-generator-annprocess</artifactId>
       <version>${jmh.version}</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>palisades-lakes</groupId>
-      <artifactId>nzqr</artifactId>
-      <version>0.0.0</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -139,6 +139,12 @@
      <artifactId>jas</artifactId> <version>${jas-version}</version> </dependency> -->
     <!-- no easy path double -> Rational double <dependency> <groupId>org.apfloat</groupId>
      <artifactId>apfloat</artifactId> <version>${apfloat-version}</version> </dependency> -->
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-launcher</artifactId>
+      <version>${junit-platform-version}</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
@@ -174,7 +180,6 @@
       <groupId>palisades-lakes</groupId>
       <artifactId>nzqr</artifactId>
       <version>0.0.0</version>
-      <classifier>tests</classifier>
       <exclusions>
         <exclusion>
           <groupId>org.jsoup</groupId>
@@ -182,7 +187,20 @@
         </exclusion>
       </exclusions>
     </dependency>
-  </dependencies>
+  <dependency>
+    <groupId>palisades-lakes</groupId>
+    <artifactId>nzqr</artifactId>
+    <version>0.0.0</version>
+    <classifier>tests</classifier>
+    <exclusions>
+      <exclusion>
+        <groupId>org.jsoup</groupId>
+        <artifactId>jsoup</artifactId>
+      </exclusion>
+    </exclusions>
+  </dependency>
+
+</dependencies>
 
   <build>
     <plugins>
@@ -195,7 +213,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
+        <version>${maven-compiler-version}</version>
         <configuration>
           <compilerVersion>${java-version}</compilerVersion>
           <source>${java-version}</source>
@@ -205,8 +223,39 @@
             <arg>-J-Dclojure.compiler.direct-linking=true</arg>
             <arg>--enable-preview</arg>
           </compilerArgs>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.openjdk.jmh</groupId>
+              <artifactId>jmh-generator-annprocess</artifactId>
+              <version>${jmh.version}</version>
+            </path>
+          </annotationProcessorPaths>
+
         </configuration>
       </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.codehaus.mojo</groupId>-->
+<!--        <artifactId>exec-maven-plugin</artifactId>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <id>run-benchmarks</id>-->
+<!--            <phase>integration-test</phase>-->
+<!--            <goals>-->
+<!--              <goal>exec</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <classpathScope>test</classpathScope>-->
+<!--              <executable>java</executable>-->
+<!--              <arguments>-->
+<!--                <argument>-classpath</argument>-->
+<!--                <classpath/>-->
+<!--                <argument>org.openjdk.jmh.Main</argument>-->
+<!--                <argument>.*</argument>-->
+<!--              </arguments>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
