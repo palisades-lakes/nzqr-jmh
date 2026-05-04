@@ -1,10 +1,6 @@
 package nzqr.jmh.benchmarks.accumulate;
 
-import java.io.File;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.concurrent.TimeUnit;
-
+import nzqr.java.SystemInfo;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
@@ -13,18 +9,22 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
 
-import nzqr.java.SystemInfo;
+import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.concurrent.TimeUnit;
 
-/** Benchmark <code>double[]</code> sums.
+/**
+ * Benchmark <code>double[]</code> sums.
  *
  * <pre>
  * java -cp target\benchmarks.jar nzqr.jmh.Base
  * </pre>
+ *
  * @author palisades dot lakes at gmail dot com
- * @version 2022-10-30
+ * @version 2026-05-04
  */
 
-@SuppressWarnings("unchecked")
 public final class Defaults {
 
   //--------------------------------------------------------------
@@ -33,7 +33,8 @@ public final class Defaults {
     DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
 
   public static final String now () {
-    return LocalDateTime.now().format(DTF); }
+    return LocalDateTime.now().format(DTF);
+  }
 
   //--------------------------------------------------------------
 
@@ -43,13 +44,13 @@ public final class Defaults {
     parent.mkdirs();
     final File csv =
       new File(parent,
-        fileName
-        + "-"  + SystemInfo.model()
-        + "-" + now()
-        + ".csv");
+               fileName
+                 + "-" + SystemInfo.model()
+                 + "-" + now()
+                 + ".csv");
     //final File json =
     //  new File(parent, fileName + "-" + now() + ".json");
-    final Options options = new OptionsBuilder()
+    return new OptionsBuilder()
       .mode(Mode.AverageTime)
       .timeUnit(TimeUnit.MILLISECONDS)
       .include(includes)
@@ -62,14 +63,16 @@ public final class Defaults {
       .shouldDoGC(true)
       .jvmArgs(
         "--enable-preview",
-        "-Xmx5g","-Xms5g","-Xmn2500m",
-        "-XX:+UseFMA")
+        "-Xmx5g", "-Xms5g", "-Xmn2500m",
+        "-XX:+UseFMA",
+        "--sun-misc-unsafe-memory-access=allow",
+        "--illegal-native-access=allow")
       .warmupIterations(3)
       .warmupTime(TimeValue.seconds(24))
       .measurementIterations(4)
       .measurementTime(TimeValue.seconds(20))
       .build();
-    return options; }
+  }
 
   //--------------------------------------------------------------
 
@@ -78,13 +81,17 @@ public final class Defaults {
 
     try {
       final Runner runner =
-        new Runner(Defaults.options(fileName,includes));
-      runner.run(); }
+        new Runner(Defaults.options(fileName, includes));
+      runner.run();
+    }
     catch (final RunnerException e) {
-      throw new RuntimeException(e); } }
+      throw new RuntimeException(e);
+    }
+  }
 
   public static final void run (final String includes) {
-    run(includes,includes); }
+    run(includes, includes);
+  }
 
   //--------------------------------------------------------------
 }

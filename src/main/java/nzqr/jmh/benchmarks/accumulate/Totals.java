@@ -1,7 +1,7 @@
 package nzqr.jmh.benchmarks.accumulate;
 
 /** <pre>
- * mvn install & java -cp target\benchmarks.jar nzqr.jmh.benchmarks.accumulate.Totals
+ * mvn install & jmh nzqr.jmh.benchmarks.accumulate.Totals
  * </pre>
  * @author palisades dot lakes at gmail dot com
  * @version 2026-05-04
