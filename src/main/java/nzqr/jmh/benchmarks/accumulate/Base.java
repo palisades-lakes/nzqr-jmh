@@ -2,25 +2,19 @@ package nzqr.jmh.benchmarks.accumulate;
 
 //import java.util.List;
 
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Param;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
-
 import nzqr.java.accumulators.Accumulator;
 import nzqr.java.accumulators.BigFloatAccumulator;
 import nzqr.java.prng.Generator;
 import nzqr.java.prng.Generators;
 import nzqr.java.test.Common;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
-/** Benchmark operations on <code>double[]</code>.
+/**
+ * Benchmark operations on <code>double[]</code>.
  *
  * @author palisades dot lakes at gmail dot com
- * @version 2023-08-16
+ * @version 2026-05-03
  */
 
 //@SuppressWarnings("unchecked")
@@ -39,10 +33,10 @@ public abstract class Base {
   //@Param({"finite",})
   //@Param({"gaussian",})
   //@Param({"laplace",})
-  @Param({"uniform",})
+  @Param({ "uniform", })
   //@Param({"exponential","finite","gaussian","laplace","uniform",})
-  //@Param({"exponential","laplace","uniform",})
-  String generator;
+    //@Param({"exponential","laplace","uniform",})
+    String generator;
   Generator gen;
 
   Accumulator exact;
@@ -50,26 +44,28 @@ public abstract class Base {
   double[] truth;
 
   @Param({
-    //"nzqr.java.accumulators.DoubleAccumulator",
-    //"nzqr.java.accumulators.KahanAccumulator0",
-    "nzqr.java.accumulators.RationalFloatAccumulator",
-    "nzqr.java.accumulators.BigFloatAccumulator",
-    //"nzqr.jmh.accumulators.BigFloat0Accumulator",
-    //"nzqr.java.accumulators.KahanAccumulator",
-    //"nzqr.test.java.accumulators.EFloatAccumulator",
-    //"nzqr.test.java.accumulators.ERationalAccumulator",
-    //"nzqr.java.accumulators.DistilledAccumulator",
-    //"nzqr.java.accumulators.ZhuHayesAccumulator",
-    //"nzqr.jmh.accumulators.ZhuHayesGCAccumulator",
-    //"nzqr.jmh.accumulators.ZhuHayesGCBranch",
-    //"nzqr.jmh.accumulators.ZhuHayesBranch",
-    //"nzqr.jmh.accumulators.BigDecimalAccumulator",
-    //"nzqr.jmh.accumulators.BigFractionAccumulator",
-    //"nzqr.jmh.accumulators.DoubleFmaAccumulator",
-    //"nzqr.jmh.accumulators.KahanFmaAccumulator",
-    //"nzqr.jmh.accumulators.FloatAccumulator",
-    //"nzqr.jmh.accumulators.FloatFmaAccumulator",
-    //"nzqr.jmh.accumulators.RatioAccumulator",
+    // TODO: need debugging:
+     "nzqr.jmh.accumulators.SpireAlgebraicAccumulator",
+//    "nzqr.jmh.accumulators.EFloatAccumulator",
+//    "nzqr.jmh.accumulators.ERationalAccumulator",
+//    "nzqr.jmh.accumulators.ZhuHayesGCAccumulator",
+//    "nzqr.jmh.accumulators.ZhuHayesGCBranch",
+//    "nzqr.jmh.accumulators.ZhuHayesBranch",
+//    "nzqr.jmh.accumulators.BigDecimalAccumulator",
+//    "nzqr.jmh.accumulators.BigFractionAccumulator",
+//    "nzqr.jmh.accumulators.DoubleFmaAccumulator",
+//    "nzqr.jmh.accumulators.KahanFmaAccumulator",
+//    "nzqr.jmh.accumulators.FloatAccumulator",
+//    "nzqr.jmh.accumulators.FloatFmaAccumulator",
+//    "nzqr.jmh.accumulators.RatioAccumulator",
+//    "nzqr.jmh.accumulators.SpireRationalAccumulator",
+//    "nzqr.jmh.accumulators.SpireRealAccumulator",
+//    "nzqr.java.accumulators.BigFloatAccumulator",
+//    "nzqr.java.accumulators.DistilledAccumulator",
+//    "nzqr.java.accumulators.DoubleAccumulator",
+//    "nzqr.java.accumulators.KahanAccumulator",
+//    "nzqr.java.accumulators.RationalFloatAccumulator",
+//    "nzqr.java.accumulators.ZhuHayesAccumulator",
   })
   String accumulator;
   Accumulator acc;
@@ -81,9 +77,9 @@ public abstract class Base {
     //"8388609",
     //"4194303",
     //"2097153",
-    "1048575",
+    //"1048575",
     //"524289",
-    //"131071",
+    "131071",
   })
   int dim;
 
@@ -94,7 +90,10 @@ public abstract class Base {
   double[] p;
 
   //--------------------------------------------------------------
-  /** This is what is timed. */
+
+  /**
+   * This is what is timed.
+   */
 
   public abstract double[] operation (final Accumulator ac,
                                       final double[] z0,
@@ -102,27 +101,31 @@ public abstract class Base {
 
   //--------------------------------------------------------------
 
-  /** Re-initialize the prngs with the same seeds for each
+  /**
+   * Re-initialize the prngs with the same seeds for each
    * <code>(accumulator,dim)</code> pair.
    */
   @Setup(Level.Trial)
   public final void trialSetup () {
-    gen = Generators.make(generator,dim);
+    gen = Generators.make(generator, dim);
     //exact = EFloatAccumulator.make();
     exact = BigFloatAccumulator.make();
     assert exact.isExact();
-    acc = Common.makeAccumulator(accumulator); }
+    acc = Common.makeAccumulator(accumulator);
+  }
 
   @Setup(Level.Invocation)
   public final void invocationSetup () {
     x0 = (double[]) gen.next();
     x1 = (double[]) gen.next();
-    truth = operation(exact,x0,x1); }
+    truth = operation(exact, x0, x1);
+  }
 
   @TearDown(Level.Invocation)
   public final void invocationTeardown () {
     assert
-    0.0 == exact.clear().addL1Distance(truth,p).doubleValue(); }
+      0.0 == exact.clear().addL1Distance(truth, p).doubleValue();
+  }
 
   // not needed while testing exact methods
   //  @TearDown(Level.Trial)
@@ -151,9 +154,10 @@ public abstract class Base {
 
   @Benchmark
   public final double[] bench (final Blackhole blackhole) {
-    p = operation(acc,x0,x1);
+    p = operation(acc, x0, x1);
     blackhole.consume(p);
-    return p; }
+    return p;
+  }
 
   //--------------------------------------------------------------
   //  /** <pre>
@@ -165,7 +169,8 @@ public abstract class Base {
   //    throws RunnerException {
   //    System.out.println("args=" + Arrays.toString(args));
   //    final Options opt =
-  //      Defaults.options("Generators","TotalDot|TotalL2Norm|TotalSum");
+  //      Defaults.options("Generators",
+  //      "TotalDot|TotalL2Norm|TotalSum");
   //    System.out.println(opt.toString());
   //    new Runner(opt).run(); }
 
