@@ -44,28 +44,36 @@ public abstract class Base {
   double[] truth;
 
   @Param({
-    // TODO: need debugging:
-     "nzqr.jmh.accumulators.SpireAlgebraicAccumulator",
-//    "nzqr.jmh.accumulators.EFloatAccumulator",
-//    "nzqr.jmh.accumulators.ERationalAccumulator",
-//    "nzqr.jmh.accumulators.ZhuHayesGCAccumulator",
-//    "nzqr.jmh.accumulators.ZhuHayesGCBranch",
-//    "nzqr.jmh.accumulators.ZhuHayesBranch",
-//    "nzqr.jmh.accumulators.BigDecimalAccumulator",
-//    "nzqr.jmh.accumulators.BigFractionAccumulator",
-//    "nzqr.jmh.accumulators.DoubleFmaAccumulator",
-//    "nzqr.jmh.accumulators.KahanFmaAccumulator",
-//    "nzqr.jmh.accumulators.FloatAccumulator",
-//    "nzqr.jmh.accumulators.FloatFmaAccumulator",
-//    "nzqr.jmh.accumulators.RatioAccumulator",
-//    "nzqr.jmh.accumulators.SpireRationalAccumulator",
-//    "nzqr.jmh.accumulators.SpireRealAccumulator",
-//    "nzqr.java.accumulators.BigFloatAccumulator",
-//    "nzqr.java.accumulators.DistilledAccumulator",
-//    "nzqr.java.accumulators.DoubleAccumulator",
-//    "nzqr.java.accumulators.KahanAccumulator",
-//    "nzqr.java.accumulators.RationalFloatAccumulator",
-//    "nzqr.java.accumulators.ZhuHayesAccumulator",
+
+    "nzqr.jmh.accumulators.BigDecimalAccumulator",
+    "nzqr.jmh.accumulators.BigFractionAccumulator",
+    "nzqr.java.accumulators.BigFloatAccumulator",
+    "nzqr.java.accumulators.DistilledAccumulator",
+    "nzqr.java.accumulators.DoubleAccumulator",
+    "nzqr.jmh.accumulators.DoubleFmaAccumulator",
+    "nzqr.jmh.accumulators.EFloatAccumulator",
+    "nzqr.jmh.accumulators.ERationalAccumulator",
+    "nzqr.jmh.accumulators.FloatAccumulator",
+    "nzqr.jmh.accumulators.FloatFmaAccumulator",
+    "nzqr.java.accumulators.KahanAccumulator",
+    "nzqr.jmh.accumulators.KahanFmaAccumulator",
+    "nzqr.jmh.accumulators.RatioAccumulator",
+    "nzqr.java.accumulators.RationalFloatAccumulator",
+    "nzqr.java.accumulators.ZhuHayesAccumulator",
+    "nzqr.jmh.accumulators.ZhuHayesBranch",
+    "nzqr.jmh.accumulators.ZhuHayesGCAccumulator",
+    "nzqr.jmh.accumulators.ZhuHayesGCBranch",
+
+    // Fails with infinite loop, stack overflow exception,
+    // possibly due to call to scala.collection.concurrent.TrieMap
+    // not being thread safe
+    // https://github.com/scala/bug/issues/7943
+    // Spire accumulators are >10x slower than everything else.
+    // "nzqr.jmh.accumulators.SpireAlgebraicAccumulator",
+
+    // These 2 work but are too slow to consider (as of 2026-05-04)
+    // "nzqr.jmh.accumulators.SpireRationalAccumulator",
+    // "nzqr.jmh.accumulators.SpireRealAccumulator",
   })
   String accumulator;
   Accumulator acc;
@@ -77,9 +85,9 @@ public abstract class Base {
     //"8388609",
     //"4194303",
     //"2097153",
-    //"1048575",
+    "1048575",
     //"524289",
-    "131071",
+    //"131071",
   })
   int dim;
 
